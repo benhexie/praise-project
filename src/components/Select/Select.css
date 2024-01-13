@@ -1,0 +1,104 @@
+.dashboard__custom__select__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard__custom__select__container label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.dashboard__custom__select {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.dashboard__custom__select__title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.825rem 1rem;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #333;
+    cursor: pointer;
+}
+
+.dashboard__custom__select__title span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #000;
+}
+
+.dashboard__custom__select__title__icon {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #000;
+}
+
+.dashboard__custom__select__options {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #333;
+    border-radius: 5px;
+    z-index: 1;
+    margin-top: 4px;
+}
+
+.dashboard__custom__select__options span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #000;
+    cursor: pointer;
+}
+
+.dashboard__custom__select__options span:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+.dashboard__custom__select__options span:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.dashboard__custom__select__options span:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.dashboard__custom__select__options span:not(:last-child) {
+    border-bottom: 1px solid #333;
+}
+
+.dashboard__custom__select__options span:not(:last-child):hover {
+    border-bottom: 1px solid #fff;
+}
+
+.dashboard__custom__select__options span:not(:first-child):hover {
+    border-top: 1px solid #fff;
+}
+
+.dashboard__custom__select__options span:not(:first-child) {
+    border-top: 1px solid #333;
+}
+
+.dashboard__custom__select__title__icon {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #000;
+}
