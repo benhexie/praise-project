@@ -7,6 +7,10 @@ import Login from "./pages/Home/FormPage/Login";
 import ErrorPage from "./pages/Error/ErrorPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Construction from "./pages/Error/Construction";
+import Landing from "./pages/Home/Landing";
+
+const DEVELOPMENT = process.env.REACT_APP_DEV === "true";
 
 function App() {
   return (
@@ -25,12 +29,29 @@ function App() {
       />
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/" element={<FormPage />}>
-            <Route path="signup" element={<Signup />} />
-            <Route path="login" element={<Login />} />
-          </Route>
-          <Route path="*" element={<ErrorPage />} />
+          {DEVELOPMENT
+            ? (() => {
+                return (
+                  <>
+                    <Route path="/" element={<Construction />} />
+                    <Route path="*" element={<Construction />} />
+                  </>
+                );
+              })()
+            : (() => {
+              return (
+                <>
+                  <Route path="/" element={<Home />}>
+                    <Route index element={<Landing />} />
+                    <Route path="/" element={<FormPage />}>
+                      <Route path="signup" element={<Signup />} />
+                      <Route path="login" element={<Login />} />
+                    </Route>
+                  </Route>
+                  <Route path="*" element={<ErrorPage />} />
+                </>
+              );
+            })()}
         </Routes>
       </Router>
     </div>
