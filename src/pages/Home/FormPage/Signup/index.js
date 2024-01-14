@@ -32,6 +32,7 @@ const Signup = () => {
   useEffect(() => {
     setToken("");
     setSchool("");
+    setAddress("");
   }, [role]);
 
   const handleSubmit = async (e) => {
@@ -98,7 +99,8 @@ const Signup = () => {
     if (role === "teacher" && !school) errorObj.school = "School is required.";
     if (role === "teacher" && !token) errorObj.token = "Token is required.";
     if (role === "school" && !school) errorObj.school = "School is required.";
-    if (role === "school" && !address) errorObj.address = "Address is required.";
+    if (role === "school" && !address)
+      errorObj.address = "Address is required.";
     setError(errorObj);
     return Object.keys(errorObj).length === 0;
   }
