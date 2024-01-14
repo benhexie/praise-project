@@ -4,6 +4,9 @@ import "./Input.css";
 const Input = forwardRef(
   (
     {
+      name = "",
+      error = "",
+      setError,
       label,
       type,
       placeholder,
@@ -34,7 +37,10 @@ const Input = forwardRef(
             type={type}
             placeholder={placeholder}
             value={value}
-            onChange={(e) => setValue && setValue(e.target.value)}
+            onChange={(e) => {
+              setValue && setValue(e.target.value);
+              setError && setError({ ...error, [name]: "" });
+            }}
             {...props}
           />
           {RightIcon && (
@@ -44,6 +50,7 @@ const Input = forwardRef(
             />
           )}
         </div>
+        {error?.[name] && <span className="custom__input__error">{error[name]}</span>}
       </div>
     );
   }

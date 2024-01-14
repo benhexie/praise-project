@@ -1,52 +1,3 @@
-/* 
-<div className={`nav ${show ? "active" : ""}`}>
-      <div className="nav__web">
-        <Link className="nav__item nav__logo" to="/">
-          <img
-            src="https://www.freepnglogos.com/uploads/netflix-logo-0.png"
-            alt="Netflix Logo"
-          />
-          <h1>Praise</h1>
-        </Link>
-        <NavLink className="nav__item" to="/" end>
-          Home
-        </NavLink>
-        <NavLink className="nav__item" to="about">
-          About
-        </NavLink>
-        <NavLink className="nav__item" to="contact">
-          Contact
-        </NavLink>
-        <NavLink className="nav__item" to="login">
-          Login
-        </NavLink>
-        <NavLink className="nav__item" to="signup">
-          Signup
-        </NavLink>
-        <div className={`nav__item nav__menu`} onClick={handleMenuClick}>
-          {show ? <AiOutlineClose /> : <AiOutlineMenu />}
-        </div>
-      </div>
-      <div className="nav__mobile">
-        <NavLink className="nav__item" to="/" end>
-          Home
-        </NavLink>
-        <NavLink className="nav__item" to="about">
-          About
-        </NavLink>
-        <NavLink className="nav__item" to="contact">
-          Contact
-        </NavLink>
-        <NavLink className="nav__item" to="login">
-          Login
-        </NavLink>
-        <NavLink className="nav__item" to="signup">
-          Signup
-        </NavLink>
-      </div>
-    </div>
-*/
-
 .nav {
   display: flex;
   flex-direction: column;
@@ -55,11 +6,12 @@
   top: 0;
   z-index: 100;
   transition: all 0.3s ease-in-out;
-  pointer-events: none;
+  height: auto;
+  height: var(--nav-height);
 }
 
 .nav__web {
-  height: 10vh;
+  height: var(--nav-height);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -68,7 +20,6 @@
   z-index: 1;
   background-color: inherit;
   background-color: var(--nav-bg-color);
-  pointer-events: all;
 }
 
 .nav__item {
@@ -108,10 +59,6 @@
 }
 
 .nav__menu {
-  position: absolute;
-  right: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
   font-size: 1.5rem;
   cursor: pointer;
   transition: none;
@@ -119,7 +66,7 @@
 }
 
 .nav__menu svg {
-    pointer-events: none;
+  pointer-events: none;
 }
 
 .nav__mobile {
@@ -129,9 +76,14 @@
   justify-content: center;
   gap: 1rem;
   padding-bottom: 2rem;
-  transform: translateY(-100%);
+  margin-top: -100%;
   background-color: var(--nav-bg-color);
   transition: all 0.3s ease-in-out;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 0;
 }
 
 @media (max-width: 900px) {
@@ -149,17 +101,20 @@
     display: flex;
   }
 
+  .nav__web {
+    padding: 0 1rem;
+  }
+
   .nav__web .nav__item:not(.nav__logo, .nav__menu) {
     display: none;
   }
 
   .nav__mobile.active {
-    transform: translateY(0);
-    pointer-events: all;
+    margin: 0;
   }
 
   .nav__mobile .nav__item {
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1rem;
     width: 100%;
     border-radius: 0;
     text-align: left;

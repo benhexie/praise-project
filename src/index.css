@@ -12,6 +12,9 @@
   --nav-bg-color: #343a40;
   --nav-text-color: #fff;
   --nav-text-color-hover: #000;
+
+  /* SIZES */
+  --nav-height: 5rem;
 }
 
 * {

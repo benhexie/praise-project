@@ -1,7 +1,126 @@
+import { useState } from "react";
+import Button from "../../../../components/Button/Button";
+import Input from "../../../../components/Input/Input";
 import "./Login.css";
+import { MdPassword } from "react-icons/md";
+import { FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
+import { BsQuestionLg } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+const SERVER = process.env.REACT_APP_SERVER;
 
 const Login = () => {
-  return <div className="login"></div>;
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [reason, setReason] = useState(""); // reason for login
+  const [error, setError] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (loading) return;
+    if (!validateInput()) return;
+
+    setLoading(true);
+    try {
+      const res = await fetch(`${SERVER}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, reason }),
+      });
+      const data = await res.json();
+      setLoading(false);
+      if (data.error) {
+        setError({ email: data.error });
+        return;
+      }
+      toast.success("Login successful");
+      navigate("/");
+    } catch (err) {
+      setLoading(false);
+      toast.error("Something went wrong");
+      console.log(err);
+    }
+  };
+
+  function validateInput() {
+    let errorObj = {};
+    if (!email) {
+      errorObj.email = "Email is required";
+    }
+    if (
+      email &&
+      !new RegExp(/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+\.[a-z]+$/).test(email)
+    )
+      errorObj.email = "Email is invalid.";
+    if (!password) {
+      errorObj.password = "Password is required";
+    }
+    if (password && password.length < 8)
+      errorObj.password = "Password must be at least 8 characters.";
+    if (!reason) {
+      errorObj.reason = "Reason is required";
+    }
+    setError(errorObj);
+    if (Object.keys(errorObj).length > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  return (
+    <div className="login">
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <Input
+          LeftIcon={FaEnvelope}
+          error={error}
+          setError={setError}
+          type="text"
+          label="E-mail"
+          placeholder="Enter your email"
+          name="email"
+          className="form__item"
+          value={email}
+          setValue={setEmail}
+        />
+        <Input
+          error={error}
+          setError={setError}
+          LeftIcon={MdPassword}
+          RightIcon={showPassword ? FaEyeSlash : FaEye}
+          rightIconOptions={{
+            onClick: () => {
+              setShowPassword(!showPassword);
+            },
+          }}
+          type={showPassword ? "text" : "password"}
+          label="Password"
+          placeholder="Enter your password"
+          name="password"
+          className="form__item"
+          value={password}
+          setValue={setPassword}
+        />
+        <Input
+          LeftIcon={BsQuestionLg}
+          error={error}
+          setError={setError}
+          type="text"
+          label="Reason"
+          placeholder="Enter your reason for login"
+          name="reason"
+          className="form__item"
+          value={reason}
+          setValue={setReason}
+        />
+        <Button disabled={loading}>Login</Button>
+      </form>
+    </div>
+  );
 };
 
 export default Login;
