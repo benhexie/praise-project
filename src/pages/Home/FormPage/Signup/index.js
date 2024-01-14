@@ -21,6 +21,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState(""); // ["teacher", "school"]
   const [school, setSchool] = useState("");
+  const [schools, setSchools] = useState([]); // [{_id, name}]
   const [address, setAddress] = useState("");
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
@@ -33,6 +34,19 @@ const Signup = () => {
     setToken("");
     setSchool("");
     setAddress("");
+
+    if (role === "teacher") {
+      fetch(`${SERVER}/schools`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) return toast.error(data.message);
+          setSchools(data.data);
+        })
+        .catch((err) => {
+          console.log(err.message);
+          toast.error("Something went wrong. Please try again.");
+        });
+    }
   }, [role]);
 
   const handleSubmit = async (e) => {
@@ -58,18 +72,15 @@ const Signup = () => {
       });
       const data = await res.json();
       setLoading(false);
-      if (data.error) {
-        toast.success(data.message);
-        return;
-      }
+      if (data.error) return toast.error(data.message);
       toast.success(data.message);
       navigate("/login");
     } catch (err) {
-      console.log(err.message);
       setLoading(false);
       if (/failed to fetch|network error/i.test(err.message)) {
         return toast.error("Please check your internet connection.");
       }
+      console.log(err.message);
       toast.error("Something went wrong. Please try again.");
     }
   };
@@ -176,6 +187,11 @@ const Signup = () => {
                 }}
               >
                 <option value="">Select school</option>
+                {schools.map((school) => (
+                  <option key={school._id} value={school._id}>
+                    {school.name}
+                  </option>
+                ))}
               </select>
               {error.school && (
                 <span className="custom__input__error">{error.school}</span>

@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Construction from "./pages/Error/Construction";
 import Landing from "./pages/Home/Landing";
+import Dashboard from "./pages/Dashboard";
 
 const DEVELOPMENT = process.env.REACT_APP_DEV === "true";
 
@@ -39,19 +40,20 @@ function App() {
                 );
               })()
             : (() => {
-              return (
-                <>
-                  <Route path="/" element={<Home />}>
-                    <Route index element={<Landing />} />
-                    <Route path="/" element={<FormPage />}>
-                      <Route path="signup" element={<Signup />} />
-                      <Route path="login" element={<Login />} />
+                return (
+                  <>
+                    <Route path="/" element={<Home />}>
+                      <Route index element={<Landing />} />
+                      <Route path="/" element={<FormPage />}>
+                        <Route path="signup" element={<Signup />} />
+                        <Route path="login" element={<Login />} />
+                      </Route>
                     </Route>
-                  </Route>
-                  <Route path="*" element={<ErrorPage />} />
-                </>
-              );
-            })()}
+                    <Route path="/dashboard" element={<Dashboard />}></Route>
+                    <Route path="*" element={<ErrorPage />} />
+                  </>
+                );
+              })()}
         </Routes>
       </Router>
     </div>

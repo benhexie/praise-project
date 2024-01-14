@@ -33,16 +33,17 @@ const Login = () => {
       });
       const data = await res.json();
       setLoading(false);
-      if (data.error) {
-        setError({ email: data.error });
-        return;
-      }
+      if (data.error) return toast.error(data.message);
+      localStorage.setItem("token", data.data.token);
       toast.success("Login successful");
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       setLoading(false);
+      if (/failed to fetch|network error/i.test(err.message)) {
+        return toast.error("Please check your internet connection.");
+      }
       toast.error("Something went wrong");
-      console.log(err);
+      console.log(err.message);
     }
   };
 
