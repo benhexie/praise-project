@@ -1,0 +1,152 @@
+/* 
+--primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --info-color: #17a2b8;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --404-color: #f44336;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --nav-bg-color: #343a40;
+  --nav-text-color: #fff;
+  --nav-text-color-hover: #000;
+
+<div className={`dashboard__nav ${showMenu ? "show" : ""}`}>
+      {showMenu ? (
+        <AiOutlineClose
+          className="dashboard__nav__menu__icon"
+          onClick={() => setShowMenu(!showMenu)}
+        />
+      ) : (
+        <AiOutlineMenu
+          className="dashboard__nav__menu__icon"
+          onClick={() => setShowMenu(!showMenu)}
+        />
+      )}
+      <div className={`dashboard__nav__menu`}>
+        <NavLink to={"/dashboard"} className={"dashboard__nav__link"}>
+          {/\dashboard$/i.test(location.pathname) ? (
+            <GoHomeFill className="dashboard__nav__link__icon" />
+          ) : (
+            <GoHome className="dashboard__nav__link__icon" />
+          )}
+          <span>Dashboard</span>
+        </NavLink>
+        <NavLink to={"/dashboard/profile"} className={"dashboard__nav__link"}>
+          {/\profile$/i.test(location.pathname) ? (
+            <RiUser3Fill className="dashboard__nav__link__icon" />
+          ) : (
+            <RiUser3Line className="dashboard__nav__link__icon" />
+          )}
+          <span>Profile</span>
+        </NavLink>
+        <Link
+          to={"/login"}
+          className={"dashboard__nav__link dashboard__nav__logout"}
+        >
+          <IoLogOutOutline className="dashboard__nav__link__icon" />
+          <span>Logout</span>
+        </Link>
+      </div>
+      <div
+        className="dashboard__nav__overlay"
+        onClick={() => setShowMenu(false)}
+      />
+    </div>
+*/
+
+/* Nav goes to the left */
+
+.dashboard__nav {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  color: var(--nav-text-color);
+  width: 100%;
+  pointer-events: none;
+}
+
+.dashboard__nav__menu {
+  pointer-events: all;
+  background-color: var(--nav-bg-color);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 250px;
+  height: 100vh;
+  height: 100dvh;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  overflow-x: hidden;
+  transition: all 0.3s ease-in-out;
+  padding-top: 4rem;
+}
+
+.dashboard__nav__menu__icon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 2rem;
+  cursor: pointer;
+  pointer-events: all;
+  color: #000;
+  z-index: 1;
+  transition: all 0.5s ease-in-out;
+}
+
+.dashboard__nav.show .dashboard__nav__menu__icon {
+  color: #fff;
+}
+
+.dashboard__nav.show .dashboard__nav__menu {
+  left: 0;
+}
+
+.dashboard__nav__link {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1rem 1rem 2rem;
+  text-decoration: none;
+  color: var(--nav-text-color);
+  transition: all 0.3s ease-in-out;
+}
+
+.dashboard__nav__link.active {
+  background-color: var(--nav-text-color);
+  color: var(--nav-bg-color);
+}
+
+.dashboard__nav__link span {
+  font-size: 1.2rem;
+}
+
+.dashboard__nav__link__icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.dashboard__nav__link:hover {
+  background-color: var(--nav-text-color-hover);
+  color: #fff;
+}
+
+.dashboard__nav__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.dashboard__nav.show .dashboard__nav__overlay {
+  opacity: 1;
+  pointer-events: all;
+}

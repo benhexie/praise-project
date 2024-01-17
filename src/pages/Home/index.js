@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
-import Nav from "../../components/Nav/Nav";
 import "./Home.css";
+import HomeNav from "../../components/Nav/HomeNav";
 
 const Home = () => {
   return <div className="home">
-    <Nav />
+    <HomeNav />
     <Outlet />
   </div>;
 };

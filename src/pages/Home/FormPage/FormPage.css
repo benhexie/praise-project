@@ -47,17 +47,6 @@
   transform: scale(1.05);
 }
 
-/* 
-<select
-            className="form__item form__select"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-          >
-            <option value="teacher">Teacher</option>
-            <option value="school">School</option>
-          </select>
-*/
-
 .formpage .form__select {
   width: 100%;
   height: 3rem;
@@ -78,4 +67,17 @@
 
 .formpage .form__select:hover {
   cursor: pointer;
+}
+
+.form__footer {
+  text-align: center;
+}
+
+.form__footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.form__footer a:hover {
+  text-decoration: underline;
 }

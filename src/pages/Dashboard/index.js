@@ -6,6 +6,8 @@ import UserDashboard from "./User";
 import AdminDashboard from "./Admin";
 import { toast } from "react-toastify";
 import SomethingWentWrong from "../Error/SomethingWentWrong";
+import DashboardNav from "../../components/Nav/DashboardNav";
+import { Outlet, useLocation } from "react-router-dom";
 
 const SERVER = process.env.REACT_APP_SERVER;
 
@@ -42,8 +44,12 @@ const Dashboard = () => {
       {(() => {
         if (loading) return <DashboardLoading />;
         if (!user) return <SomethingWentWrong />;
-        if (user.role === "user") return <UserDashboard />;
-        if (user.role === "admin") return <AdminDashboard />;
+        return (
+          <>
+            <DashboardNav />
+            <Outlet />
+          </>
+        );
       })()}
     </div>
   );

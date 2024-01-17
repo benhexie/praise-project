@@ -10,7 +10,7 @@ import { IoMdKey } from "react-icons/io";
 import { FaBuilding } from "react-icons/fa";
 import { PiAddressBookFill } from "react-icons/pi";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SERVER = process.env.REACT_APP_SERVER;
 
@@ -271,6 +271,9 @@ const Signup = () => {
             setValue={setConfirm}
           />
           <Button disabled={loading}>Signup</Button>
+          <p className="form__footer">
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
         </form>
       </div>
     </div>
