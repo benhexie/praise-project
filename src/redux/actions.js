@@ -4,3 +4,10 @@ export const setUser = (user) => {
     payload: user,
   };
 };
+
+export const setSchool = (school) => {
+  return {
+    type: "SET_SCHOOL",
+    payload: school,
+  };
+};

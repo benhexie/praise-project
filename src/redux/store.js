@@ -9,6 +9,9 @@ const reducerFtn = (state = initialState, action = {}) => {
     case "SET_USER":
       return { ...state, user: action.payload };
 
+    case "SET_SCHOOL":
+      return { ...state, school: action.payload };
+
     default:
       return state;
   }

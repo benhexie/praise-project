@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import AdminDashboard from "../Admin";
-import UserDashboard from "../User";
+import AdminDashboard from "./Admin";
+import UserDashboard from "./User";
 
 const DashboardIndex = () => {
   const user = useSelector((state) => state.user);
