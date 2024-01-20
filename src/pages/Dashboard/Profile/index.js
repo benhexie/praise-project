@@ -5,6 +5,7 @@ import { setToken } from "../../../redux/actions";
 import { toast } from "react-toastify";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import User from "../../../assets/svgs/user.svg";
 
 const SERVER = process.env.REACT_APP_SERVER;
 
@@ -85,16 +86,22 @@ const Profile = () => {
         <h1>Profile</h1>
       </div>
       <div className="dashboard__container">
-        <section className="profile__section general__section">
+        <section className="profile__section">
+          <label className="dashboard__section__item profile__image__container">
+            <img src={user.image || User} alt="profile" />
+              <input type="file" hidden />
+          </label>
+        </section>
+        <section className="dashboard__section general__section">
           <h2>General Information</h2>
-          <div className="profile__section__content">
-            <div className="profile__section__item">
+          <div className="dashboard__section__content">
+            <div className="dashboard__section__item">
               <label>
                 <span>Email</span>
                 <input type="text" value={user.email} disabled />
               </label>
             </div>
-            <div className="profile__section__item">
+            <div className="dashboard__section__item">
               <label>
                 <span>First Name</span>
                 <input
@@ -105,7 +112,7 @@ const Profile = () => {
                 />
               </label>
             </div>
-            <div className="profile__section__item">
+            <div className="dashboard__section__item">
               <label>
                 <span>Last Name</span>
                 <input
@@ -118,7 +125,7 @@ const Profile = () => {
             </div>
             {user.role !== "admin" && (
               <>
-                <div className="profile__section__item">
+                <div className="dashboard__section__item">
                   <label>
                     <span>Age</span>
                     <input
@@ -129,7 +136,7 @@ const Profile = () => {
                     />
                   </label>
                 </div>
-                <div className="profile__section__item">
+                <div className="dashboard__section__item">
                   <label>
                     <span>Origin</span>
                     <input
@@ -140,7 +147,7 @@ const Profile = () => {
                     />
                   </label>
                 </div>
-                <div className="profile__section__item">
+                <div className="dashboard__section__item">
                   <label>
                     <span>Nationality</span>
                     <input
@@ -151,7 +158,7 @@ const Profile = () => {
                     />
                   </label>
                 </div>
-                <div className="profile__section__item">
+                <div className="dashboard__section__item">
                   <label>
                     <span>Phone</span>
                     <input
@@ -165,17 +172,17 @@ const Profile = () => {
               </>
             )}
             <button
-              className="profile__section__button"
+              className="dashboard__section__button"
               disabled={!generalChanged}
             >
               Save
             </button>
           </div>
         </section>
-        <section className="profile__section school__section">
+        <section className="dashboard__section school__section">
           <h2>School Information</h2>
-          <div className="profile__section__content">
-            <div className="profile__section__item">
+          <div className="dashboard__section__content">
+            <div className="dashboard__section__item">
               <label>
                 <span>Name</span>
                 <input
@@ -187,7 +194,7 @@ const Profile = () => {
                 />
               </label>
             </div>
-            <div className="profile__section__item">
+            <div className="dashboard__section__item">
               <label>
                 <span>Address</span>
                 <input
@@ -201,7 +208,7 @@ const Profile = () => {
             </div>
             {user.role === "admin" && (
               <button
-                className="profile__section__button"
+                className="dashboard__section__button"
                 disabled={!schoolChanged}
               >
                 Save
@@ -210,10 +217,10 @@ const Profile = () => {
           </div>
         </section>
         {user.role === "admin" && (
-          <section className="profile__section token__section">
+          <section className="dashboard__section token__section">
             <h2>Token Information</h2>
-            <div className="profile__section__content">
-              <div className="profile__section__item">
+            <div className="dashboard__section__content">
+              <div className="dashboard__section__item">
                 <label>
                   <span>Token</span>
                   <div className="profile__input__container">
@@ -227,7 +234,7 @@ const Profile = () => {
                   </div>
                 </label>
                 <button
-                  className="profile__section__button"
+                  className="dashboard__section__button"
                   onClick={generateToken}
                 >
                   Generate New Token
@@ -237,14 +244,14 @@ const Profile = () => {
           </section>
         )}
         {user.role !== "admin" && (
-          <section className="profile__section professional__section">
+          <section className="dashboard__section professional__section">
             <h2>Professional Information</h2>
-            <div className="profile__section__content">
+            <div className="dashboard__section__content">
               <button
-                className="profile__section__button"
+                className="dashboard__section__button"
                 onClick={() => navigate("/dashboard/professional")}
               >
-                Go to Professional Profile
+                Go to Professional Information
               </button>
             </div>
           </section>

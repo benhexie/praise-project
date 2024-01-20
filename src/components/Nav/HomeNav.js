@@ -24,7 +24,7 @@ const HomeNav = () => {
             src="https://www.freepnglogos.com/uploads/netflix-logo-0.png"
             alt="Netflix Logo"
           /> */}
-          <h1>Praise</h1>
+          <h1>Lectura</h1>
         </Link>
         <NavLink className="home__nav__item" to="/" end>
           Home
@@ -38,10 +38,13 @@ const HomeNav = () => {
         <NavLink className="home__nav__item" to="login">
           Login
         </NavLink>
-        <NavLink className="home__nav__item" to="signup">
+        <NavLink className="home__nav__item home__nav__signup" to="signup">
           Signup
         </NavLink>
-        <div className={`home__nav__item home__nav__menu`} onClick={handleMenuClick}>
+        <div
+          className={`home__nav__item home__nav__menu`}
+          onClick={handleMenuClick}
+        >
           {show ? <AiOutlineClose /> : <AiOutlineMenu />}
         </div>
       </div>

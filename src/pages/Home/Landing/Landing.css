@@ -1,0 +1,142 @@
+/* 
+<div className="landing">
+      <header className="landing__section landing__header">
+        <h1>Welcome to Lectura</h1>
+        <p>Your Gateway to Academic Excellence and Expertise</p>
+      </header>
+
+      <section className="landing__section about__section">
+        <h2>About Lectura</h2>
+        <p>
+          Lectura is a revolutionary academic platform dedicated to connecting
+          educators and administrators seamlessly. Our mission is to provide a
+          comprehensive solution for academic management, fostering a culture of
+          excellence in education.
+        </p>
+        <img src="sample-about-image.jpg" alt="About Lectura" />
+      </section>
+
+      <section className="landing__section features__section">
+        <h2>Key Features</h2>
+        <ul>
+          <li>Comprehensive lecturer profiles with detailed qualifications</li>
+          <li>
+            Admin and Super Admin functionalities for streamlined management
+          </li>
+          <li>
+            Intuitive search and ranking system for optimal lecturer selection
+          </li>
+          <li>Secure user authentication ensuring data confidentiality</li>
+          <li>Scoring system to highlight academic achievements</li>
+        </ul>
+      </section>
+
+      <section className="landing__section contact__section">
+        <h2>Contact Us</h2>
+        <p>Have questions or feedback? Reach out to our team!</p>
+        <div className="contact__info">
+          <p>
+            <FaEnvelope /> info@lectura.com
+          </p>
+          <p>
+            <FaPhone /> +1 (123) 456-7890
+          </p>
+        </div>
+        <img src="sample-contact-image.jpg" alt="Contact Us" />
+      </section>
+    </div>
+ */
+
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+
+.landing__section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  min-height: calc(100vh - var(--nav-height));
+  min-height: calc(100dvh - var(--nav-height));
+}
+
+.landing__section h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.landing__section h2 {
+  font-size: 3rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.landing__section p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  max-width: 1200px;
+    text-align: center;
+}
+
+.landing__section img {
+  height: auto;
+  border-radius: 8px;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 700px;
+  object-fit: cover;
+}
+
+.landing__section ul {
+  list-style: none;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.landing__section li {
+  margin-bottom: 0.5rem;
+}
+
+.landing__section .contact__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.landing__section .contact__info p {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.landing__section .contact__info svg {
+  margin-right: 0.5rem;
+}
+
+.landing__section .contact__info a {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  color: #000;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,13 +1,17 @@
 .home__nav {
   display: flex;
   flex-direction: column;
-  color: #fff;
+  color: var(--nav-text-color);
   position: sticky;
   top: 0;
   z-index: 100;
   transition: all 0.3s ease-in-out;
   height: auto;
   height: var(--nav-height);
+}
+
+.home__nav a {
+  color: inherit;
 }
 
 .home__nav__web {
@@ -40,6 +44,10 @@
   cursor: pointer;
 }
 
+.home__nav__signup {
+  border: 1px solid #000;
+}
+
 .home__nav__logo {
   display: flex;
   align-items: center;
@@ -63,10 +71,17 @@
   cursor: pointer;
   transition: none;
   display: none;
+  transition: all 0.3s ease-in-out;
 }
 
 .home__nav__menu svg {
   pointer-events: none;
+  color: #000;
+  transition: all 0.3s ease-in-out;
+}
+
+.home__nav__menu:hover svg {
+  color: #fff;
 }
 
 .home__nav__mobile {
@@ -74,7 +89,6 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 1rem;
   padding-bottom: 2rem;
   margin-top: -100%;
   background-color: var(--nav-bg-color);
@@ -114,7 +128,7 @@
   }
 
   .home__nav__mobile .home__nav__item {
-    padding: 0.5rem 1rem;
+    padding: 1rem;
     width: 100%;
     border-radius: 0;
     text-align: left;

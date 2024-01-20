@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
+  school: {},
+  professional: {},
 };
 
 const reducerFtn = (state = initialState, action = {}) => {

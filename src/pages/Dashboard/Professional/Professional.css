@@ -1,8 +1,92 @@
 .professional {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.professional__image__container {
+  position: relative;
+  width: 150px;
+  min-width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #ccc;
+}
+
+.professional__image__container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.professional .profile__section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.professional .profile__section .dashboard__section__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.professional .profile__section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.professional .profile__section p {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.professional .profile__section .school__txt {
+  color: #ccc;
+}
+
+/* 
+<div className="experience__section__item professional__section__item--empty">
+              <h2>No experience added yet</h2>
+              <IoAddOutline />
+            </div>
+*/
+
+.professional__section__item--empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  border: 1px dashed #ccc;
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.professional__section__item--empty:hover {
+  cursor: pointer;
+  border: 1px dashed #000;
+}
+
+.professional__section__item--empty svg {
+  width: 2rem;
+  height: 2rem;
+  color: #ccc;
+  transition: all 0.2s ease-in-out;
+}
+
+.professional__section__item--empty:hover svg {
+  color: #000;
+  cursor: pointer;
 }
