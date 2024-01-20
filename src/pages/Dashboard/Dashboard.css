@@ -30,6 +30,7 @@
   position: sticky;
   top: 0;
   left: 0;
+  z-index: 10;
 }
 
 .dashboard__header h1 {
@@ -37,6 +38,7 @@
   font-weight: 500;
 }
 
+/* DASHBOARD SECTION */
 .dashboard__section {
   width: 100%;
   height: 100%;
@@ -140,4 +142,188 @@
 .dashboard__section__button:active:enabled {
   background-color: #000;
   color: #fff;
+}
+
+/* DASHBOARD OVERLAY */
+.dashboard__overlay {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.dashboard__overlay__header {
+  width: 100%;
+  min-height: calc(var(--nav-height) * 1.5);
+  padding: 1.2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-color);
+  position: sticky;
+  top: 0;
+  left: 0;
+  margin-bottom: 1rem;
+}
+
+.dashboard__overlay__header h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.dashboard__overlay__close {
+  font-size: 2rem;
+  color: #000;
+  cursor: pointer;
+}
+
+.dashboard__overlay__content {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1200px;
+}
+
+.dashboard__overlay__content small {
+  font-size: 0.8rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.dashboard__overlay__form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard__overlay__form__group {
+  width: 100%;
+  margin: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard__overlay__form__group__required {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #ff0000;
+}
+
+.dashboard__overlay__form__group label {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard__overlay__form__group input,
+.dashboard__overlay__form__group textarea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  outline: none;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.dashboard__overlay__form__group textarea {
+  height: 3rem;
+}
+
+.dashboard__overlay__form__group input:focus,
+.dashboard__overlay__form__group textarea:focus {
+  border: 1px solid #000;
+}
+
+.dashboard__overlay__form__group input::placeholder,
+.dashboard__overlay__form__group textarea::placeholder {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.dashboard__overlay__form__group input:disabled,
+.dashboard__overlay__form__group textarea:disabled {
+  background-color: #f5f5f5;
+}
+
+.dashboard__overlay__form__group input:disabled::placeholder,
+.dashboard__overlay__form__group textarea:disabled::placeholder {
+  color: #ccc;
+}
+
+.dashboard__overlay__form__group input:disabled:focus,
+.dashboard__overlay__form__group textarea:disabled:focus {
+  border: 1px solid #ccc;
+}
+
+.dashboard__overlay__form__group input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.dashboard__overlay__form__group input[type="checkbox"]:checked {
+  background-color: #000;
+}
+
+.dashboard__overlay__form__group input[type="checkbox"]:checked:after {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  position: absolute;
+  top: 0.3rem;
+  left: 0.3rem;
+  background-color: #fff;
+}
+
+.dashboard__overlay__form__group input[type="submit"] {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+.dashboard__overlay__form__group input[type="submit"]:disabled {
+  background-color: #ccc;
+  color: #000;
+  cursor: not-allowed;
+}
+
+.dashboard__overlay__form__group input[type="submit"]:hover:enabled {
+  background-color: #333;
+}
+
+.dashboard__overlay__form__group input[type="submit"]:active:enabled {
+  background-color: #000;
+  color: #fff;
+}
+
+.dashboard__overlay__form__group select {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  outline: none;
+  font-size: 1rem;
+  background-color: #fff;
 }

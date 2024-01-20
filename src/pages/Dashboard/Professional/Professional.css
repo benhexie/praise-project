@@ -5,6 +5,7 @@
   justify-content: center;
   height: 100%;
   width: 100%;
+  position: relative;
 }
 
 .professional__image__container {

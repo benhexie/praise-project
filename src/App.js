@@ -13,6 +13,9 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Dashboard/Profile";
 import DashboardIndex from "./pages/Dashboard/DashboardIndex";
 import Professional from "./pages/Dashboard/Professional";
+import ExperienceOverlay from "./pages/Dashboard/Professional/overlay/ExperienceOverlay";
+import EducationOverlay from "./pages/Dashboard/Professional/overlay/EducationOverlay";
+import ProjectsOverlay from "./pages/Dashboard/Professional/overlay/ProjectsOverlay";
 
 const DEVELOPMENT = process.env.REACT_APP_DEV === "true";
 
@@ -56,7 +59,13 @@ function App() {
                     </Route>
                     <Route path="/dashboard" element={<Dashboard />}>
                       <Route index element={<DashboardIndex />} />
-                      <Route path="professional" element={<Professional />} />
+                      <Route path="professional" element={<Professional />}>
+                        <Route path="add">
+                          <Route path="experience" element={<ExperienceOverlay />} />
+                          <Route path="education" element={<EducationOverlay />} />
+                          <Route path="projects" element={<ProjectsOverlay />} />
+                        </Route>
+                      </Route>
                       <Route path="profile" element={<Profile />} />
                       <Route path="*" element={<ErrorPage />} />
                     </Route>
