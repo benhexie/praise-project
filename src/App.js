@@ -12,6 +12,7 @@ import Landing from "./pages/Home/Landing";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Dashboard/Profile";
 import DashboardIndex from "./pages/Dashboard/DashboardIndex";
+import Professional from "./pages/Dashboard/Professional";
 
 const DEVELOPMENT = process.env.REACT_APP_DEV === "true";
 
@@ -53,6 +54,7 @@ function App() {
                     </Route>
                     <Route path="/dashboard" element={<Dashboard />}>
                       <Route index element={<DashboardIndex />} />
+                      <Route path="professional" element={<Professional />} />
                       <Route path="profile" element={<Profile />} />
                       <Route path="*" element={<ErrorPage />} />
                     </Route>

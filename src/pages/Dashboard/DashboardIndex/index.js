@@ -1,3 +1,4 @@
+import "./DashboardIndex.css"
 import { useSelector } from "react-redux";
 import AdminDashboard from "./Admin";
 import UserDashboard from "./User";

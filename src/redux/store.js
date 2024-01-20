@@ -12,6 +12,15 @@ const reducerFtn = (state = initialState, action = {}) => {
     case "SET_SCHOOL":
       return { ...state, school: action.payload };
 
+    case "SET_TOKEN":
+      return {
+        ...state,
+        school: {
+          ...state.school,
+          token: action.payload,
+        }
+      }
+
     default:
       return state;
   }

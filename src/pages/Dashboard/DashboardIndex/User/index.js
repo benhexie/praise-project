@@ -1,9 +1,14 @@
-import "./UserDashboard.css"
+import "./UserDashboard.css";
 
 const UserDashboard = () => {
   return (
-    <div>Logged in as user.</div>
-  )
-}
+    <div className="user__dashboard">
+      <div className="dashboard__header">
+        <h1>Dashboard</h1>
+      </div>
+      <div className="dashboard__container">Hey</div>
+    </div>
+  );
+};
 
-export default UserDashboard
+export default UserDashboard;

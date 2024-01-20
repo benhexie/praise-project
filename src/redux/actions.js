@@ -11,3 +11,10 @@ export const setSchool = (school) => {
     payload: school,
   };
 };
+
+export const setToken = (token) => {
+  return {
+    type: "SET_TOKEN",
+    payload: token,
+  };
+};

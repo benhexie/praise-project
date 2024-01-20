@@ -2,6 +2,7 @@ import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./DashboardNav.css";
 import { GoHome, GoHomeFill } from "react-icons/go";
 import { RiUser3Line, RiUser3Fill } from "react-icons/ri";
+import { PiScrollDuotone, PiScrollFill } from "react-icons/pi";
 import { IoLogOutOutline } from "react-icons/io5";
 import { AiOutlineMenu } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
@@ -37,6 +38,14 @@ const DashboardNav = () => {
             <GoHome className="dashboard__nav__link__icon" />
           )}
           <span>Dashboard</span>
+        </NavLink>
+        <NavLink to={"/dashboard/professional"} className={"dashboard__nav__link"}>
+          {/\/professional$/i.test(location.pathname) ? (
+            <PiScrollFill className="dashboard__nav__link__icon" />
+          ) : (
+            <PiScrollDuotone className="dashboard__nav__link__icon" />
+          )}
+          <span>Professional</span>
         </NavLink>
         <NavLink to={"/dashboard/profile"} className={"dashboard__nav__link"}>
           {/\/profile$/i.test(location.pathname) ? (

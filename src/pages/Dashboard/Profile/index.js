@@ -1,9 +1,17 @@
 import "./Profile.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { setToken } from "../../../redux/actions";
+import { toast } from "react-toastify";
+import { MdOutlineContentCopy } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+
+const SERVER = process.env.REACT_APP_SERVER;
 
 const Profile = () => {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const schoolData = useSelector((state) => state.school);
   const [firstname, setFirstname] = useState(user.firstname);
   const [lastname, setLastname] = useState(user.lastname);
@@ -48,12 +56,35 @@ const Profile = () => {
     address,
   ]);
 
+  const generateToken = async () => {
+    try {
+      const res = await fetch(`${SERVER}/token`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      if (data.error) {
+        toast.error(data.message);
+      }
+      dispatch(setToken(data.data.token));
+    } catch (err) {
+      if (/failed to fetch|network error/i.test(err.message)) {
+        return toast.error("Please check your internet connection.");
+      }
+      toast.error("Something went wrong");
+      console.log(err.message);
+    }
+  };
+
   return (
     <div className="profile">
       <div className="dashboard__header profile__header">
         <h1>Profile</h1>
       </div>
-      <div className="profile__container">
+      <div className="dashboard__container">
         <section className="profile__section general__section">
           <h2>General Information</h2>
           <div className="profile__section__content">
@@ -92,7 +123,7 @@ const Profile = () => {
                     <span>Age</span>
                     <input
                       type="text"
-                      placeholder={user.age}
+                      placeholder={user.age || "Enter your age"}
                       value={age}
                       onChange={(e) => setAge(e.target.value)}
                     />
@@ -103,7 +134,7 @@ const Profile = () => {
                     <span>Origin</span>
                     <input
                       type="text"
-                      placeholder={user.origin}
+                      placeholder={user.origin || "Enter your origin"}
                       value={origin}
                       onChange={(e) => setOrigin(e.target.value)}
                     />
@@ -114,7 +145,7 @@ const Profile = () => {
                     <span>Nationality</span>
                     <input
                       type="text"
-                      placeholder={user.nationality}
+                      placeholder={user.nationality || "Enter your nationality"}
                       value={nationality}
                       onChange={(e) => setNationality(e.target.value)}
                     />
@@ -125,7 +156,7 @@ const Profile = () => {
                     <span>Phone</span>
                     <input
                       type="text"
-                      placeholder={user.phone}
+                      placeholder={user.phone || "Enter your phone number"}
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                     />
@@ -178,6 +209,46 @@ const Profile = () => {
             )}
           </div>
         </section>
+        {user.role === "admin" && (
+          <section className="profile__section token__section">
+            <h2>Token Information</h2>
+            <div className="profile__section__content">
+              <div className="profile__section__item">
+                <label>
+                  <span>Token</span>
+                  <div className="profile__input__container">
+                    <input type="text" value={schoolData.token} disabled />
+                    <MdOutlineContentCopy
+                      onClick={() => {
+                        navigator.clipboard.writeText(schoolData.token);
+                        toast.success("Copied to clipboard");
+                      }}
+                    />
+                  </div>
+                </label>
+                <button
+                  className="profile__section__button"
+                  onClick={generateToken}
+                >
+                  Generate New Token
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
+        {user.role !== "admin" && (
+          <section className="profile__section professional__section">
+            <h2>Professional Information</h2>
+            <div className="profile__section__content">
+              <button
+                className="profile__section__button"
+                onClick={() => navigate("/dashboard/professional")}
+              >
+                Go to Professional Profile
+              </button>
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );
