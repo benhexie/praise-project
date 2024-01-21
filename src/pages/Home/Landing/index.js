@@ -24,7 +24,10 @@ const Landing = () => {
         <p>Your Gateway to Academic Excellence and Expertise</p>
       </header>
 
-      <section className="landing__section about__section" ref={aboutSectionRef}>
+      <section
+        className="landing__section about__section"
+        ref={aboutSectionRef}
+      >
         <img src={AboutImage} alt="About Lectura" />
         <h2>About Lectura</h2>
         <p>
@@ -50,7 +53,10 @@ const Landing = () => {
         </ul>
       </section>
 
-      <section className="landing__section contact__section" ref={contactSectionRef}>
+      <section
+        className="landing__section contact__section"
+        ref={contactSectionRef}
+      >
         <img src={ContactImage} alt="Contact Us" />
         <h2>Contact Us</h2>
         <p>Have questions or feedback? Reach out to our team!</p>
@@ -58,8 +64,8 @@ const Landing = () => {
           <Link to={"mailto:"}>
             <FaEnvelope /> info@lectura.com
           </Link>
-          <Link to={"tel:"}>
-            <FaPhone /> +1 (123) 456-7890
+          <Link to={"tel:+2348022779300"}>
+            <FaPhone /> +234 802 277 9300
           </Link>
         </div>
       </section>
