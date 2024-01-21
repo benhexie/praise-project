@@ -7,11 +7,13 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { AiOutlineMenu } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const DashboardNav = () => {
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     setShowMenu(false);
@@ -39,14 +41,19 @@ const DashboardNav = () => {
           )}
           <span>Dashboard</span>
         </NavLink>
-        <NavLink to={"/dashboard/professional"} className={"dashboard__nav__link"}>
-          {/\/professional$/i.test(location.pathname) ? (
-            <PiScrollFill className="dashboard__nav__link__icon" />
-          ) : (
-            <PiScrollDuotone className="dashboard__nav__link__icon" />
-          )}
-          <span>Professional</span>
-        </NavLink>
+        {user.role !== "admin" && (
+          <NavLink
+            to={"/dashboard/professional"}
+            className={"dashboard__nav__link"}
+          >
+            {/\/professional$/i.test(location.pathname) ? (
+              <PiScrollFill className="dashboard__nav__link__icon" />
+            ) : (
+              <PiScrollDuotone className="dashboard__nav__link__icon" />
+            )}
+            <span>Professional</span>
+          </NavLink>
+        )}
         <NavLink to={"/dashboard/profile"} className={"dashboard__nav__link"}>
           {/\/profile$/i.test(location.pathname) ? (
             <RiUser3Fill className="dashboard__nav__link__icon" />
