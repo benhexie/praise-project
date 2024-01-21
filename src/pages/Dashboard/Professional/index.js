@@ -37,7 +37,7 @@ const Professional = () => {
               </div>
             </section>
             <div className="dashboard__section experience__section">
-              {!professional.experiences?.length ? (
+              {!professional.experience?.length ? (
                 <div
                   className="experience__section__item professional__section__item--empty"
                   onClick={() => navigate("add/experience")}
@@ -50,22 +50,32 @@ const Professional = () => {
                   <div className="dashboard__section__header">
                     <h2>Experience</h2>
                     <div className="dashboard__section__header__actions">
-                      <IoAddOutline className="dashboard__section__header__action" />
+                      <IoAddOutline
+                        className="dashboard__section__header__action"
+                        onClick={() => navigate("add/experience")}
+                      />
                     </div>
                   </div>
                   <div className="dashboard__section__content">
-                    {professional.experiences.map((experience) => (
-                      <div className="experience__section__content__item">
-                        <h3>{experience.title}</h3>
-                        <p>{experience.description}</p>
-                      </div>
-                    ))}
+                    {professional.experience
+                      .sort(
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                      )
+                      .map((experience) => (
+                        <div
+                          className="dashboard__section__content__item"
+                          key={experience._id}
+                        >
+                          <h3>{experience.company}</h3>
+                          <p>{experience.title}</p>
+                        </div>
+                      ))}
                   </div>
                 </div>
               )}
             </div>
             <div className="dashboard__section education__section">
-              {!professional.educations?.length ? (
+              {!professional.education?.length ? (
                 <div
                   className="education__section__item professional__section__item--empty"
                   onClick={() => navigate("add/education")}
@@ -78,45 +88,65 @@ const Professional = () => {
                   <div className="dashboard__section__header">
                     <h2>Education</h2>
                     <div className="dashboard__section__header__actions">
-                      <IoAddOutline className="dashboard__section__header__action" />
+                      <IoAddOutline
+                        className="dashboard__section__header__action"
+                        onClick={() => navigate("add/education")}
+                      />
                     </div>
                   </div>
                   <div className="dashboard__section__content">
-                    {professional.educations.map((education) => (
-                      <div className="education__section__content__item">
-                        <h3>{education.title}</h3>
-                        <p>{education.description}</p>
-                      </div>
-                    ))}
+                    {professional.education
+                      .sort(
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                      )
+                      .map((education) => (
+                        <div
+                          className="dashboard__section__content__item"
+                          key={education._id}
+                        >
+                          <h3>{education.title}</h3>
+                          <p>{education.description}</p>
+                        </div>
+                      ))}
                   </div>
                 </div>
               )}
             </div>
             {/* projects and publications */}
             <div className="dashboard__section projects__section">
-              {!professional.projects?.length ? (
+              {!professional.catalog?.length ? (
                 <div
                   className="projects__section__item professional__section__item--empty"
-                  onClick={() => navigate("add/projects")}
+                  onClick={() => navigate("add/catalog")}
                 >
-                  <h2>No projects or publications added yet</h2>
+                  <h2>Catalog is empty</h2>
                   <IoAddOutline />
                 </div>
               ) : (
                 <div className="projects__section__item">
                   <div className="dashboard__section__header">
-                    <h2>Projects and Publications</h2>
+                    <h2>Catalog</h2>
                     <div className="dashboard__section__header__actions">
-                      <IoAddOutline className="dashboard__section__header__action" />
+                      <IoAddOutline
+                        className="dashboard__section__header__action"
+                        onClick={() => navigate("add/catalog")}
+                      />
                     </div>
                   </div>
                   <div className="dashboard__section__content">
-                    {professional.projects.map((project) => (
-                      <div className="projects__section__content__item">
-                        <h3>{project.title}</h3>
-                        <p>{project.description}</p>
-                      </div>
-                    ))}
+                    {professional.catalog
+                      .sort(
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                      )
+                      .map((catalog) => (
+                        <div
+                          className="dashboard__section__content__item"
+                          key={catalog._id}
+                        >
+                          <h3>{catalog.title}</h3>
+                          <p>{catalog.description}</p>
+                        </div>
+                      ))}
                   </div>
                 </div>
               )}

@@ -1,10 +1,16 @@
-import "./ProjectsOverlay.css";
+import "./CatalogOverlay.css";
 import { useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { IoMdAdd, IoMdClose } from "react-icons/io";
+import { toast } from "react-toastify";
+import { updateCatalog } from "../../../../redux/actions";
+import { useDispatch } from "react-redux";
+
+const SERVER = process.env.REACT_APP_SERVER;
 
 const ProjectsOverlay = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [type, setType] = useState("project"); // project or publication
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -15,10 +21,65 @@ const ProjectsOverlay = () => {
   const [current, setCurrent] = useState(false);
   const imageRef = useRef(null);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    const formData = new FormData();
+    formData.append("type", type);
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("links", JSON.stringify(links));
+    formData.append("from", from);
+    formData.append("to", to);
+    formData.append("current", current);
+    if (imageRef.current.files.length > 0)
+      formData.append("image", imageRef.current.files[0]);
+
+    try {
+      const response = await fetch(`${SERVER}/api/profile/catalog`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: formData,
+      });
+      const data = await response.json();
+      if (data.error) return toast.error(data.message);
+      dispatch(updateCatalog(data.data));
+      toast.success("Added to catalog successfully");
+      navigate("/dashboard/professional");
+    } catch (error) {
+      if (/failed to fetch|network error/i.test(error.message))
+        return toast.error("Please check your internet connection");
+      console.log(error.message);
+      toast.error("Something went wrong");
+    }
+  };
+
+  function validateForm() {
+    if (name === "") {
+      toast.error("Name is required");
+      return false;
+    }
+    if (from === "") {
+      toast.error("From is required");
+      return false;
+    }
+    if (!current && to === "") {
+      toast.error("To is required");
+      return false;
+    }
+    return true;
+  }
+
   return (
     <div className="dashboard__overlay projects__overlay">
       <div className="dashboard__overlay__header">
-        <h2>Add Project/Publication</h2>
+        <h2>
+          Add <span style={{ textTransform: "capitalize" }}>{type}</span> to
+          Catalog
+        </h2>
         <IoMdClose
           className="dashboard__overlay__close"
           onClick={() => navigate("/dashboard/professional")}
@@ -26,7 +87,7 @@ const ProjectsOverlay = () => {
       </div>
       <div className="dashboard__overlay__content">
         <small>* indicates required</small>
-        <form className="dashboard__overlay__form">
+        <form className="dashboard__overlay__form" onSubmit={handleSubmit}>
           <div className="dashboard__overlay__form__group">
             <label htmlFor="type">
               Type{" "}
@@ -42,6 +103,7 @@ const ProjectsOverlay = () => {
             >
               <option value="project">Project</option>
               <option value="publication">Publication</option>
+              <option value="patent">Patent</option>
             </select>
           </div>
           <div className="dashboard__overlay__form__group">

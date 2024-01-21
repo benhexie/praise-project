@@ -2,9 +2,15 @@ import "./ExperienceOverlay.css";
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { updateExperience } from "../../../../redux/actions";
+import { useDispatch } from "react-redux";
+
+const SERVER = process.env.REACT_APP_SERVER;
 
 const ExperienceOverlay = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [company, setCompany] = useState("");
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
@@ -12,6 +18,61 @@ const ExperienceOverlay = () => {
   const [to, setTo] = useState("");
   const [current, setCurrent] = useState(false);
   const [description, setDescription] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    const experience = {
+      company,
+      title,
+      location,
+      from,
+      to,
+      current,
+      description,
+    };
+    try {
+      const response = await fetch(`${SERVER}/api/profile/experience`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(experience),
+      });
+      const data = await response.json();
+      if (data.error) return toast.error(data.message);
+      dispatch(updateExperience(data.data));
+      toast.success("Experience added successfully");
+      navigate("/dashboard/professional");
+    } catch (error) {
+      if (/failed to fetch|network error/i.test(error.message))
+        return toast.error("Please check your internet connection");
+      console.log(error.message);
+      toast.error("Something went wrong");
+    }
+  };
+
+  function validateForm() {
+    if (company === "") {
+      toast.error("Company is required");
+      return false;
+    }
+    if (title === "") {
+      toast.error("Title is required");
+      return false;
+    }
+    if (from === "") {
+      toast.error("Starting date is required");
+      return false;
+    }
+    if (!current && to === "") {
+      toast.error("Ending date is required");
+      return false;
+    }
+    return true;
+  }
 
   return (
     <div className="dashboard__overlay experience__overlay">
@@ -24,7 +85,7 @@ const ExperienceOverlay = () => {
       </div>
       <div className="dashboard__overlay__content">
         <small>* indicates required</small>
-        <form className="dashboard__overlay__form">
+        <form className="dashboard__overlay__form" onSubmit={handleSubmit}>
           <div className="dashboard__overlay__form__group">
             <label htmlFor="company">
               Company

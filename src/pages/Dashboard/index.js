@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import SomethingWentWrong from "../Error/SomethingWentWrong";
 import DashboardNav from "../../components/Nav/DashboardNav";
 import { Outlet, useNavigate } from "react-router-dom";
-import { setSchool, setUser } from "../../redux/actions";
+import { setProfessional, setSchool, setUser } from "../../redux/actions";
 
 const SERVER = process.env.REACT_APP_SERVER;
 
@@ -27,14 +27,15 @@ const Dashboard = () => {
       .then((data) => {
         setLoading(false);
         if (data.error) {
-          toast.error(data.message)
+          toast.error(data.message);
           if (/no token provided|invalid token/i.test(data.error)) {
             localStorage.removeItem("token");
           }
           return navigate("/login", { replace: true });
-        };
+        }
         dispatch(setUser(data.data.user));
         dispatch(setSchool(data.data.school));
+        dispatch(setProfessional(data.data.professional));
       })
       .catch((err) => {
         setLoading(false);

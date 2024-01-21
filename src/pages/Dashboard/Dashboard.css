@@ -144,6 +144,49 @@
   color: #fff;
 }
 
+.dashboard__section__header {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dashboard__section__header__actions {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.dashboard__section__header__action {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.dashboard__section__content__item {
+  width: 100%;
+  height: 100%;
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard__section__content__item h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard__section__content__item p {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
 /* DASHBOARD OVERLAY */
 .dashboard__overlay {
   width: 100%;

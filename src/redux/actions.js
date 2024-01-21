@@ -12,9 +12,37 @@ export const setSchool = (school) => {
   };
 };
 
+export const setProfessional = (professional) => {
+  return {
+    type: "SET_PROFESSIONAL",
+    payload: professional,
+  };
+}
+
 export const setToken = (token) => {
   return {
     type: "SET_TOKEN",
     payload: token,
   };
 };
+
+export const updateExperience = (experience) => {
+  return {
+    type: "UPDATE_EXPERIENCE",
+    payload: experience,
+  };
+}
+
+export const updateEducation = (education) => {
+  return {
+    type: "UPDATE_EDUCATION",
+    payload: education,
+  };
+} 
+
+export const updateCatalog = (catalog) => {
+  return {
+    type: "UPDATE_CATALOG",
+    payload: catalog,
+  };
+}
