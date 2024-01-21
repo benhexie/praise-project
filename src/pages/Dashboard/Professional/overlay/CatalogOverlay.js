@@ -11,7 +11,7 @@ const SERVER = process.env.REACT_APP_SERVER;
 const ProjectsOverlay = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [type, setType] = useState("project"); // project or publication
+  const [type, setType] = useState("project"); // project, publication, patent
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [links, setLinks] = useState([]);
@@ -29,7 +29,23 @@ const ProjectsOverlay = () => {
     formData.append("type", type);
     formData.append("name", name);
     formData.append("description", description);
-    formData.append("links", JSON.stringify(links));
+    if (link) {
+      if (
+        !links.includes(link) &&
+        (() => {
+          try {
+            new URL(link);
+            return true;
+          } catch (error) {
+            return false;
+          }
+        })()
+      )
+        formData.append("links", JSON.stringify(links.concat(link)));
+      else formData.append("links", JSON.stringify(links));
+    } else {
+      formData.append("links", JSON.stringify(links));
+    }
     formData.append("from", from);
     formData.append("to", to);
     formData.append("current", current);
@@ -46,6 +62,7 @@ const ProjectsOverlay = () => {
       });
       const data = await response.json();
       if (data.error) return toast.error(data.message);
+      console.log(data.data);
       dispatch(updateCatalog(data.data));
       toast.success("Added to catalog successfully");
       navigate("/dashboard/professional");
@@ -234,7 +251,7 @@ const ProjectsOverlay = () => {
               checked={current}
               onChange={(e) => setCurrent(e.target.checked)}
             />
-            <span>I currently working on this</span>
+            <span>I am currently working on this</span>
           </div>
           <div className="dashboard__overlay__form__group">
             <label htmlFor="image">Preview Image</label>

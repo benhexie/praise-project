@@ -104,15 +104,14 @@ const Professional = () => {
                           className="dashboard__section__content__item"
                           key={education._id}
                         >
-                          <h3>{education.title}</h3>
-                          <p>{education.description}</p>
+                          <h3>{education.school}</h3>
+                          <p>{education.degree}</p>
                         </div>
                       ))}
                   </div>
                 </div>
               )}
             </div>
-            {/* projects and publications */}
             <div className="dashboard__section projects__section">
               {!professional.catalog?.length ? (
                 <div
@@ -143,8 +142,21 @@ const Professional = () => {
                           className="dashboard__section__content__item"
                           key={catalog._id}
                         >
-                          <h3>{catalog.title}</h3>
+                          <h3>{catalog.name}</h3>
                           <p>{catalog.description}</p>
+                          {catalog.links &&
+                            catalog.links.length > 0 &&
+                            catalog.links.map((link, index) => (
+                              <span key={index}>
+                                <a
+                                  href={link}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  {link}
+                                </a>
+                              </span>
+                            ))}
                         </div>
                       ))}
                   </div>
