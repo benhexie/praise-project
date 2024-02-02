@@ -6,7 +6,7 @@ const UserDashboard = () => {
       <div className="dashboard__header">
         <h1>Dashboard</h1>
       </div>
-      <div className="dashboard__container">Logged in as admin.</div>
+      <div className="dashboard__container">Logged in as user.</div>
     </div>
   );
 };

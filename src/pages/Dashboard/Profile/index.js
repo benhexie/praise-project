@@ -1,7 +1,7 @@
 import "./Profile.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { setToken } from "../../../redux/actions";
+import { setToken, updateUser } from "../../../redux/actions";
 import { toast } from "react-toastify";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -80,6 +80,33 @@ const Profile = () => {
     }
   };
 
+  const saveGeneral = async () => {
+    try {
+      const res = await fetch(`${SERVER}/user`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          firstname,
+          lastname,
+          age,
+          origin,
+          nationality,
+          phone,
+        }),
+      });
+      const data = await res.json();
+      if (data.error) {
+        return toast.error(data.message);
+      }
+      dispatch(updateUser(data.data));
+      setGeneralChanged(false);
+      toast.success("Saved");
+    } catch (error) {}
+  };
+
   return (
     <div className="profile">
       <div className="dashboard__header profile__header">
@@ -89,7 +116,7 @@ const Profile = () => {
         <section className="profile__section">
           <label className="dashboard__section__item profile__image__container">
             <img src={user.image || User} alt="profile" />
-              <input type="file" hidden />
+            <input type="file" hidden />
           </label>
         </section>
         <section className="dashboard__section general__section">
@@ -132,7 +159,13 @@ const Profile = () => {
                       type="text"
                       placeholder={user.age || "Enter your age"}
                       value={age}
-                      onChange={(e) => setAge(e.target.value)}
+                      onChange={(e) => {
+                        if (
+                          /^\d+$/.test(e.target.value) ||
+                          e.target.value === ""
+                        )
+                          setAge(e.target.value);
+                      }}
                     />
                   </label>
                 </div>
@@ -174,6 +207,7 @@ const Profile = () => {
             <button
               className="dashboard__section__button"
               disabled={!generalChanged}
+              onClick={saveGeneral}
             >
               Save
             </button>

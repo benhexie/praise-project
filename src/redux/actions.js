@@ -17,7 +17,7 @@ export const setProfessional = (professional) => {
     type: "SET_PROFESSIONAL",
     payload: professional,
   };
-}
+};
 
 export const setToken = (token) => {
   return {
@@ -31,18 +31,25 @@ export const updateExperience = (experience) => {
     type: "UPDATE_EXPERIENCE",
     payload: experience,
   };
-}
+};
 
 export const updateEducation = (education) => {
   return {
     type: "UPDATE_EDUCATION",
     payload: education,
   };
-} 
+};
 
 export const updateCatalog = (catalog) => {
   return {
     type: "UPDATE_CATALOG",
     payload: catalog,
   };
-}
+};
+
+export const updateUser = (user) => {
+  return {
+    type: "UPDATE_USER",
+    payload: user,
+  };
+};
