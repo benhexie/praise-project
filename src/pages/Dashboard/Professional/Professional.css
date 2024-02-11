@@ -53,13 +53,6 @@
   color: #ccc;
 }
 
-/* 
-<div className="experience__section__item professional__section__item--empty">
-              <h2>No experience added yet</h2>
-              <IoAddOutline />
-            </div>
-*/
-
 .professional__section__item--empty {
   display: flex;
   flex-direction: column;

@@ -186,6 +186,17 @@
   font-weight: 400;
 }
 
+.dashboard__section__content__item a {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.dashboard__section__content__item a:hover {
+  text-decoration: underline;
+}
+
 /* DASHBOARD OVERLAY */
 .dashboard__overlay {
   width: 100%;
