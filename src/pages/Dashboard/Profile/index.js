@@ -118,6 +118,33 @@ const Profile = () => {
             <img src={user.image || User} alt="profile" />
             <input type="file" hidden />
           </label>
+          <p className="profile__image__text">
+            Click to change profile picture
+          </p>
+          <div className="profile__info">
+            <div className="dashboard__section__item">
+              <label>
+                <span>Full Name</span>
+                <input
+                  type="text"
+                  value={`${user.firstname} ${user.lastname}`}
+                  disabled
+                />
+              </label>
+            </div>
+            <div className="dashboard__section__item">
+              <label>
+                <span>Email</span>
+                <input type="text" value={user.email} disabled />
+              </label>
+            </div>
+            <div className="dashboard__section__item">
+              <label>
+                <span>Role</span>
+                <input type="text" value={user.role} disabled />
+              </label>
+            </div>
+          </div>
         </section>
         <section className="dashboard__section general__section">
           <h2>General Information</h2>

@@ -69,7 +69,7 @@
 }
 
 .dashboard__nav__link:hover {
-  background-color: var(--nav-text-color-hover);
+  background-color: var(--secondary-color);
   color: #fff;
 }
 
@@ -89,4 +89,40 @@
 .dashboard__nav.show .dashboard__nav__overlay {
   opacity: 1;
   pointer-events: all;
+}
+
+.dashboard__nav__logout {
+  background-color: var(--danger-color);
+  color: #fff;
+}
+
+@media (min-width: 1200px) {
+  .dashboard__nav {
+    position: relative;
+  }
+
+  .dashboard__nav__menu {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    max-width: none;
+    padding-top: 0;
+    background-color: transparent;
+    left: 0;
+    transition: none;
+  }
+
+  .dashboard__nav__menu__icon {
+    display: none;
+  }
+
+  .dashboard__nav__link {
+    padding: 1rem 2rem;
+  }
+
+  .dashboard__nav__overlay {
+    display: none;
+  }
 }

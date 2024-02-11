@@ -1,0 +1,225 @@
+.admin-dashboard {
+  margin: 0 auto;
+  padding: 20px;
+  width: 100%;
+}
+
+.admin-dashboard__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-dashboard__header h1 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.admin-dashboard__header-bell {
+  position: relative;
+}
+
+.admin-dashboard__header-bell-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--danger-color);
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.admin-dashboard__welcome h2 {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+  margin: 0;
+}
+
+.admin-dashboard__overview,
+.admin-dashboard__lecturer,
+.admin-dashboard__course {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-dashboard__overview h2,
+.admin-dashboard__lecturer h2,
+.admin-dashboard__course h2 {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  margin-top: 0;
+}
+
+.admin-dashboard__overview .admin-dashboard__card,
+.admin-dashboard__lecturer .admin-dashboard__card,
+.admin-dashboard__course .admin-dashboard__card {
+  background-color: var(--light-color);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.admin-dashboard__overview .admin-dashboard__card h3,
+.admin-dashboard__lecturer .admin-dashboard__card h3,
+.admin-dashboard__course .admin-dashboard__card h3 {
+  font-size: 1.2rem;
+  color: var(--dark-color);
+  margin: 0;
+}
+
+.admin-dashboard__overview-quick {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.admin-dashboard__lecturer-overview,
+.admin-dashboard__course-overview {
+}
+
+.admin-dashboard__overview-quick .admin-dashboard__card,
+.admin-dashboard__lecturer-overview .admin-dashboard__card,
+.admin-dashboard__course-overview .admin-dashboard__card {
+  flex: 0 0 calc(50% - 20px);
+}
+
+.admin-dashboard__lecturer-search h3 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.admin-dashboard__lecturer-search-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-dashboard__lecturer-search-input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--secondary-color);
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+.admin-dashboard__lecturer-search-button {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.admin-dashboard__lecturer-search-button:hover {
+  background-color: #0056b3;
+}
+
+.admin-dashboard__lecturer-search-results h3 {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.admin-dashboard__lecturer-search-results-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--light-color);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.admin-dashboard__lecturer-search-results-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.admin-dashboard__lecturer-search-results-item h3 {
+  font-size: 1rem;
+  color: var(--dark-color);
+  margin: 0;
+}
+
+.admin-dashboard__lecturer-search-results-button {
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.admin-dashboard__lecturer-search-results-button:hover {
+  background-color: #4a545b;
+}
+
+.admin-dashboard__course {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.admin-dashboard__course h2 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.admin-dashboard__course-view-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--light-color);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.admin-dashboard__course-view-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.admin-dashboard__course-view-item h3 {
+  font-size: 1rem;
+  color: var(--dark-color);
+  margin: 0;
+}
+
+.admin-dashboard__course-view-button {
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.admin-dashboard__course-view-button:hover {
+  background-color: #4a545b;
+}

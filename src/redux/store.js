@@ -4,6 +4,7 @@ const initialState = {
   user: null,
   school: {},
   professional: {},
+  notifications: [1],
 };
 
 const reducerFtn = (state = initialState, action = {}) => {
