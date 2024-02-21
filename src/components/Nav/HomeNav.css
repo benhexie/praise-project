@@ -45,7 +45,8 @@
 }
 
 .home__nav__signup {
-  border: 1px solid #000;
+  background-color: var(--primary-color);
+  color: #fff !important;
 }
 
 .home__nav__logo {
@@ -59,6 +60,12 @@
   border-radius: 0.5rem;
   transition: all 0.3s ease-in-out;
   margin-right: auto;
+}
+
+.home__nav__logo h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--primary-color);
 }
 
 .home__nav__logo img {
@@ -133,5 +140,21 @@
     border-radius: 0;
     text-align: left;
     margin: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .home__nav__web {
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .home__nav__web {
+    padding: 0 0.5rem;
+  }
+
+  .home__nav__item {
+    padding: 0.5rem;
   }
 }

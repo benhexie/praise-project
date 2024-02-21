@@ -4,6 +4,7 @@ import { FaEnvelope, FaPhone } from "react-icons/fa";
 import AboutImage from "../../../assets/images/about-us.avif";
 import ContactImage from "../../../assets/images/contact-us.webp";
 import { useEffect, useRef } from "react";
+import lecturaLoogo from "../../../assets/svgs/lectura-logo.svg";
 
 const Landing = () => {
   const aboutSectionRef = useRef(null);
@@ -20,7 +21,8 @@ const Landing = () => {
   return (
     <div className="landing">
       <header className="landing__section landing__header">
-        <h1>Welcome to Lectura</h1>
+        <img src={lecturaLoogo} alt="Lectura" />
+        <h1>Welcome to Lectura!</h1>
         <p>Your Gateway to Academic Excellence and Expertise</p>
       </header>
 

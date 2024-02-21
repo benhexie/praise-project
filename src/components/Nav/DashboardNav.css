@@ -23,6 +23,37 @@
   overflow-x: hidden;
   transition: all 0.3s ease-in-out;
   padding-top: 4rem;
+  gap: 1rem;
+}
+
+.dashboard__nav__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 1rem 0;
+  background-color: var(--nav-bg-color);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  color: var(--primary-color);
+}
+
+.dashboard__nav__header__logo {
+  width: 80px;
+  height: 80px;
+  margin-right: 1rem;
+}
+
+.dashboard__nav__header__logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.dashboard__nav__header__title {
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 .dashboard__nav__menu__icon {
@@ -55,7 +86,7 @@
 }
 
 .dashboard__nav__link.active {
-  background-color: var(--nav-text-color);
+  background-color: var(--primary-color);
   color: var(--nav-bg-color);
 }
 
@@ -98,20 +129,18 @@
 
 @media (min-width: 1200px) {
   .dashboard__nav {
-    position: relative;
+    position: sticky;
+    width: 100%;
+    display: flex;
+    pointer-events: all;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+    top: 0;
   }
 
   .dashboard__nav__menu {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    width: auto;
-    height: auto;
-    max-width: none;
-    padding-top: 0;
-    background-color: transparent;
-    left: 0;
-    transition: none;
+    left: unset;
   }
 
   .dashboard__nav__menu__icon {

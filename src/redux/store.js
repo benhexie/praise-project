@@ -4,7 +4,28 @@ const initialState = {
   user: null,
   school: {},
   professional: {},
-  notifications: [1],
+  notifications: [
+    {
+      message: "Hello dear",
+      createdAt: "23/34/3536",
+    },
+    {
+      message: "Hello dear",
+      createdAt: "23/34/3536",
+    },
+    {
+      message: "Hello dear",
+      createdAt: "23/34/3536",
+    },
+    {
+      message: "Hello dear",
+      createdAt: "23/34/3536",
+    },
+    {
+      message: "Hello dear",
+      createdAt: "23/34/3536",
+    },
+  ],
 };
 
 const reducerFtn = (state = initialState, action = {}) => {

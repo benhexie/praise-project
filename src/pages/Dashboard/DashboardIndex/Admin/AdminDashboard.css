@@ -1,6 +1,5 @@
 .admin-dashboard {
   margin: 0 auto;
-  padding: 20px;
   width: 100%;
 }
 
@@ -9,6 +8,13 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: white;
+  padding: 20px;
 }
 
 .admin-dashboard__header h1 {
@@ -17,8 +23,38 @@
   margin: 0;
 }
 
+.admin-dashboard__content {
+  padding-inline: 20px;
+}
+
+.admin-dashboard__notifications-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .admin-dashboard__header-bell {
   position: relative;
+  width: 36px;
+  height: 36px;
+  background-color: var(--dark-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.admin-dashboard__header-bell:active {
+  cursor: grab;
+}
+
+.admin-dashboard__header-bell.show {
+  background-color: var(--primary-color);
 }
 
 .admin-dashboard__header-bell-badge {
@@ -36,6 +72,40 @@
   font-size: 0.8rem;
 }
 
+.admin-dashboard__notifications {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  background-color: white;
+  max-width: 300px;
+  top: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.admin-dashboard__notifications__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.admin-dashboard__notifications.show {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.admin-dashboard__notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .admin-dashboard__welcome h2 {
   font-size: 1.5rem;
   color: var(--secondary-color);
@@ -48,8 +118,8 @@
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
-  margin-bottom: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .admin-dashboard__overview h2,
@@ -105,6 +175,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  gap: 8px;
 }
 
 .admin-dashboard__lecturer-search-input {
@@ -112,7 +183,6 @@
   padding: 10px;
   border-radius: 5px;
   border: 1px solid var(--secondary-color);
-  margin-right: 10px;
   font-size: 1rem;
 }
 
@@ -174,13 +244,6 @@
   background-color: #4a545b;
 }
 
-.admin-dashboard__course {
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
-
 .admin-dashboard__course h2 {
   font-size: 1.8rem;
   color: var(--primary-color);
@@ -222,4 +285,46 @@
 
 .admin-dashboard__course-view-button:hover {
   background-color: #4a545b;
+}
+
+.admin-dashboard__lecturer-search-filter {
+  position: relative;
+}
+
+.admin-dashboard__lecturer-search-filter svg {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.admin-dashboard__lecturer-search-filter-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  width: 200px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
+  z-index: 1;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-dashboard__lecturer-search-filter-dropdown.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.admin-dashboard__lecturer-search-filter-dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
 }

@@ -22,10 +22,24 @@
   min-height: calc(100dvh - var(--nav-height));
 }
 
-.landing__section h1 {
-  font-size: 4rem;
-  font-weight: 700;
+.landing__header {
+  font-size: 2rem;
+  font-weight: 500;
   margin-bottom: 1rem;
+  color: var(--primary-color);
+  gap: 1rem;
+}
+
+.landing__section.landing__header img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 1rem;
+  object-fit: contain;
+}
+
+.landing__section.landing__header h1 {
+  text-align: center;
 }
 
 .landing__section h2 {
@@ -39,7 +53,7 @@
   font-weight: 400;
   margin-bottom: 1rem;
   max-width: 1200px;
-    text-align: center;
+  text-align: center;
 }
 
 .landing__section img {
@@ -90,4 +104,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 500px) {
+  .landing__section h2,
+  h1 {
+    font-size: 2rem;
+  }
+
+  .landing__header.landing__section img {
+    max-width: 200px;
+  }
+
+  .landing__section p {
+    font-size: 1.2rem;
+  }
+
+  .landing__section ul {
+    font-size: 1.2rem;
+  }
+
+  .landing__section .contact__info p {
+    font-size: 1.2rem;
+  }
+
+  .landing__section .contact__info a {
+    font-size: 1.2rem;
+  }
 }

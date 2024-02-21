@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import "./HomeNav.css";
 import { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import lecturaLogo from "../../assets/svgs/lectura-logo.svg";
 
 const HomeNav = () => {
   const [show, setShow] = useState(false);
@@ -20,10 +21,7 @@ const HomeNav = () => {
     <div className={`home__nav`}>
       <div className="home__nav__web">
         <Link className="home__nav__item home__nav__logo" to="/">
-          {/* <img
-            src="https://www.freepnglogos.com/uploads/netflix-logo-0.png"
-            alt="Netflix Logo"
-          /> */}
+          <img src={lecturaLogo} alt="Lectura" />
           <h1>Lectura</h1>
         </Link>
         <NavLink className="home__nav__item" to="/" end>

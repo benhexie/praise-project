@@ -8,6 +8,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import lecturaLogo from "../../assets/svgs/lectura-logo.svg";
 
 const DashboardNav = () => {
   const location = useLocation();
@@ -33,6 +34,12 @@ const DashboardNav = () => {
         />
       )}
       <div className={`dashboard__nav__menu`}>
+        <div className="dashboard__nav__header">
+          <Link to={"/dashboard"} className="dashboard__nav__header__logo">
+            <img src={lecturaLogo} alt="logo" />
+          </Link>
+          <h1 className="dashboard__nav__header__title">Lectura</h1>
+        </div>
         <NavLink to={"/dashboard"} end className={"dashboard__nav__link"}>
           {/\/dashboard$/i.test(location.pathname) ? (
             <GoHomeFill className="dashboard__nav__link__icon" />
@@ -42,10 +49,7 @@ const DashboardNav = () => {
           <span>Dashboard</span>
         </NavLink>
         {user.role === "admin" && (
-          <NavLink
-            to={"/dashboard/courses"}
-            className={"dashboard__nav__link"}
-          >
+          <NavLink to={"/dashboard/courses"} className={"dashboard__nav__link"}>
             {/\/courses$/i.test(location.pathname) ? (
               <PiScrollFill className="dashboard__nav__link__icon" />
             ) : (

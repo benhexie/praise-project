@@ -114,13 +114,15 @@ const Profile = () => {
       </div>
       <div className="dashboard__container">
         <section className="profile__section">
-          <label className="dashboard__section__item profile__image__container">
-            <img src={user.image || User} alt="profile" />
+          <label className="profile__image__container">
             <input type="file" hidden />
+            <label className="dashboard__section__item profile__image__label">
+              <img src={user.image || User} alt="profile" />
+            </label>
+            <p className="profile__image__text">
+              Click to change profile picture
+            </p>
           </label>
-          <p className="profile__image__text">
-            Click to change profile picture
-          </p>
           <div className="profile__info">
             <div className="dashboard__section__item">
               <label>
