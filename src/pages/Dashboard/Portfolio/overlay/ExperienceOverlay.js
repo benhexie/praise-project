@@ -45,7 +45,7 @@ const ExperienceOverlay = () => {
       if (data.error) return toast.error(data.message);
       dispatch(updateExperience(data.data));
       toast.success("Experience added successfully");
-      navigate("/dashboard/professional");
+      navigate("/dashboard/portfolio");
     } catch (error) {
       if (/failed to fetch|network error/i.test(error.message))
         return toast.error("Please check your internet connection");
@@ -80,7 +80,7 @@ const ExperienceOverlay = () => {
         <h2>Add Experience</h2>
         <IoMdClose
           className="dashboard__overlay__close"
-          onClick={() => navigate("/dashboard/professional")}
+          onClick={() => navigate("/dashboard/portfolio")}
         />
       </div>
       <div className="dashboard__overlay__content">

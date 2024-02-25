@@ -1,0 +1,124 @@
+.course__new {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: newcourse 0.3s ease;
+}
+
+@keyframes newcourse {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.course__new__container {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  border-radius: 8px;
+  position: relative;
+}
+
+.course__new__close__icon {
+  color: white;
+  scale: 2.5;
+  cursor: pointer;
+  position: absolute;
+  top: -30px;
+  left: 0px;
+  box-shadow: var(--box-shadow);
+  transition: all 0.3s ease-in-out;
+}
+
+.course__new__close__icon:hover {
+  box-shadow: none;
+  scale: 2.6;
+  rotate: 180deg;
+}
+
+.course__new__container form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.course__new__container form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.course__new__container form :is(input, select) {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  height: 40px;
+  padding-inline: 8px;
+  outline: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.course__new__container form button {
+  height: 40px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: large;
+  font-weight: 500;
+  cursor: pointer;
+  padding-inline: 8px;
+  transition: all 0.3s ease;
+}
+
+.course__new__container form button:not(:disabled):hover {
+  scale: 1.03;
+}
+
+.course__new__container form button:disabled {
+  cursor: not-allowed;
+}
+
+.assign__to__container {
+  display: flex;
+  gap: 8px;
+}
+
+.course__new__container .assign__to__container button {
+  background-color: var(--secondary-color);
+}
+
+.course__profile__preview {
+  padding: 8px;
+  border-radius: 5px;
+  border: solid 1px #000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.course__profile__preview p {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.course__profile__preview span {
+  font-weight: 500;
+}

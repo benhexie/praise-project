@@ -14,21 +14,24 @@
 
 .dashboard__header {
   width: 100%;
-  height: 100%;
+  height: 96px;
   padding: 1.2rem 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--bg-color);
+  background-color: white;
   position: sticky;
   top: 0;
   left: 0;
   z-index: 10;
+  color: var(--primary-color);
 }
 
 .dashboard__header h1 {
-  font-size: 1.5rem;
   font-weight: 500;
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin: 0;
 }
 
 /* DASHBOARD SECTION */
@@ -197,7 +200,7 @@
   height: 100%;
   min-height: 100vh;
   min-height: 100dvh;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 100;

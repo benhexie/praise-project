@@ -65,7 +65,7 @@ const ProjectsOverlay = () => {
       console.log(data.data);
       dispatch(updateCatalog(data.data));
       toast.success("Added to catalog successfully");
-      navigate("/dashboard/professional");
+      navigate("/dashboard/portfolio");
     } catch (error) {
       if (/failed to fetch|network error/i.test(error.message))
         return toast.error("Please check your internet connection");
@@ -99,7 +99,7 @@ const ProjectsOverlay = () => {
         </h2>
         <IoMdClose
           className="dashboard__overlay__close"
-          onClick={() => navigate("/dashboard/professional")}
+          onClick={() => navigate("/dashboard/portfolio")}
         />
       </div>
       <div className="dashboard__overlay__content">

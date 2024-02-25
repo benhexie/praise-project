@@ -16,6 +16,8 @@
 
   /* SIZES */
   --nav-height: 5rem;
+
+  --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -35,4 +37,13 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.scrollable {
+  overflow-y: auto;
+}
+
+.scrollable > div {
+  display: flex;
+  flex-direction: column;
 }

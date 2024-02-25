@@ -12,11 +12,13 @@ import Landing from "./pages/Home/Landing";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Dashboard/Profile";
 import DashboardIndex from "./pages/Dashboard/DashboardIndex";
-import Professional from "./pages/Dashboard/Professional";
-import ExperienceOverlay from "./pages/Dashboard/Professional/overlay/ExperienceOverlay";
-import EducationOverlay from "./pages/Dashboard/Professional/overlay/EducationOverlay";
-import CatalogOverlay from "./pages/Dashboard/Professional/overlay/CatalogOverlay";
+import ExperienceOverlay from "./pages/Dashboard/Portfolio/overlay/ExperienceOverlay";
+import EducationOverlay from "./pages/Dashboard/Portfolio/overlay/EducationOverlay";
+import CatalogOverlay from "./pages/Dashboard/Portfolio/overlay/CatalogOverlay";
 import Courses from "./pages/Dashboard/Courses";
+import NewCourse from "./pages/Dashboard/Courses/New/NewCourse";
+import User from "./pages/Dashboard/User";
+import Portfolio from "./pages/Dashboard/Portfolio";
 
 const DEVELOPMENT = process.env.REACT_APP_DEV === "true";
 
@@ -60,8 +62,12 @@ function App() {
                     </Route>
                     <Route path="/dashboard" element={<Dashboard />}>
                       <Route index element={<DashboardIndex />} />
-                      <Route path="courses" element={<Courses />} />
-                      <Route path="professional" element={<Professional />}>
+                      <Route path="user/:id" element={<User />} />
+                      <Route path="courses" element={<Courses />}>
+                        <Route path="new" element={<NewCourse />} />
+                        <Route path=":id" element={<NewCourse />} />
+                      </Route>
+                      <Route path="portfolio" element={<Portfolio />}>
                         <Route path="add">
                           <Route
                             path="experience"

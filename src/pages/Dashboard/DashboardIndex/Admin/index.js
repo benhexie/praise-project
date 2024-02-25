@@ -3,17 +3,19 @@ import "./AdminDashboard.css";
 import { BsBell, BsBellFill } from "react-icons/bs";
 import { FiFilter } from "react-icons/fi";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
   const notifications = useSelector((state) => state.notifications);
   const user = useSelector((state) => state.user);
   const [showNotifications, setShowNotifications] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="admin-dashboard">
-      <div className="admin-dashboard__header">
-        <h1>Admin Dashboard</h1>
+      <div className="dashboard__header admin-dashboard__header">
+        <h1>Dashboard</h1>
         <div className="admin-dashboard__notifications-wrapper">
           <div
             className={`admin-dashboard__header-bell ${
@@ -52,32 +54,35 @@ const AdminDashboard = () => {
             </div>
           </div>
         </div>
-        <div className="admin-dashboard__welcome">
-          <h2>Welcome, {user.firstname}!</h2>
-        </div>
+        <h2 className="admin-dashboard__welcome">Welcome, {user.firstname}!</h2>
       </div>
       <div className="admin-dashboard__content">
         <div className="admin-dashboard__overview">
           <h2>Overview</h2>
           <div className="admin-dashboard__overview-total">
             <div className="card admin-dashboard__card admin-dashboard__overview-card">
-              <h3>Total Lecturers: [N]</h3>
+              <h3>Total Lecturers: 45</h3>
             </div>
             <div className="card admin-dashboard__card admin-dashboard__overview-card">
-              <h3>Total Courses: [N]</h3>
+              <h3>Total Courses: 203</h3>
             </div>
           </div>
           <div className="admin-dashboard__overview-quick">
-            <div className="card admin-dashboard__card admin-dashboard__overview-card">
-              <h3>Create New Course</h3>
-            </div>
-            <div className="card admin-dashboard__card admin-dashboard__overview-card">
-              <h3>View All Lecturers</h3>
-            </div>
+            <Link
+              to={"/dashboard/courses"}
+              className="card admin-dashboard__card admin-dashboard__overview-card"
+            >
+              <h3>Manage Courses</h3>
+            </Link>
+            <Link
+              to={"/dashboard/profile"}
+              className="card admin-dashboard__card admin-dashboard__overview-card"
+            >
+              <h3>Manage Profile</h3>
+            </Link>
           </div>
         </div>
         <div className="admin-dashboard__lecturer">
-          <h2>Lecturer Overview</h2>
           <div className="admin-dashboard__lecturer-overview">
             <div className="admin-dashboard__lecturer-search">
               <h3>Search lecturers</h3>
@@ -89,7 +94,11 @@ const AdminDashboard = () => {
                 />
                 <div className="admin-dashboard__lecturer-search-filter">
                   <FiFilter onClick={() => setShowFilters((prev) => !prev)} />
-                  <div className={`admin-dashboard__lecturer-search-filter-dropdown ${showFilters ? "show" : ""}`}>
+                  <div
+                    className={`admin-dashboard__lecturer-search-filter-dropdown ${
+                      showFilters ? "show" : ""
+                    }`}
+                  >
                     <label className="admin-dashboard__lecturer-search-filter-dropdown-item">
                       <input type="checkbox" />
                       <p>Filter 1</p>
@@ -106,41 +115,20 @@ const AdminDashboard = () => {
               </div>
               <div className="admin-dashboard__lecturer-search-results">
                 <h3>Search results</h3>
-                <div className="admin-dashboard__lecturer-search-results-container">
-                  <div className="admin-dashboard__lecturer-search-results-item">
-                    <h3>Lecturer 1</h3>
-                    <button className="admin-dashboard__lecturer-search-results-button">
-                      View
-                    </button>
+                <div className="scrollable admin-dashboard__lecturer-search-results-container">
+                  <div>
+                    <div className="admin-dashboard__lecturer-search-results-item">
+                      <h3>Ebiesuwa Oluwaseun</h3>
+                      <button
+                        className="admin-dashboard__lecturer-search-results-button"
+                        onClick={() =>
+                          navigate(`/dashboard/user/${"qwertyuiop"}`)
+                        }
+                      >
+                        View
+                      </button>
+                    </div>
                   </div>
-                  <div className="admin-dashboard__lecturer-search-results-item">
-                    <h3>Lecturer 2</h3>
-                    <button className="admin-dashboard__lecturer-search-results-button">
-                      View
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="admin-dashboard__course">
-          <h2>Course Overview</h2>
-          <div className="admin-dashboard__course-overview">
-            <div className="admin-dashboard__course-view">
-              <h3>View courses</h3>
-              <div className="admin-dashboard__course-view-container">
-                <div className="admin-dashboard__course-view-item">
-                  <h3>Course 1</h3>
-                  <button className="admin-dashboard__course-view-button">
-                    View
-                  </button>
-                </div>
-                <div className="admin-dashboard__course-view-item">
-                  <h3>Course 2</h3>
-                  <button className="admin-dashboard__course-view-button">
-                    View
-                  </button>
                 </div>
               </div>
             </div>

@@ -45,7 +45,7 @@ const EducationOverlay = () => {
       if (data.error) return toast.error(data.message);
       dispatch(updateEducation(data.data));
       toast.success("Education added successfully");
-      navigate("/dashboard/professional");
+      navigate("/dashboard/portfolio");
     } catch (error) {
       if (/failed to fetch|network error/i.test(error.message))
         return toast.error("Please check your internet connection");
@@ -76,7 +76,7 @@ const EducationOverlay = () => {
         <h2>Add Education</h2>
         <IoMdClose
           className="dashboard__overlay__close"
-          onClick={() => navigate("/dashboard/professional")}
+          onClick={() => navigate("/dashboard/portfolio")}
         />
       </div>
       <div className="dashboard__overlay__content">

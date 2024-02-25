@@ -40,8 +40,9 @@
 
 .home__nav__item:not(.home__nav__logo):hover {
   color: #fff;
-  background-color: #000;
+  background-color: var(--primary-color);
   cursor: pointer;
+  filter: brightness(1.5);
 }
 
 .home__nav__signup {

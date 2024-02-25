@@ -11,14 +11,6 @@
   align-items: center;
   margin-bottom: 20px;
   background-color: #fff;
-  padding: 20px;
-  padding-left: 40px;
-}
-
-.profile__header h1 {
-  font-size: 2rem;
-  color: var(--primary-color);
-  margin: 0;
 }
 
 .dashboard__container {
@@ -124,7 +116,7 @@
   width: 100%;
   background-color: var(--primary-color);
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   padding: 20px;
   cursor: pointer;
   transition: all 0.3 ease-in-out;

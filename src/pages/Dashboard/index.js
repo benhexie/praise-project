@@ -16,36 +16,45 @@ const Dashboard = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   fetch(`${SERVER}/data`, {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setLoading(false);
+  //       if (data.error) {
+  //         toast.error(data.message);
+  //         if (/no token provided|invalid token/i.test(data.error)) {
+  //           localStorage.removeItem("token");
+  //         }
+  //         return navigate("/login", { replace: true });
+  //       }
+  //       dispatch(setUser(data.data.user));
+  //       dispatch(setSchool(data.data.school));
+  //       dispatch(setProfessional(data.data.professional));
+  //     })
+  //     .catch((err) => {
+  //       setLoading(false);
+  //       if (/failed to fetch|network error/i.test(err.message)) {
+  //         return toast.error("Please check your internet connection.");
+  //       }
+  //       toast.error("Something went wrong");
+  //       console.log(err.message);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    fetch(`${SERVER}/data`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setLoading(false);
-        if (data.error) {
-          toast.error(data.message);
-          if (/no token provided|invalid token/i.test(data.error)) {
-            localStorage.removeItem("token");
-          }
-          return navigate("/login", { replace: true });
-        }
-        dispatch(setUser(data.data.user));
-        dispatch(setSchool(data.data.school));
-        dispatch(setProfessional(data.data.professional));
-      })
-      .catch((err) => {
-        setLoading(false);
-        if (/failed to fetch|network error/i.test(err.message)) {
-          return toast.error("Please check your internet connection.");
-        }
-        toast.error("Something went wrong");
-        console.log(err.message);
-      });
-  }, []);
+    setLoading(false);
+    dispatch(setUser({
+      firstname: "Benedict",
+      lastname: "Gabriel",
+      role: "user"
+    }))
+  }, [])
 
   return (
     <div className="dashboard">

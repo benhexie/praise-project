@@ -1,11 +1,11 @@
+import "./Portfolio.css";
 import { useSelector } from "react-redux";
-import "./Professional.css";
 import User from "../../../assets/svgs/user.svg";
 import { IoAddOutline } from "react-icons/io5";
 import ErrorPage from "../../Error/ErrorPage";
 import { Outlet, useNavigate } from "react-router-dom";
 
-const Professional = () => {
+const Portfolio = () => {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const school = useSelector((state) => state.school);
@@ -19,7 +19,7 @@ const Professional = () => {
         <div className="professional">
           <Outlet />
           <div className="dashboard__header profile__header">
-            <h1>Professional Information</h1>
+            <h1>Portfolio</h1>
           </div>
           <div className="dashboard__container">
             <section className="profile__section">
@@ -148,11 +148,7 @@ const Professional = () => {
                             catalog.links.length > 0 &&
                             catalog.links.map((link, index) => (
                               <span key={index}>
-                                <a
-                                  href={link}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                >
+                                <a href={link} target="_blank" rel="noreferrer">
                                   {link}
                                 </a>
                               </span>
@@ -170,4 +166,4 @@ const Professional = () => {
   );
 };
 
-export default Professional;
+export default Portfolio;

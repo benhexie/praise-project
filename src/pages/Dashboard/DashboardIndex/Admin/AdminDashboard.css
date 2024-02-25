@@ -1,6 +1,8 @@
 .admin-dashboard {
   margin: 0 auto;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .admin-dashboard__header {
@@ -15,21 +17,25 @@
   z-index: 100;
   background-color: white;
   padding: 20px;
+  flex-wrap: wrap;
 }
 
 .admin-dashboard__header h1 {
   font-size: 2rem;
   color: var(--primary-color);
   margin: 0;
+  margin-left: 2rem;
 }
 
 .admin-dashboard__content {
   padding-inline: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .admin-dashboard__notifications-wrapper {
   position: relative;
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,13 +91,16 @@
   margin-top: 8px;
   padding: 8px;
   border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  color: black;
+  min-width: 240px;
 }
 
 .admin-dashboard__notifications__inner {
   display: flex;
   flex-direction: column;
-  gap: 16px;
   max-height: 200px;
+  gap: 16px;
   overflow-y: auto;
 }
 
@@ -106,15 +115,16 @@
   align-items: center;
 }
 
-.admin-dashboard__welcome h2 {
+.admin-dashboard__welcome {
   font-size: 1.5rem;
   color: var(--secondary-color);
   margin: 0;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .admin-dashboard__overview,
-.admin-dashboard__lecturer,
-.admin-dashboard__course {
+.admin-dashboard__lecturer {
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
@@ -122,9 +132,17 @@
   margin-bottom: 20px;
 }
 
+.admin-dashboard__lecturer {
+  flex: 1;
+}
+
+.admin-dashboard__lecturer-search-results-container {
+  height: 400px;
+  max-height: 400px;
+}
+
 .admin-dashboard__overview h2,
-.admin-dashboard__lecturer h2,
-.admin-dashboard__course h2 {
+.admin-dashboard__lecturer h2 {
   color: var(--primary-color);
   font-size: 1.8rem;
   margin-top: 0;
@@ -149,19 +167,29 @@
 
 .admin-dashboard__overview-quick {
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
   align-items: flex-start;
   flex-wrap: wrap;
-}
-
-.admin-dashboard__lecturer-overview,
-.admin-dashboard__course-overview {
 }
 
 .admin-dashboard__overview-quick .admin-dashboard__card,
 .admin-dashboard__lecturer-overview .admin-dashboard__card,
 .admin-dashboard__course-overview .admin-dashboard__card {
   flex: 0 0 calc(50% - 20px);
+}
+
+.admin-dashboard__overview-quick .admin-dashboard__overview-card {
+  flex: 1;
+  height: 100%;
+  margin: unset;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  max-width: 400px;
+  text-decoration: none;
+}
+
+.admin-dashboard__overview-quick .admin-dashboard__overview-card h3 {
+  color: white;
 }
 
 .admin-dashboard__lecturer-search h3 {
@@ -176,14 +204,17 @@
   align-items: center;
   margin-bottom: 20px;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .admin-dashboard__lecturer-search-input {
+  width: 100%;
   flex: 1;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid var(--secondary-color);
   font-size: 1rem;
+  outline: none;
 }
 
 .admin-dashboard__lecturer-search-button {
@@ -212,8 +243,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--light-color);
-  padding-bottom: 10px;
+  border-bottom: 1px solid var(--bg-color);
+  padding-block: 0.5rem;
   margin-bottom: 10px;
 }
 
@@ -327,4 +358,44 @@
   align-items: center;
   padding: 8px;
   cursor: pointer;
+}
+
+@media (max-width: 520px) {
+  .admin-dashboard__overview-quick {
+    flex-direction: column;
+  }
+
+  .admin-dashboard__overview-quick .admin-dashboard__overview-card {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .admin-dashboard__lecturer-search-button {
+    flex: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .admin-dashboard__lecturer-search-filter {
+    display: none;
+  }
+}
+
+@media (max-width: 630px) {
+  .admin-dashboard__header > * {
+    order: 2;
+  }
+
+  .admin-dashboard__welcome {
+    flex: 100%;
+    order: 1;
+    margin-left: 2rem;
+    font-size: 1rem;
+  }
+
+  .admin-dashboard__notifications {
+    right: 0;
+  }
 }

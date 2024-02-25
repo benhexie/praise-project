@@ -60,15 +60,15 @@ const DashboardNav = () => {
         )}
         {user.role !== "admin" && (
           <NavLink
-            to={"/dashboard/professional"}
+            to={"/dashboard/portfolio"}
             className={"dashboard__nav__link"}
           >
-            {/\/professional$/i.test(location.pathname) ? (
+            {/\/portfolio$/i.test(location.pathname) ? (
               <PiScrollFill className="dashboard__nav__link__icon" />
             ) : (
               <PiScrollDuotone className="dashboard__nav__link__icon" />
             )}
-            <span>Professional</span>
+            <span>Portfolio</span>
           </NavLink>
         )}
         <NavLink to={"/dashboard/profile"} className={"dashboard__nav__link"}>

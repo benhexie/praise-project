@@ -26,6 +26,14 @@ const initialState = {
       createdAt: "23/34/3536",
     },
   ],
+  teachers: [
+    {
+      _id: "qwertyuiop",
+      firstname: "Oluwaseun",
+      lastname: "Ebiesuwa",
+      department: "Computer Science"
+    },
+  ],
 };
 
 const reducerFtn = (state = initialState, action = {}) => {
