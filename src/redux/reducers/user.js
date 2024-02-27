@@ -48,7 +48,7 @@ export const userReducer = (state = initialState, action = {}) => {
         },
       };
 
-    case "SET_COURSES":
+    case "SET_ASSIGNED_COURSES":
       return { ...state, courses: action.payload };
 
     default:

@@ -103,6 +103,11 @@
   white-space: nowrap;
 }
 
+.user-dashboard__courses__container {
+  overflow-x: auto;
+  width: 100%;
+}
+
 .no__assigned__text {
   color: var(--primary-color);
   font-size: 1.5rem;

@@ -1,8 +1,10 @@
-import { useNavigate, useParams } from "react-router-dom";
 import "./NewCourse.css";
+import { useNavigate, useParams } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addCourse, updateCourse } from "../../../../redux/actions/admin";
+import { toast } from "react-toastify";
 
 const NewCourse = () => {
   const navigate = useNavigate();
@@ -10,23 +12,37 @@ const NewCourse = () => {
   const id = useParams().id;
   const [title, setTitle] = useState("");
   const [code, setCode] = useState("");
+  const [credits, setCredits] = useState("");
+  const [description, setDescription] = useState("");
   const [assignTo, setAssignTo] = useState("");
   const [error, setError] = useState("");
   const [profileId, setProfileId] = useState("");
   const [previewData, setPreviewData] = useState({});
+  const dispatch = useDispatch();
 
-  const teachers = useSelector((state) => state.admin.teachers);
+  const courses = useSelector((state) => state.admin.courses);
+  const lecturers = useSelector((state) => state.admin.lecturers);
+
+  useEffect(() => {
+    if (!id) return;
+    const course = courses.filter((course) => course._id === id)?.[0];
+    if (!course) return navigate("/dashboard/courses", { replace: true });
+    setTitle(course.title);
+    setCode(course.code);
+    setCredits(course.credits);
+    setAssignTo(course.assignedTo);
+  }, []);
 
   useEffect(() => {
     setError("");
-  }, [title, code, assignTo]);
+  }, [title, code, credits, description, assignTo]);
 
   useEffect(() => {
     if (!profileId) return;
     setPreviewData(
-      teachers.filter((user) => {
+      lecturers.filter((user) => {
         return user._id === profileId;
-      })?.[0] || {}
+      })?.[0] || {},
     );
   }, [profileId]);
 
@@ -36,18 +52,25 @@ const NewCourse = () => {
     if (error) return setError(message);
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_SERVER}/`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER}/course`, {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
           title,
           code,
-          assignTo,
+          credits,
+          description,
+          assignedTo: assignTo,
         }),
       });
+      const data = await res.json();
+      if (data.error) return setError(data.message);
+      dispatch(addCourse(data.course));
+      navigate("/dashboard/courses", { replace: true });
     } catch (error) {
       setError(error.message);
     }
@@ -59,18 +82,27 @@ const NewCourse = () => {
     if (error) return setError(message);
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_SERVER}/`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER}/course`, {
         method: "PUT",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
           title,
           code,
-          assignTo,
+          credits,
+          description,
+          assignedTo: assignTo,
         }),
       });
+
+      const data = await res.json();
+      if (data.error) return setError(data.message);
+      toast.success("Course updated successfully");
+      dispatch(updateCourse(data.data));
+      navigate("/dashboard/courses", { replace: true });
     } catch (error) {
       setError(error.message);
     }
@@ -81,6 +113,7 @@ const NewCourse = () => {
     if (!code) return [true, "Course code cannot be empty"];
     if (!/^[A-Za-z]+ *[0-9]+$/.test(code))
       return [true, "Course code is invalid"];
+    if (!credits) return [true, "Course credits cannot be empty"];
     return [false, ""];
   };
 
@@ -100,7 +133,9 @@ const NewCourse = () => {
         />
         <form onSubmit={id ? editHandler : createHandler}>
           <label>
-            Course Title
+            <p>
+              Course Title <span>*</span>
+            </p>
             <input
               placeholder="Trigonometry"
               autoFocus
@@ -109,11 +144,32 @@ const NewCourse = () => {
             />
           </label>
           <label>
-            Course Code
+            <p>
+              Course Code <span>*</span>
+            </p>
             <input
               placeholder="MATH 203"
               value={code}
               onChange={(e) => setCode(e.target.value)}
+            />
+          </label>
+          <label>
+            <p>
+              Course Credits <span>*</span>
+            </p>
+            <input
+              type="number"
+              placeholder="3"
+              value={credits}
+              onChange={(e) => setCredits(e.target.value)}
+            />
+          </label>
+          <label>
+            <p>Description</p>
+            <input
+              placeholder="A brief description of the course"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </label>
           {!profileId || Object.keys(previewData).length === 0 ? null : (
@@ -124,18 +180,24 @@ const NewCourse = () => {
                   {previewData.firstname} {previewData.lastname}
                 </span>
               </p>
-              <p>Department:<span>{previewData.department}</span></p>
+              <p>
+                Department:<span>{previewData.department}</span>
+              </p>
             </div>
           )}
           <label>
-            Assign to
+            <p>Assign to</p>
             <div className="assign__to__container">
               <select
                 value={assignTo}
                 onChange={(e) => setAssignTo(e.target.value)}
               >
                 <option value={""}>Not assigned</option>
-                <option value={"qwertyuiop"}>Ebiesuwa (1 remaining)</option>
+                {lecturers.map((user) => (
+                  <option key={user._id} value={user._id}>
+                    {user.firstname} {user.lastname} ({3} remaining)
+                  </option>
+                ))}
               </select>
               <button
                 type="button"

@@ -6,7 +6,14 @@ import { toast } from "react-toastify";
 import SomethingWentWrong from "../Error/SomethingWentWrong";
 import DashboardNav from "../../components/Nav/DashboardNav";
 import { Outlet, useNavigate } from "react-router-dom";
-import { setProfessional, setSchool, setUser } from "../../redux/actions";
+import {
+  setAssignedCourses,
+  setCourses,
+  setLecturers,
+  setProfessional,
+  setSchool,
+  setUser,
+} from "../../redux/actions";
 
 const SERVER = process.env.REACT_APP_SERVER;
 
@@ -35,7 +42,14 @@ const Dashboard = () => {
         }
         dispatch(setUser(data.data.user));
         dispatch(setSchool(data.data.school));
-        dispatch(setProfessional(data.data.professional));
+        if (data.data.user.role === "admin") {
+          dispatch(setCourses(data.data.courses));
+          dispatch(setLecturers(data.data.lecturers));
+        }
+        if (data.data.user.role === "user") {
+          dispatch(setAssignedCourses(data.data.courses));
+          dispatch(setProfessional(data.data.professional));
+        }
       })
       .catch((err) => {
         setLoading(false);

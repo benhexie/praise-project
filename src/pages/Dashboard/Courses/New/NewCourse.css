@@ -64,6 +64,12 @@
   font-weight: 500;
 }
 
+.course__new__container form label span {
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
 .course__new__container form :is(input, select) {
   border: 1px solid rgba(0, 0, 0, 0.5);
   height: 40px;

@@ -18,3 +18,10 @@ export const updateCatalog = (catalog) => {
     payload: catalog,
   };
 };
+
+export const setAssignedCourses = (courses) => {
+  return {
+    type: "SET_ASSIGNED_COURSES",
+    payload: courses,
+  };
+};

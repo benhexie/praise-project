@@ -33,13 +33,17 @@ const Courses = () => {
             </div>
           ) : (
             courses.map((course) => (
-              <div key={course._id} className="card courses__course__card">
-                <h3 className="courses__course__name">{course.name}</h3>
+              <Link
+                key={course._id}
+                to={course._id}
+                className="card courses__course__card"
+              >
+                <h3 className="courses__course__name">{course.code}</h3>
                 <label>
                   Assigned
-                  <input type="checkbox" />
+                  <input type="checkbox" checked={course.assignedTo ? true : false} />
                 </label>
-              </div>
+              </Link>
             ))
           )}
         </div>
