@@ -138,6 +138,7 @@
   border: 2px solid var(--primary-color);
   margin-bottom: 20px;
   pointer-events: none;
+  border: 2px solid white;
 }
 
 .profile__image__label img {

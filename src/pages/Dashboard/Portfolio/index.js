@@ -6,10 +6,10 @@ import ErrorPage from "../../Error/ErrorPage";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const Portfolio = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.general.user);
   const navigate = useNavigate();
-  const school = useSelector((state) => state.school);
-  const professional = useSelector((state) => state.professional);
+  const school = useSelector((state) => state.general.school);
+  const professional = useSelector((state) => state.user.professional);
 
   return (
     <>

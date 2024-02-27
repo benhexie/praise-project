@@ -1,58 +1,92 @@
 import { useSelector } from "react-redux";
 import "./UserDashboard.css";
-import { useState } from "react";
-import { BsBell, BsBellFill } from "react-icons/bs";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import Header from "../components/Header";
 
 const UserDashboard = () => {
-  const notifications = useSelector((state) => state.notifications);
-  const user = useSelector((state) => state.user);
-  const [showNotifications, setShowNotifications] = useState(false);
+  const indicatorRef = useRef(null);
+  const [indicatorWidth, setIndicatorWidth] = useState(0);
+  const [maxIndicatorWidth] = useState(30);
+  const courses = useSelector((state) => state.user.courses);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIndicatorWidth((prev) => {
+        if (prev === maxIndicatorWidth) return prev;
+        const next = prev + 1;
+        if (next >= maxIndicatorWidth) clearInterval(intervalId);
+        return next;
+      });
+    }, 10);
+  }, []);
 
   return (
     <div className="user__dashboard">
-      <div className="dashboard__header admin-dashboard__header">
-        <h1>Dashboard</h1>
-        <div className="admin-dashboard__notifications-wrapper">
-          <div
-            className={`admin-dashboard__header-bell ${
-              showNotifications ? "show" : ""
-            }`}
-            onClick={() => setShowNotifications((prev) => !prev)}
-          >
-            {notifications.length > 0 ? <BsBellFill /> : <BsBell />}
-            {notifications.length > 0 ? (
-              <div className="admin-dashboard__header-bell-badge">
-                {notifications.length}
-              </div>
-            ) : null}
-          </div>
-          <div
-            className={`admin-dashboard__notifications ${
-              showNotifications ? "show" : ""
-            }`}
-          >
-            <div className="admin-dashboard__notifications__inner">
-              {notifications.length > 0 ? (
-                notifications.map((notification, index) => (
-                  <div
-                    key={notification._id || index}
-                    className="admin-dashboard__notification"
-                  >
-                    <p>{notification.message}</p>
-                    <small>{notification.createdAt}</small>
-                  </div>
-                ))
-              ) : (
-                <div className="admin-dashboard__notification">
-                  <h3>No new notifications</h3>
-                </div>
-              )}
-            </div>
+      <Header />
+      <div className="dashboard__container">
+        <div className="profile__complete__indicator">
+          <div ref={indicatorRef} style={{ width: `${indicatorWidth}%` }}>
+            <span>{indicatorWidth}%</span>
           </div>
         </div>
-        <h2 className="admin-dashboard__welcome">Welcome, {user.firstname}!</h2>
+        <div className="profile__complete__indicator__list__container">
+          <ul>
+            <li>
+              <input type="checkbox" checked={false} onChange={() => {}} />
+              <Link to={"/dashboard/profile"}>
+                Complete profile information
+              </Link>
+            </li>
+            <li>
+              <input type="checkbox" checked={false} onChange={() => {}} />
+              <Link to={"/dashboard/profile"}>Add profile picture</Link>
+            </li>
+            <li>
+              <input type="checkbox" checked={false} onChange={() => {}} />
+              <Link to={"/dashboard/portfolio/add/education"}>
+                Add education
+              </Link>
+            </li>
+            <li>
+              <input type="checkbox" checked={false} onChange={() => {}} />
+              <Link to={"/dashboard/portfolio/add/experience"}>
+                Add professional experience
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className="user-dashboard__info__container">
+          {courses.length > 0 ? (
+            <table>
+              <thead>
+                <tr>
+                  <th>course code</th>
+                  <th>course title</th>
+                  <th>course description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {courses.map((course) => (
+                  <tr key={course._id}>
+                    <td>{course.code}</td>
+                    <td>{course.title}</td>
+                    <td>{course.description}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p className="no__assigned__text">
+              No courses have been assigned to you.
+            </p>
+          )}
+          <div className="user-manage__container">
+            <Link to={"/dashboard/portfolio"}>Manage Portfolio</Link>
+            <Link to={"/dashboard/profile"}>Manage Profile</Link>
+          </div>
+        </div>
       </div>
-      <div className="dashboard__container">Logged in as user.</div>
     </div>
   );
 };

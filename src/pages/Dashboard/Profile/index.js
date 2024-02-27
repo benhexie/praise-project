@@ -10,10 +10,10 @@ import User from "../../../assets/svgs/user.svg";
 const SERVER = process.env.REACT_APP_SERVER;
 
 const Profile = () => {
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const schoolData = useSelector((state) => state.school);
+  const user = useSelector((state) => state.general.user);
+  const schoolData = useSelector((state) => state.general.school);
   const [firstname, setFirstname] = useState(user.firstname);
   const [lastname, setLastname] = useState(user.lastname);
   const [age, setAge] = useState(user.age || "");
@@ -24,6 +24,7 @@ const Profile = () => {
   const [address, setAddress] = useState(schoolData.address);
   const [generalChanged, setGeneralChanged] = useState(false);
   const [schoolChanged, setSchoolChanged] = useState(false);
+  const [image, setImage] = useState(User);
 
   useEffect(() => {
     if (
@@ -107,6 +108,15 @@ const Profile = () => {
     } catch (error) {}
   };
 
+  const imageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
     <div className="profile">
       <div className="dashboard__header profile__header">
@@ -115,9 +125,9 @@ const Profile = () => {
       <div className="dashboard__container">
         <section className="profile__section">
           <label className="profile__image__container">
-            <input type="file" hidden />
+            <input type="file" hidden onChange={imageChange} />
             <label className="dashboard__section__item profile__image__label">
-              <img src={user.image || User} alt="profile" />
+              <img src={user.image || image} alt="profile" />
             </label>
             <p className="profile__image__text">
               Click to change profile picture
@@ -308,13 +318,13 @@ const Profile = () => {
         )}
         {user.role !== "admin" && (
           <section className="dashboard__section professional__section">
-            <h2>Professional Information</h2>
+            <h2>Manage Portfolio</h2>
             <div className="dashboard__section__content">
               <button
                 className="dashboard__section__button"
-                onClick={() => navigate("/dashboard/professional")}
+                onClick={() => navigate("/dashboard/portfolio")}
               >
-                Go to Professional Information
+                Go to Portfolio
               </button>
             </div>
           </section>

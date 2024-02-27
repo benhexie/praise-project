@@ -4,7 +4,7 @@ import AdminDashboard from "./Admin";
 import UserDashboard from "./User";
 
 const DashboardIndex = () => {
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.general.user);
 
   return <>{user.role === "admin" ? <AdminDashboard /> : <UserDashboard />}</>;
 };

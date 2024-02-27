@@ -1,8 +1,11 @@
 import "./Courses.css";
 import { Link, Outlet } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 const Courses = () => {
+  const courses = useSelector((state) => state.admin.courses);
+
   return (
     <div className="courses">
       <div className="dashboard__header courses__header">
@@ -23,15 +26,22 @@ const Courses = () => {
           <input placeholder="Search..." />
         </div>
         <div className="scrollablle courses__container">
-          <div>
-            <Link to={"qwertyuiop"} className="card courses__course__card">
-              <h3 className="courses__course__name">Math 302</h3>
-              <label>
-                Assigned
-                <input type="checkbox" />
-              </label>
-            </Link>
-          </div>
+          {courses.length === 0 ? (
+            <div className="courses__no-courses">
+              <h3>No courses available</h3>
+              <Link to={"new"}>Create new course</Link>
+            </div>
+          ) : (
+            courses.map((course) => (
+              <div key={course._id} className="card courses__course__card">
+                <h3 className="courses__course__name">{course.name}</h3>
+                <label>
+                  Assigned
+                  <input type="checkbox" />
+                </label>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

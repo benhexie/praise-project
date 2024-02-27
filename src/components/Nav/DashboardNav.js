@@ -6,6 +6,7 @@ import { PiScrollDuotone, PiScrollFill } from "react-icons/pi";
 import { IoLogOutOutline } from "react-icons/io5";
 import { AiOutlineMenu } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
+import { IoBookOutline, IoBook } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import lecturaLogo from "../../assets/svgs/lectura-logo.svg";
@@ -14,7 +15,7 @@ const DashboardNav = () => {
   const location = useLocation();
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.general.user);
 
   useEffect(() => {
     setShowMenu(false);
@@ -51,9 +52,9 @@ const DashboardNav = () => {
         {user.role === "admin" && (
           <NavLink to={"/dashboard/courses"} className={"dashboard__nav__link"}>
             {/\/courses$/i.test(location.pathname) ? (
-              <PiScrollFill className="dashboard__nav__link__icon" />
+              <IoBook className="dashboard__nav__link__icon" />
             ) : (
-              <PiScrollDuotone className="dashboard__nav__link__icon" />
+              <IoBookOutline className="dashboard__nav__link__icon" />
             )}
             <span>Courses</span>
           </NavLink>

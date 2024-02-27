@@ -15,7 +15,7 @@ const NewCourse = () => {
   const [profileId, setProfileId] = useState("");
   const [previewData, setPreviewData] = useState({});
 
-  const teachers = useSelector((state) => state.teachers);
+  const teachers = useSelector((state) => state.admin.teachers);
 
   useEffect(() => {
     setError("");
