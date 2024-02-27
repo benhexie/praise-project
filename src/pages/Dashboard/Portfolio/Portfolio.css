@@ -15,7 +15,7 @@
   height: 150px;
   border-radius: 50%;
   overflow: hidden;
-  border: 1px solid #ccc;
+  border: 2px solid var(--primary-color);
 }
 
 .professional__image__container img {

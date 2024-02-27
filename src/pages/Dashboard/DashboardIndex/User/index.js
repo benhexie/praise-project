@@ -7,7 +7,26 @@ import Header from "../components/Header";
 const UserDashboard = () => {
   const indicatorRef = useRef(null);
   const [indicatorWidth, setIndicatorWidth] = useState(0);
-  const [maxIndicatorWidth] = useState(30);
+  const user = useSelector((state) => state.general.user);
+  const professional = useSelector((state) => state.user.professional);
+  const [isProfileComplete] = useState(() => {
+    return user.firstname &&
+      user.lastname &&
+      user.phone &&
+      user.age &&
+      user.origin &&
+      user.nationality
+      ? true
+      : false;
+  });
+  const [maxIndicatorWidth] = useState(() => {
+    let max = 30;
+    if (user.image) max += 10;
+    if (isProfileComplete) max += 20;
+    if (professional.education.length > 0) max += 20;
+    if (professional.experience.length > 0) max += 20;
+    return max;
+  });
   const courses = useSelector((state) => state.user.courses);
 
   useEffect(() => {
@@ -33,23 +52,39 @@ const UserDashboard = () => {
         <div className="profile__complete__indicator__list__container">
           <ul>
             <li>
-              <input type="checkbox" checked={false} onChange={() => {}} />
+              <input
+                type="checkbox"
+                checked={isProfileComplete}
+                onChange={() => {}}
+              />
               <Link to={"/dashboard/profile"}>
                 Complete profile information
               </Link>
             </li>
             <li>
-              <input type="checkbox" checked={false} onChange={() => {}} />
+              <input
+                type="checkbox"
+                checked={user.image ? true : false}
+                onChange={() => {}}
+              />
               <Link to={"/dashboard/profile"}>Add profile picture</Link>
             </li>
             <li>
-              <input type="checkbox" checked={false} onChange={() => {}} />
+              <input
+                type="checkbox"
+                checked={professional.education.length > 0 ? true : false}
+                onChange={() => {}}
+              />
               <Link to={"/dashboard/portfolio/add/education"}>
                 Add education
               </Link>
             </li>
             <li>
-              <input type="checkbox" checked={false} onChange={() => {}} />
+              <input
+                type="checkbox"
+                checked={professional.experience.length > 0 ? true : false}
+                onChange={() => {}}
+              />
               <Link to={"/dashboard/portfolio/add/experience"}>
                 Add professional experience
               </Link>

@@ -77,7 +77,7 @@ const Profile = () => {
         return toast.error("Please check your internet connection.");
       }
       toast.error("Something went wrong");
-      console.log(err.message);
+      console.error(err.message);
     }
   };
 
@@ -108,13 +108,31 @@ const Profile = () => {
     } catch (error) {}
   };
 
-  const imageChange = (e) => {
+  const imageChange = async (e) => {
     const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setImage(reader.result);
-    };
-    reader.readAsDataURL(file);
+    const formData = new FormData();
+    formData.append("image", file);
+    try {
+      const res = await fetch(`${SERVER}/user/image`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.error) {
+        return toast.error(data.message);
+      }
+      dispatch(updateUser(data.data));
+      toast.success("Image updated");
+    } catch (error) {
+      if (/failed to fetch|network error/i.test(error.message)) {
+        return toast.error("Please check your internet connection.");
+      }
+      toast.error("Something went wrong");
+      console.log(error.message);
+    }
   };
 
   return (

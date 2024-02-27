@@ -1,5 +1,9 @@
 const initialState = {
-  professional: {},
+  professional: {
+    experience: [],
+    education: [],
+    catalog: [],
+  },
   courses: [],
 };
 
