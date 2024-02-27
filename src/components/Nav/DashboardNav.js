@@ -35,12 +35,12 @@ const DashboardNav = () => {
         />
       )}
       <div className={`dashboard__nav__menu`}>
-        <div className="dashboard__nav__header">
-          <Link to={"/dashboard"} className="dashboard__nav__header__logo">
+        <Link to={"/dashboard"} className="dashboard__nav__header">
+          <div className="dashboard__nav__header__logo">
             <img src={lecturaLogo} alt="logo" />
-          </Link>
+          </div>
           <h1 className="dashboard__nav__header__title">Lectura</h1>
-        </div>
+        </Link>
         <NavLink to={"/dashboard"} end className={"dashboard__nav__link"}>
           {/\/dashboard$/i.test(location.pathname) ? (
             <GoHomeFill className="dashboard__nav__link__icon" />

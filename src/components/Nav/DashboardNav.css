@@ -40,6 +40,7 @@
   top: 0;
   z-index: 1;
   color: var(--primary-color);
+  text-decoration: none;
 }
 
 .dashboard__nav__header__logo {
