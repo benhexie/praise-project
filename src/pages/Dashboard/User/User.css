@@ -4,14 +4,15 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  padding: 2rem;
   position: relative;
+  padding: 20px;
+  padding-top: 50px;
 }
 
 .admin__user__back {
   position: absolute;
   top: 20px;
-  left: 20px;
+  left: 48px;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 5px;
@@ -36,15 +37,18 @@
 .admin__user__container {
   background-color: var(--nav-bg-color);
   box-shadow: var(--box-shadow);
-  padding: 2rem;
+  padding: 20px;
   border-radius: 5px;
   width: 100%;
   max-width: 500px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.admin__user__image {
-  margin-bottom: 1rem;
+.admin__user__container p {
+  word-break: break-all;
 }
 
 .admin__user__image img {

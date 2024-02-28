@@ -23,7 +23,7 @@ const Courses = () => {
             <option value={"code"}>Course code</option>
             <option value={"title"}>Course title</option>
           </select>
-          <input placeholder="Search..." />
+          <input placeholder="Search courses" />
         </div>
         <div className="scrollablle courses__container">
           {courses.length === 0 ? (

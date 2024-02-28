@@ -45,32 +45,12 @@ const AdminDashboard = () => {
           <div className="admin-dashboard__lecturer-overview">
             <div className="admin-dashboard__lecturer-search">
               <h3>Search lecturers</h3>
-              <div className="admin-dashboard__lecturer-search-container">
-                <input
-                  type="text"
-                  placeholder="Search lecturers"
-                  className="admin-dashboard__lecturer-search-input"
-                />
-                <div className="admin-dashboard__lecturer-search-filter">
-                  <FiFilter onClick={() => setShowFilters((prev) => !prev)} />
-                  <div
-                    className={`admin-dashboard__lecturer-search-filter-dropdown ${
-                      showFilters ? "show" : ""
-                    }`}
-                  >
-                    <label className="admin-dashboard__lecturer-search-filter-dropdown-item">
-                      <input type="checkbox" />
-                      <p>Filter 1</p>
-                    </label>
-                    <label className="admin-dashboard__lecturer-search-filter-dropdown-item">
-                      <input type="checkbox" />
-                      <p>Filter 2</p>
-                    </label>
-                  </div>
-                </div>
-                <button className="admin-dashboard__lecturer-search-button">
-                  Search
-                </button>
+              <div className="courses__search__container">
+                <select>
+                  <option value={""}>All</option>
+                  <option value={"name"}>Name</option>
+                </select>
+                <input placeholder="Search lecturers" />
               </div>
               <div className="admin-dashboard__lecturer-search-results">
                 <h3>Search results</h3>

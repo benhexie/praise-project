@@ -136,6 +136,10 @@
   flex: 1;
 }
 
+.admin-dashboard__lecturer-search .courses__search__container {
+  padding: 0;
+}
+
 .admin-dashboard__lecturer-search-results-container {
   height: 400px;
   max-height: 400px;
