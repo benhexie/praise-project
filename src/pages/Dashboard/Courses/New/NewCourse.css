@@ -128,3 +128,14 @@
 .course__profile__preview span {
   font-weight: 500;
 }
+
+.course__profile__preview a {
+  color: var(--primary-color);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.course__profile__preview a:hover {
+  color: var(--secondary-color);
+}

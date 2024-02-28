@@ -1,7 +1,7 @@
 import "./User.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { GoTrash } from "react-icons/go";
+import { GoArrowLeft, GoTrash } from "react-icons/go";
 import { useState } from "react";
 import ConfirmationBox from "../../../components/Dialog/ConfirmationBox";
 import { toast } from "react-toastify";
@@ -18,6 +18,7 @@ const User = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [disableLoading, setDisableLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const disableAccount = async () => {
     if (!showDialog) {
@@ -78,6 +79,10 @@ const User = () => {
 
   return (
     <div className="admin__user">
+      <button className="admin__user__back" onClick={() => navigate(-1)}>
+        <GoArrowLeft />
+        Back
+      </button>
       {lecturer ? (
         <div className="card admin__user__container">
           {showDialog && (

@@ -1,5 +1,5 @@
 import "./NewCourse.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +30,7 @@ const NewCourse = () => {
     setTitle(course.title);
     setCode(course.code);
     setCredits(course.credits);
+    setDescription(course.description);
     setAssignTo(course.assignedTo);
   }, []);
 
@@ -183,6 +184,7 @@ const NewCourse = () => {
               <p>
                 Department:<span>{previewData.department}</span>
               </p>
+              <Link to={`/dashboard/user/${profileId}`}>View Full Profile</Link>
             </div>
           )}
           <label>
