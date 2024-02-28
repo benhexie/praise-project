@@ -41,7 +41,11 @@ const Courses = () => {
                 <h3 className="courses__course__name">{course.code}</h3>
                 <label>
                   Assigned
-                  <input type="checkbox" checked={course.assignedTo ? true : false} />
+                  <input
+                    type="checkbox"
+                    checked={course.assignedTo ? true : false}
+                    onChange={() => {}}
+                  />
                 </label>
               </Link>
             ))

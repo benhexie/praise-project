@@ -36,6 +36,17 @@ export const adminReducer = (state = initialState, action = {}) => {
     case "SET_LECTURERS":
       return { ...state, lecturers: action.payload };
 
+    case "UPDATE_LECTURER":
+      return {
+        ...state,
+        lecturers: state.lecturers.map((lecturer) => {
+          if (lecturer._id === action.payload._id) {
+            return action.payload;
+          }
+          return lecturer;
+        }),
+      };
+
     default:
       return state;
   }

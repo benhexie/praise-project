@@ -19,6 +19,13 @@ export const setLecturers = (lecturers) => {
   };
 };
 
+export const updateLecturer = (lecturer) => {
+  return {
+    type: "UPDATE_LECTURER",
+    payload: lecturer,
+  };
+};
+
 export const setCourses = (courses) => {
   return {
     type: "SET_COURSES",
