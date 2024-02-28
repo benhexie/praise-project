@@ -19,6 +19,7 @@ import Courses from "./pages/Dashboard/Courses";
 import NewCourse from "./pages/Dashboard/Courses/New/NewCourse";
 import User from "./pages/Dashboard/User";
 import Portfolio from "./pages/Dashboard/Portfolio";
+import ForgotPassword from "./pages/Home/FormPage/ForgotPassword";
 
 const DEVELOPMENT = process.env.REACT_APP_DEV === "true";
 
@@ -58,6 +59,10 @@ function App() {
                       <Route path="/" element={<FormPage />}>
                         <Route path="signup" element={<Signup />} />
                         <Route path="login" element={<Login />} />
+                        <Route
+                          path="forgot-password"
+                          element={<ForgotPassword />}
+                        />
                       </Route>
                     </Route>
                     <Route path="/dashboard" element={<Dashboard />}>

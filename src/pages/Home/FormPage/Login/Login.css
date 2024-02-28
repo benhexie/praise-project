@@ -1,2 +1,10 @@
-.login {
+.login__forgot__password {
+    text-align: end;
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+.login__forgot__password:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }

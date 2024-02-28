@@ -57,7 +57,7 @@ const Dashboard = () => {
           return toast.error("Please check your internet connection.");
         }
         toast.error("Something went wrong");
-        console.log(err.message);
+        console.error(err.message);
       });
   }, []);
 
