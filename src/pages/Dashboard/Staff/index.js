@@ -1,16 +1,16 @@
-import "./User.css";
+import "./Staff.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { GoArrowLeft, GoTrash } from "react-icons/go";
 import { useState } from "react";
 import ConfirmationBox from "../../../components/Dialog/ConfirmationBox";
 import { toast } from "react-toastify";
-import { updateLecturer } from "../../../redux/actions/admin";
+import { updateStaff } from "../../../redux/actions/admin";
 
-const User = () => {
+const Staff = () => {
   const id = useParams().id;
   const lecturer = useSelector((state) =>
-    state.admin.lecturers.find((l) => l._id === id),
+    state.admin.staffs.find((l) => l._id === id),
   );
   const courses = useSelector((state) =>
     state.admin.courses.filter((c) => c.assignedTo === id),
@@ -38,7 +38,7 @@ const User = () => {
       const data = await res.json();
       setDisableLoading(false);
       if (data.error) return toast.error(data.message);
-      dispatch(updateLecturer(data.data));
+      dispatch(updateStaff(data.data));
       toast.success(data.message);
       setShowDialog(false);
     } catch (err) {
@@ -65,7 +65,7 @@ const User = () => {
       const data = await res.json();
       setDisableLoading(false);
       if (data.error) return toast.error(data.message);
-      dispatch(updateLecturer(data.data));
+      dispatch(updateStaff(data.data));
       toast.success(data.message);
     } catch (err) {
       setDisableLoading(false);
@@ -138,4 +138,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Staff;

@@ -9,7 +9,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import {
   setAssignedCourses,
   setCourses,
-  setLecturers,
+  setStaffs,
   setProfessional,
   setSchool,
   setUser,
@@ -44,9 +44,9 @@ const Dashboard = () => {
         dispatch(setSchool(data.data.school));
         if (data.data.user.role === "admin") {
           dispatch(setCourses(data.data.courses));
-          dispatch(setLecturers(data.data.lecturers));
+          dispatch(setStaffs(data.data.staffs));
         }
-        if (data.data.user.role === "user") {
+        if (data.data.user.role === "staff") {
           dispatch(setAssignedCourses(data.data.courses));
           dispatch(setProfessional(data.data.professional));
         }

@@ -21,7 +21,7 @@ const NewCourse = () => {
   const dispatch = useDispatch();
 
   const courses = useSelector((state) => state.admin.courses);
-  const lecturers = useSelector((state) => state.admin.lecturers);
+  const staffs = useSelector((state) => state.admin.staffs);
 
   useEffect(() => {
     if (!id) return;
@@ -41,7 +41,7 @@ const NewCourse = () => {
   useEffect(() => {
     if (!profileId) return;
     setPreviewData(
-      lecturers.filter((user) => {
+      staffs.filter((user) => {
         return user._id === profileId;
       })?.[0] || {},
     );
@@ -184,7 +184,7 @@ const NewCourse = () => {
               <p>
                 Department:<span>{previewData.department}</span>
               </p>
-              <Link to={`/dashboard/user/${profileId}`}>View Full Profile</Link>
+              <Link to={`/dashboard/staff/${profileId}`}>View Full Profile</Link>
             </div>
           )}
           <label>
@@ -195,9 +195,9 @@ const NewCourse = () => {
                 onChange={(e) => setAssignTo(e.target.value)}
               >
                 <option value={""}>Not assigned</option>
-                {lecturers.map((user) => (
-                  <option key={user._id} value={user._id}>
-                    {user.firstname} {user.lastname} ({3} remaining)
+                {staffs.map((staff) => (
+                  <option key={staff._id} value={staff._id}>
+                    {staff.firstname} {staff.lastname} ({3} remaining)
                   </option>
                 ))}
               </select>

@@ -17,7 +17,7 @@ import EducationOverlay from "./pages/Dashboard/Portfolio/overlay/EducationOverl
 import CatalogOverlay from "./pages/Dashboard/Portfolio/overlay/CatalogOverlay";
 import Courses from "./pages/Dashboard/Courses";
 import NewCourse from "./pages/Dashboard/Courses/New/NewCourse";
-import User from "./pages/Dashboard/User";
+import Staff from "./pages/Dashboard/Staff";
 import Portfolio from "./pages/Dashboard/Portfolio";
 import ForgotPassword from "./pages/Home/FormPage/ForgotPassword";
 
@@ -67,7 +67,7 @@ function App() {
                     </Route>
                     <Route path="/dashboard" element={<Dashboard />}>
                       <Route index element={<DashboardIndex />} />
-                      <Route path="user/:id" element={<User />} />
+                      <Route path="staff/:id" element={<Staff />} />
                       <Route path="courses" element={<Courses />}>
                         <Route path="new" element={<NewCourse />} />
                         <Route path=":id" element={<NewCourse />} />

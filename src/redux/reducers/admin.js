@@ -1,6 +1,6 @@
 const initialState = {
   courses: [],
-  lecturers: [],
+  staffs: [],
 };
 
 export const adminReducer = (state = initialState, action = {}) => {
@@ -33,17 +33,17 @@ export const adminReducer = (state = initialState, action = {}) => {
         ),
       };
 
-    case "SET_LECTURERS":
-      return { ...state, lecturers: action.payload };
+    case "SET_STAFFS":
+      return { ...state, staffs: action.payload };
 
-    case "UPDATE_LECTURER":
+    case "UPDATE_STAFF":
       return {
         ...state,
-        lecturers: state.lecturers.map((lecturer) => {
-          if (lecturer._id === action.payload._id) {
+        staffs: state.staffs.map((staff) => {
+          if (staff._id === action.payload._id) {
             return action.payload;
           }
-          return lecturer;
+          return staff;
         }),
       };
 

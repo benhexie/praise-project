@@ -12,17 +12,17 @@ export const setToken = (token) => {
   };
 };
 
-export const setLecturers = (lecturers) => {
+export const setStaffs = (staffs) => {
   return {
-    type: "SET_LECTURERS",
-    payload: lecturers,
+    type: "SET_STAFFS",
+    payload: staffs,
   };
 };
 
-export const updateLecturer = (lecturer) => {
+export const updateStaff = (staff) => {
   return {
-    type: "UPDATE_LECTURER",
-    payload: lecturer,
+    type: "UPDATE_STAFF",
+    payload: staff,
   };
 };
 

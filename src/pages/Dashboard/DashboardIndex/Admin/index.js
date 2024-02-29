@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 
 const AdminDashboard = () => {
-  const lecturers = useSelector((state) => state.admin.lecturers);
+  const staffs = useSelector((state) => state.admin.staffs);
   const courses = useSelector((state) => state.admin.courses);
   const [showFilters, setShowFilters] = useState(false);
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const AdminDashboard = () => {
           <h2>Overview</h2>
           <div className="admin-dashboard__overview-total">
             <div className="card admin-dashboard__card admin-dashboard__overview-card">
-              <h3>Total Lecturers: {lecturers.length}</h3>
+              <h3>Total Staff: {staffs.length}</h3>
             </div>
             <div className="card admin-dashboard__card admin-dashboard__overview-card">
               <h3>Total Courses: {courses.length}</h3>
@@ -56,8 +56,8 @@ const AdminDashboard = () => {
                 <h3>Search results</h3>
                 <div className="scrollable admin-dashboard__lecturer-search-results-container">
                   <div>
-                    {lecturers.length > 0 ? (
-                      lecturers.map((lecturer) => (
+                    {staffs.length > 0 ? (
+                      staffs.map((lecturer) => (
                         <div
                           key={lecturer._id}
                           className="admin-dashboard__lecturer-search-results-item"
@@ -68,7 +68,7 @@ const AdminDashboard = () => {
                           <button
                             className="admin-dashboard__lecturer-search-results-button"
                             onClick={() =>
-                              navigate(`/dashboard/user/${lecturer._id}`)
+                              navigate(`/dashboard/staff/${lecturer._id}`)
                             }
                           >
                             View

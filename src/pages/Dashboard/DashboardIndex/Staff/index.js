@@ -1,10 +1,10 @@
-import "./UserDashboard.css";
+import "./StaffDashboard.css";
 import { useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 
-const UserDashboard = () => {
+const StaffDashboard = () => {
   const indicatorRef = useRef(null);
   const [indicatorWidth, setIndicatorWidth] = useState(0);
   const user = useSelector((state) => state.general.user);
@@ -130,4 +130,4 @@ const UserDashboard = () => {
   );
 };
 
-export default UserDashboard;
+export default StaffDashboard;
