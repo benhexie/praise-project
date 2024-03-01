@@ -2,9 +2,12 @@ import "./Courses.css";
 import { Link, Outlet } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const Courses = () => {
   const courses = useSelector((state) => state.admin.courses);
+  const [filter, setFilter] = useState("");
+  const [search, setSearch] = useState("");
 
   return (
     <div className="courses">
@@ -18,12 +21,16 @@ const Courses = () => {
       <Outlet />
       <div className="courses__wrapper">
         <div className="courses__search__container">
-          <select>
+          <select onChange={(e) => setFilter(e.target.value)} value={filter}>
             <option value={""}>All</option>
             <option value={"code"}>Course code</option>
             <option value={"title"}>Course title</option>
           </select>
-          <input placeholder="Search courses" />
+          <input
+            placeholder="Search courses"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
         <div className="scrollablle courses__container">
           {courses.length === 0 ? (
@@ -32,23 +39,32 @@ const Courses = () => {
               <Link to={"new"}>Create new course</Link>
             </div>
           ) : (
-            courses.map((course) => (
-              <Link
-                key={course._id}
-                to={course._id}
-                className="card courses__course__card"
-              >
-                <h3 className="courses__course__name">{course.code}</h3>
-                <label>
-                  Assigned
-                  <input
-                    type="checkbox"
-                    checked={course.assignedTo ? true : false}
-                    onChange={() => {}}
-                  />
-                </label>
-              </Link>
-            ))
+            courses
+              .filter((course) => {
+                const regex = new RegExp(search.trim(), "i");
+                if (search.trim()) {
+                  if (filter === "code") return regex.test(course.code);
+                  if (filter === "title") return regex.test(course.title);
+                }
+                return true;
+              })
+              .map((course) => (
+                <Link
+                  key={course._id}
+                  to={course._id}
+                  className="card courses__course__card"
+                >
+                  <h3 className="courses__course__name">{course.code}</h3>
+                  <label>
+                    Assigned
+                    <input
+                      type="checkbox"
+                      checked={course.assignedTo ? true : false}
+                      onChange={() => {}}
+                    />
+                  </label>
+                </Link>
+              ))
           )}
         </div>
       </div>
