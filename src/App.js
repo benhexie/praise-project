@@ -20,6 +20,7 @@ import NewCourse from "./pages/Dashboard/Courses/New/NewCourse";
 import Staff from "./pages/Dashboard/Staff";
 import Portfolio from "./pages/Dashboard/Portfolio";
 import ForgotPassword from "./pages/Home/FormPage/ForgotPassword";
+import CoursesTable from "./pages/Dashboard/CoursesTable";
 
 const DEVELOPMENT = process.env.REACT_APP_DEV === "true";
 
@@ -72,6 +73,7 @@ function App() {
                         <Route path="new" element={<NewCourse />} />
                         <Route path=":id" element={<NewCourse />} />
                       </Route>
+                      <Route path="courses/table" element={<CoursesTable />} />
                       <Route path="portfolio" element={<Portfolio />}>
                         <Route path="add">
                           <Route

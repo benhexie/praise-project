@@ -6,10 +6,11 @@ import { useState } from "react";
 import ConfirmationBox from "../../../components/Dialog/ConfirmationBox";
 import { toast } from "react-toastify";
 import { updateStaff } from "../../../redux/actions/admin";
+import { RiInformationLine } from "react-icons/ri";
 
 const Staff = () => {
   const id = useParams().id;
-  const lecturer = useSelector((state) =>
+  const staff = useSelector((state) =>
     state.admin.staffs.find((l) => l._id === id),
   );
   const courses = useSelector((state) =>
@@ -17,6 +18,7 @@ const Staff = () => {
   );
   const [showDialog, setShowDialog] = useState(false);
   const [disableLoading, setDisableLoading] = useState(false);
+  const [grantLoading, setGrantLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -83,7 +85,7 @@ const Staff = () => {
         <GoArrowLeft />
         Back
       </button>
-      {lecturer ? (
+      {staff ? (
         <div className="card admin__user__container">
           {showDialog && (
             <ConfirmationBox
@@ -95,22 +97,41 @@ const Staff = () => {
             />
           )}
           <div className="admin__user__image">
-            <img src={lecturer.image} alt={lecturer.firstname} />
+            <img src={staff.image} alt={staff.firstname} />
           </div>
           <h1>
-            {lecturer.firstname} {lecturer.lastname}
+            {staff.firstname} {staff.lastname}
           </h1>
-          <p>{lecturer.email}</p>
-          <p>{lecturer.phone}</p>
-          <p>{lecturer.department}</p>
+          <p>{staff.email}</p>
+          <p>{staff.phone}</p>
+          <p>{staff.department}</p>
           <div className="admin__user__actions">
-            <button
-              className="admin__user__actions__disable"
-              onClick={lecturer.disabled ? enableAccount : disableAccount}
-              disabled={disableLoading}
-            >
-              {lecturer.disabled ? "Enable account" : "Disable account"}
-            </button>
+            <div className="admin__user__actions__item__container">
+              <button
+                className="admin__user__actions__disable"
+                onClick={staff.disabled ? enableAccount : disableAccount}
+                disabled={disableLoading}
+              >
+                {staff.disabled ? "Enable account" : "Disable account"}
+              </button>
+              <RiInformationLine className={`admin__user__actions__info`} />
+              <span>
+                {staff.disabled
+                  ? "This will re-enable the user's account."
+                  : "This will prevent the user from using the platform."}
+              </span>
+            </div>
+            <div className="admin__user__actions__item__container">
+              <button className="admin__user__actions__grant">
+                {staff.role === "staff" ? "Grant viewer" : "Revoke viewer"}
+              </button>
+              <RiInformationLine className={`admin__user__actions__info`} />
+              <span>
+                {staff.role === "staff"
+                  ? "This will grant the user access to view but not modify courses and other staff details."
+                  : "This will revoke the user's access to view courses and other staff details."}
+              </span>
+            </div>
           </div>
           <div className="admin__user__courses">
             <h2>Courses</h2>

@@ -93,6 +93,10 @@
   transition: all 0.3s ease;
 }
 
+.course__new__container form button.delete {
+  background-color: var(--danger-color);
+}
+
 .course__new__container form button:not(:disabled):hover {
   scale: 1.03;
 }

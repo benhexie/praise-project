@@ -3,8 +3,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCourse, updateCourse } from "../../../../redux/actions/admin";
+import {
+  addCourse,
+  deleteCourse,
+  updateCourse,
+} from "../../../../redux/actions/admin";
 import { toast } from "react-toastify";
+import ConfirmationBox from "../../../../components/Dialog/ConfirmationBox";
 
 const NewCourse = () => {
   const navigate = useNavigate();
@@ -22,6 +27,7 @@ const NewCourse = () => {
 
   const courses = useSelector((state) => state.admin.courses);
   const staffs = useSelector((state) => state.admin.staffs);
+  const [showDialog, setShowDialog] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -70,7 +76,7 @@ const NewCourse = () => {
       });
       const data = await res.json();
       if (data.error) return setError(data.message);
-      dispatch(addCourse(data.course));
+      dispatch(addCourse(data.data));
       navigate("/dashboard/courses", { replace: true });
     } catch (error) {
       setError(error.message);
@@ -109,6 +115,34 @@ const NewCourse = () => {
     }
   };
 
+  const deleteCourseFtn = async (id) => {
+    if (!showDialog) {
+      setShowDialog(true);
+      return;
+    }
+
+    try {
+      const res = await fetch(`${process.env.REACT_APP_SERVER}/course/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const data = await res.json();
+      if (data.error) return toast.error(data.message);
+      dispatch(deleteCourse(id));
+      toast.success(data.message);
+      setShowDialog(false);
+    } catch (err) {
+      if (/failed to fetch|network error/i.test(err.message)) {
+        return toast.error("Please check your internet connection.");
+      }
+      toast.error("Something went wrong");
+      console.error(err.message);
+    }
+  };
+
   const validateInput = () => {
     if (!title) return [true, "Course title cannot be empty"];
     if (!code) return [true, "Course code cannot be empty"];
@@ -124,6 +158,13 @@ const NewCourse = () => {
       onClick={() => navigate("/dashboard/courses", { replace: true })}
       ref={bgRef}
     >
+      {id && showDialog && (
+        <ConfirmationBox
+          message="Are you sure you want to delete this course?"
+          onConfirm={() => deleteCourseFtn(id)}
+          onCancel={() => setShowDialog(false)}
+        />
+      )}
       <div
         className="card course__new__container"
         onClick={(e) => e.stopPropagation()}
@@ -184,7 +225,9 @@ const NewCourse = () => {
               <p>
                 Department:<span>{previewData.department}</span>
               </p>
-              <Link to={`/dashboard/staff/${profileId}`}>View Full Profile</Link>
+              <Link to={`/dashboard/staff/${profileId}`}>
+                View Full Profile
+              </Link>
             </div>
           )}
           <label>
@@ -221,6 +264,11 @@ const NewCourse = () => {
             {error}
           </p>
           <button type="submit">{id ? "Edit" : "Create"}</button>
+          {id && (
+            <button type="button" className="delete" onClick={deleteCourseFtn}>
+              Delete
+            </button>
+          )}
         </form>
       </div>
     </div>

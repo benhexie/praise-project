@@ -3,6 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { CiViewTable } from "react-icons/ci";
 
 const Courses = () => {
   const courses = useSelector((state) => state.admin.courses);
@@ -13,6 +14,9 @@ const Courses = () => {
     <div className="courses">
       <div className="dashboard__header courses__header">
         <h1>Courses</h1>
+        <Link className="courses__header__link table" to={"table"}>
+          <CiViewTable />
+        </Link>
         <Link className="courses__header__link" to={"new"}>
           <p>Create new course</p>
           <AiOutlinePlus />
