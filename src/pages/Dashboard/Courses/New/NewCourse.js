@@ -222,9 +222,9 @@ const NewCourse = () => {
                   {previewData.firstname} {previewData.lastname}
                 </span>
               </p>
-              <p>
+              {/* <p>
                 Department:<span>{previewData.department}</span>
-              </p>
+              </p> */}
               <Link to={`/dashboard/staff/${profileId}`}>
                 View Full Profile
               </Link>

@@ -6,7 +6,8 @@
   padding: 1rem;
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
 }
 
 .landing__section {
@@ -17,7 +18,7 @@
   padding: 0 1rem;
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: var(--main-bg-color);
   min-height: calc(100vh - var(--nav-height));
   min-height: calc(100dvh - var(--nav-height));
 }
@@ -26,7 +27,7 @@
   font-size: 2rem;
   font-weight: 500;
   margin-bottom: 1rem;
-  color: var(--primary-color);
+  color: var(--text-color);
   gap: 1rem;
 }
 
@@ -98,7 +99,7 @@
   font-size: 1.5rem;
   font-weight: 400;
   margin-bottom: 0.5rem;
-  color: #000;
+  color: var(--text-color);
   text-decoration: none;
   transition: all 0.3s ease-in-out;
   display: flex;

@@ -1,143 +1,64 @@
-/* 
-<div className="home__footer">
-      <div className="home__footer__content">
-        <div className="home__footer__content__section">
-          <h3>Company</h3>
-          <ul>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-            <li>
-              <Link to="/careers">Careers</Link>
-            </li>
-          </ul>
-        </div>
-        <div className="home__footer__content__section">
-          <h3>Community</h3>
-          <ul>
-            <li>
-              <Link to="/blog">Blog</Link>
-            </li>
-            <li>
-              <Link to="/support">Support</Link>
-            </li>
-            <li>
-              <Link to="/privacy">Privacy Policy</Link>
-            </li>
-            <li>
-              <Link to="/terms">Terms of Use</Link>
-            </li>
-          </ul>
-        </div>
-        <div className="home__footer__content__section">
-          <h3>Connect</h3>
-          <ul>
-            <li>
-              <a
-                href="https://www.facebook.com/lectura"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaFacebookF />
-                Facebook
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.twitter.com/lectura"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaTwitter />
-                Twitter
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.instagram.com/lectura"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaInstagram />
-                Instagram
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.linkedin.com/lectura"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaLinkedinIn />
-                LinkedIn
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <small>&copy; 2024 Lectura. All rights reserved.</small>
-    </div>
-*/
-
 .home__footer {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  color: var(--text-color);
   padding: 2rem 0;
   text-align: center;
-  background-color: #f5f5f5;
+  background-color: var(--bg-color);
+  min-height: calc(100vh - var(--nav-height));
+  min-height: calc(100dvh - var(--nav-height));
+  display: flex;
+  flex-direction: column;
 }
 
 .home__footer__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 .home__footer__content__section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
 .home__footer__content__section h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .home__footer__content__section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .home__footer__content__section ul li {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .home__footer__content__section ul li a {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .home__footer__content__section ul li a svg {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .home__footer__content__section ul li a:hover {
-    color: var(--color-primary-dark);
+  color: var(--color-primary-dark);
 }
 
 .home__footer small {
-    font-size: 1.2rem;
-    margin-top: 2rem;
-    display: block;
+  font-size: 1.2rem;
+  display: block;
+  margin-top: auto;
 }

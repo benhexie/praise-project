@@ -21,10 +21,19 @@ import Staff from "./pages/Dashboard/Staff";
 import Portfolio from "./pages/Dashboard/Portfolio";
 import ForgotPassword from "./pages/Home/FormPage/ForgotPassword";
 import CoursesTable from "./pages/Dashboard/CoursesTable";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setTheme } from "./redux/actions";
 
 const DEVELOPMENT = process.env.REACT_APP_DEV === "true";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setTheme(localStorage.getItem("theme") || null));
+  }, []);
+
   return (
     <div className="App">
       <ToastContainer

@@ -15,7 +15,6 @@
   left: 0;
   width: 100%;
   z-index: 100;
-  background-color: white;
   padding: 20px;
   flex-wrap: wrap;
 }
@@ -34,87 +33,6 @@
   flex-direction: column;
 }
 
-.admin-dashboard__notifications-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.admin-dashboard__header-bell {
-  position: relative;
-  width: 36px;
-  height: 36px;
-  background-color: var(--dark-color);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.1s ease-in-out;
-}
-
-.admin-dashboard__header-bell:active {
-  cursor: grab;
-}
-
-.admin-dashboard__header-bell.show {
-  background-color: var(--primary-color);
-}
-
-.admin-dashboard__header-bell-badge {
-  position: absolute;
-  top: -5px;
-  right: -5px;
-  background-color: var(--danger-color);
-  color: #fff;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.8rem;
-}
-
-.admin-dashboard__notifications {
-  position: absolute;
-  pointer-events: none;
-  opacity: 0;
-  z-index: 1;
-  transition: all 0.3s ease-in-out;
-  width: 100%;
-  background-color: white;
-  max-width: 300px;
-  top: 100%;
-  margin-top: 8px;
-  padding: 8px;
-  border-radius: 8px;
-  box-shadow: var(--box-shadow);
-  color: black;
-  min-width: 240px;
-}
-
-.admin-dashboard__notifications__inner {
-  display: flex;
-  flex-direction: column;
-  max-height: 200px;
-  gap: 16px;
-  overflow-y: auto;
-}
-
-.admin-dashboard__notifications.show {
-  pointer-events: all;
-  opacity: 1;
-}
-
-.admin-dashboard__notification {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .admin-dashboard__welcome {
   font-size: 1.5rem;
   color: var(--secondary-color);
@@ -125,7 +43,8 @@
 
 .admin-dashboard__overview,
 .admin-dashboard__lecturer {
-  background-color: #fff;
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -196,11 +115,16 @@
   color: white;
 }
 
+.admin-dashboard__lecturer-search {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .admin-dashboard__lecturer-search h3 {
   color: var(--primary-color);
   font-size: 1.5rem;
   margin-top: 0;
-  margin-bottom: 10px;
 }
 
 .admin-dashboard__lecturer-search-container {
@@ -260,7 +184,7 @@
 
 .admin-dashboard__lecturer-search-results-item h3 {
   font-size: 1rem;
-  color: var(--dark-color);
+  color: var(--text-color);
   margin: 0;
 }
 
@@ -397,9 +321,5 @@
     order: 1;
     margin-left: 2rem;
     font-size: 1rem;
-  }
-
-  .admin-dashboard__notifications {
-    right: 0;
   }
 }

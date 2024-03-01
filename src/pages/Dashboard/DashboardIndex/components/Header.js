@@ -1,3 +1,4 @@
+import "./Header.css";
 import React, { useEffect, useState } from "react";
 import { BsBell, BsBellFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";

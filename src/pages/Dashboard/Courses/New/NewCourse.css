@@ -28,7 +28,8 @@
   max-width: 500px;
   height: auto;
   padding: 20px;
-  background-color: white;
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
   box-shadow: var(--box-shadow);
   border-radius: 8px;
   position: relative;

@@ -45,7 +45,7 @@
   flex-direction: column;
   gap: 4px;
   padding: 20px;
-  background-color: white;
+  background-color: var(--main-bg-color);
   position: sticky;
   z-index: 1;
   top: 96px;
@@ -78,14 +78,14 @@
 .courses__course__card {
   display: flex;
   padding: 20px;
-  background-color: white;
+  background-color: var(--main-bg-color);
   justify-content: space-between;
   align-items: center;
   border-radius: 5px;
   box-shadow: var(--box-shadow);
   cursor: pointer;
   text-decoration: none;
-  color: black;
+  color: var(--text-color);
   margin-bottom: 10px;
 }
 

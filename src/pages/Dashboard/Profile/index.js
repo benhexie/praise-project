@@ -1,7 +1,7 @@
 import "./Profile.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { setToken, updateUser } from "../../../redux/actions";
+import { setToken, toggleTheme, updateUser } from "../../../redux/actions";
 import { toast } from "react-toastify";
 import { MdOutlineContentCopy } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ const SERVER = process.env.REACT_APP_SERVER;
 const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const theme = useSelector((state) => state.general.theme);
   const user = useSelector((state) => state.general.user);
   const schoolData = useSelector((state) => state.general.school);
   const [firstname, setFirstname] = useState(user.firstname);
@@ -347,6 +348,19 @@ const Profile = () => {
             </div>
           </section>
         )}
+        <section className="dashboard__section professional__section">
+          <h2>Change Theme</h2>
+          <div className="dashboard__section__content">
+            <button
+              className={`dashboard__section__button ${
+                theme === "light" ? "dark" : "light"
+              }`}
+              onClick={() => dispatch(toggleTheme())}
+            >
+              {theme === "light" ? "Dark" : "Light"} Theme
+            </button>
+          </div>
+        </section>
       </div>
     </div>
   );

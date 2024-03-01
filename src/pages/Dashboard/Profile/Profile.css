@@ -10,7 +10,6 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  background-color: #fff;
 }
 
 .dashboard__container {
@@ -24,7 +23,8 @@
 
 .profile__section {
   width: 100%;
-  background-color: #fff;
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
   padding: 1rem;
   border-radius: 8px;
 }
@@ -95,7 +95,6 @@
 
 .dashboard__section__button {
   background-color: var(--primary-color);
-  color: #fff;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -103,6 +102,17 @@
   font-size: 1rem;
   transition: background-color 0.3s ease;
   height: 120px;
+  color: #fff;
+}
+
+.dashboard__section__button.dark {
+  background-color: #000;
+  color: #fff;
+}
+
+.dashboard__section__button.light {
+  background-color: #fff;
+  color: #000;
 }
 
 .dashboard__section__button:hover {

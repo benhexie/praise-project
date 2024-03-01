@@ -3,12 +3,17 @@ import "./HomeNav.css";
 import { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import lecturaLogo from "../../assets/svgs/lectura-logo.svg";
+import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../../redux/actions/general";
 
 const HomeNav = () => {
   const [show, setShow] = useState(false);
   const handleMenuClick = () => {
     setShow(!show);
   };
+  const theme = useSelector((state) => state.general.theme);
+  const dispatch = useDispatch();
 
   //   close menu when click outside
   window.onclick = function (event) {
@@ -44,6 +49,14 @@ const HomeNav = () => {
           onClick={handleMenuClick}
         >
           {show ? <AiOutlineClose /> : <AiOutlineMenu />}
+        </div>
+        <div
+          className={`theme__toggle ${theme}`}
+          onClick={() => dispatch(toggleTheme())}
+        >
+          <div className="theme__toggle__circle" />
+          <IoMoonOutline className="moon" />
+          <IoSunnyOutline className="sun" />
         </div>
       </div>
       <div className={`home__nav__mobile  ${show ? "active" : ""}`}>
