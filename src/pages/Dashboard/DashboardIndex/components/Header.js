@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { BsBell, BsBellFill } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { notificationsRead } from "../../../../redux/actions/general";
 
 const Header = () => {
   const notifications = useSelector((state) => state.general.notifications);
   const user = useSelector((state) => state.general.user);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [closedNotifications, setClosedNotifications] = useState(notifications);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const closeNotifications = (e) => {
@@ -21,6 +24,33 @@ const Header = () => {
     return () => document.removeEventListener("click", closeNotifications);
   }, []);
 
+  useEffect(() => {
+    if (
+      showNotifications &&
+      notifications.filter((notification) => !notification.read).length > 0
+    ) {
+      fetch(`${process.env.REACT_APP_SERVER}/notifications`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) return console.error(data.message);
+          dispatch(notificationsRead());
+        })
+        .catch((err) => console.error(err.message));
+    }
+  }, [showNotifications]);
+
+  useEffect(() => {
+    if (!showNotifications) {
+      setClosedNotifications(notifications);
+    }
+  }, [showNotifications]);
+
   return (
     <div className="dashboard__header admin-dashboard__header">
       <h1>Dashboard</h1>
@@ -31,10 +61,19 @@ const Header = () => {
           }`}
           onClick={() => setShowNotifications((prev) => !prev)}
         >
-          {notifications.length > 0 ? <BsBellFill /> : <BsBell />}
-          {notifications.length > 0 ? (
+          {notifications.filter((notification) => !notification.read).length >
+          0 ? (
+            <BsBellFill />
+          ) : (
+            <BsBell />
+          )}
+          {notifications.filter((notification) => !notification.read).length >
+          0 ? (
             <div className="admin-dashboard__header-bell-badge">
-              {notifications.length}
+              {
+                notifications.filter((notification) => !notification.read)
+                  .length
+              }
             </div>
           ) : null}
         </div>
@@ -44,14 +83,29 @@ const Header = () => {
           }`}
         >
           <div className="admin-dashboard__notifications__inner">
-            {notifications.length > 0 ? (
-              notifications.map((notification, index) => (
+            {closedNotifications.length > 0 ? (
+              closedNotifications.map((notification, index) => (
                 <div
                   key={notification._id || index}
                   className="admin-dashboard__notification"
                 >
-                  <p>{notification.message}</p>
-                  <small>{notification.createdAt}</small>
+                  {notification.read ? (
+                    <p>{notification.message}</p>
+                  ) : (
+                    <strong>{notification.message}</strong>
+                  )}
+                  <small>
+                    {(() => {
+                      const date = new Date(notification.createdAt);
+                      return `${date.toLocaleDateString("en-GB")} ${
+                        date.getHours() > 12
+                          ? date.getHours() - 12
+                          : date.getHours()
+                      }:${date.getMinutes()} ${
+                        date.getHours() > 12 ? "PM" : "AM"
+                      }`;
+                    })()}
+                  </small>
                 </div>
               ))
             ) : (

@@ -18,6 +18,20 @@ export const generalReducer = (state = initialState, action = {}) => {
         user: action.payload,
       };
 
+    case "SET_NOTIFICATIONS":
+      return {
+        ...state,
+        notifications: action.payload,
+      };
+
+    case "NOTIFICATIONS_READ":
+      return {
+        ...state,
+        notifications: state.notifications.map((notification) => {
+          return { ...notification, read: true };
+        }),
+      };
+
     default:
       return state;
   }

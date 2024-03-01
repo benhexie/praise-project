@@ -13,6 +13,7 @@ import {
   setProfessional,
   setSchool,
   setUser,
+  setNotifications,
 } from "../../redux/actions";
 
 const SERVER = process.env.REACT_APP_SERVER;
@@ -42,6 +43,7 @@ const Dashboard = () => {
         }
         dispatch(setUser(data.data.user));
         dispatch(setSchool(data.data.school));
+        dispatch(setNotifications(data.data.notifications));
         if (data.data.user.role === "admin") {
           dispatch(setCourses(data.data.courses));
           dispatch(setStaffs(data.data.staffs));
