@@ -19,7 +19,7 @@ const Signup = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState(""); // ["teacher", "school"]
+  const [role, setRole] = useState(""); // ["staff", "school"]
   const [school, setSchool] = useState("");
   const [schools, setSchools] = useState([]); // [{_id, name}]
   const [address, setAddress] = useState("");
@@ -35,7 +35,7 @@ const Signup = () => {
     setSchool("");
     setAddress("");
 
-    if (role === "teacher") {
+    if (role === "staff") {
       fetch(`${SERVER}/schools`)
         .then((res) => res.json())
         .then((data) => {
@@ -100,15 +100,15 @@ const Signup = () => {
     )
       errorObj.email = "Email is invalid.";
     if (!role) errorObj.role = "Role is required.";
-    if (role && ["teacher", "school"].includes(role) === false)
+    if (role && ["staff", "school"].includes(role) === false)
       errorObj.role = "Role is invalid.";
     if (!password) errorObj.password = "Password is required.";
     if (password && password.length < 8)
       errorObj.password = "Password must be at least 8 characters.";
     if (!confirm) errorObj.confirm = "Confirm password is required.";
     if (password !== confirm) errorObj.confirm = "Password does not match.";
-    if (role === "teacher" && !school) errorObj.school = "School is required.";
-    if (role === "teacher" && !token) errorObj.token = "Token is required.";
+    if (role === "staff" && !school) errorObj.school = "School is required.";
+    if (role === "staff" && !token) errorObj.token = "Token is required.";
     if (role === "school" && !school) errorObj.school = "School is required.";
     if (role === "school" && !address)
       errorObj.address = "Address is required.";
@@ -168,14 +168,14 @@ const Signup = () => {
               }}
             >
               <option value="">Select role</option>
-              <option value="teacher">Teacher</option>
+              <option value="staff">Staff</option>
               <option value="school">School</option>
             </select>
             {error.role && (
               <span className="custom__input__error">{error.role}</span>
             )}
           </div>
-          {role === "teacher" && (
+          {role === "staff" && (
             <div className="custom__input__wrapper">
               <label>School</label>
               <select
@@ -198,7 +198,7 @@ const Signup = () => {
               )}
             </div>
           )}
-          {role === "teacher" && (
+          {role === "staff" && (
             <Input
               error={error}
               setError={setError}
