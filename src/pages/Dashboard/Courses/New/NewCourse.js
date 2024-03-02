@@ -37,8 +37,8 @@ const NewCourse = () => {
     setTitle(course.title);
     setCode(course.code);
     setCredits(course.credits);
-    setDescription(course.description);
-    setAssignTo(course.assignedTo);
+    setDescription(course.description || "");
+    setAssignTo(course.assignedTo || "");
   }, []);
 
   useEffect(() => {

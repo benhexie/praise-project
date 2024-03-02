@@ -16,8 +16,8 @@ const Staff = () => {
   const staff = useSelector((state) =>
     state.admin.staffs.find((l) => l._id === id),
   );
-  const courses = useSelector((state) =>
-    state.admin.courses.filter((c) => c.assignedTo === id),
+  const courses = useSelector((state) => state.admin.courses).filter(
+    (c) => c.assignedTo === id,
   );
   const [showDialog, setShowDialog] = useState(false);
   const [dialogCaller, setDialogCaller] = useState("disable"); // disable or grant
@@ -78,14 +78,14 @@ const Staff = () => {
           },
           body: JSON.stringify({ grant }),
         },
-      );
-      const data = await res.json();
-      setGrantLoading(false);
-      if (data.error) return toast.error(data.message);
-      dispatch(updateStaff(data.data));
-      toast.success(data.message);
-      setShowDialog(false);
-    } catch (err) {
+        );
+        const data = await res.json();
+        setGrantLoading(false);
+        if (data.error) return toast.error(data.message);
+        dispatch(updateStaff(data.data));
+        toast.success(data.message);
+        setShowDialog(false);
+      } catch (err) {
       setGrantLoading(false);
       if (/failed to fetch|network error/i.test(err.message)) {
         return toast.error("Please check your internet connection.");
@@ -94,7 +94,7 @@ const Staff = () => {
       console.error(err.message);
     }
   };
-
+  
   const unassignCourse = async (courseId) => {
     if (unassignLoading) return;
     setUnassignLoading(true);
@@ -112,7 +112,7 @@ const Staff = () => {
       const data = await res.json();
       setUnassignLoading(false);
       if (data.error) return toast.error(data.message);
-      dispatch(updateAssignedCourse(id, data.data));
+      dispatch(updateAssignedCourse(data.data));
       toast.success(data.message);
     } catch (err) {
       setUnassignLoading(false);

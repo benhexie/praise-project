@@ -54,9 +54,9 @@ export const deleteCourse = (course) => {
   };
 };
 
-export const updateAssignedCourse = (id, course) => {
+export const updateAssignedCourse = (course) => {
   return {
     type: "UPDATE_ASSIGNED_COURSE",
-    payload: { id, course },
+    payload: course,
   };
 };
