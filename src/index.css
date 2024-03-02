@@ -16,6 +16,7 @@
   --main-bg-color: #fff;
   --bg-color-light: #e0e0e0;
   --text-color: #000;
+  --nav-border-color: #e0e0e0;
 
   /* SIZES */
   --nav-height: 5rem;
@@ -62,6 +63,7 @@ code {
     --bg-color-light: #343a40;
     --main-bg-color: #252526;
     --text-color: #fff;
+    --nav-border-color: var(--nav-bg-color);
   }
 }
 
@@ -74,4 +76,5 @@ code {
   --bg-color-light: #343a40;
   --main-bg-color: #252526;
   --text-color: #fff;
+  --nav-border-color: var(--nav-bg-color);
 }

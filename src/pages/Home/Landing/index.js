@@ -1,15 +1,20 @@
 import { Link, useLocation } from "react-router-dom";
 import "./Landing.css";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
-import AboutImage from "../../../assets/images/about-us.avif";
-import ContactImage from "../../../assets/images/contact-us.webp";
+import AboutImage from "../../../assets/svgs/Globe.svg";
+import ContactImage from "../../../assets/svgs/CallCenter.svg";
+import DarkAboutImage from "../../../assets/svgs/GlobeDark.svg";
+import DarkContactImage from "../../../assets/svgs/CallCenterDark.svg";
 import { useEffect, useRef } from "react";
 import lecturaLoogo from "../../../assets/svgs/lectura-logo.svg";
+import { useSelector } from "react-redux";
 
 const Landing = () => {
   const aboutSectionRef = useRef(null);
   const contactSectionRef = useRef(null);
   const location = useLocation().pathname;
+  const theme = useSelector((state) => state.general.theme);
+
   useEffect(() => {
     if (/\/about/.test(location))
       aboutSectionRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -30,7 +35,10 @@ const Landing = () => {
         className="landing__section about__section"
         ref={aboutSectionRef}
       >
-        <img src={AboutImage} alt="About Lectura" />
+        <img
+          src={theme === "dark" ? DarkAboutImage : AboutImage}
+          alt="About Lectura"
+        />
         <h2>About Lectura</h2>
         <p>
           Lectura is a revolutionary academic platform dedicated to connecting
@@ -59,7 +67,10 @@ const Landing = () => {
         className="landing__section contact__section"
         ref={contactSectionRef}
       >
-        <img src={ContactImage} alt="Contact Us" />
+        <img
+          src={theme === "dark" ? DarkContactImage : ContactImage}
+          alt="Contact Us"
+        />
         <h2>Contact Us</h2>
         <p>Have questions or feedback? Reach out to our team!</p>
         <div className="contact__info">

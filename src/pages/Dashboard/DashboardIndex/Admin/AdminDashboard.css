@@ -69,12 +69,13 @@
   color: var(--primary-color);
   font-size: 1.8rem;
   margin-top: 0;
+  margin-bottom: 20px;
 }
 
 .admin-dashboard__overview .admin-dashboard__card,
 .admin-dashboard__lecturer .admin-dashboard__card,
 .admin-dashboard__course .admin-dashboard__card {
-  background-color: var(--light-color);
+  background-color: var(--bg-color);
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -84,7 +85,7 @@
 .admin-dashboard__lecturer .admin-dashboard__card h3,
 .admin-dashboard__course .admin-dashboard__card h3 {
   font-size: 1.2rem;
-  color: var(--dark-color);
+  color: var(--text-color);
   margin: 0;
 }
 
@@ -172,14 +173,12 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--bg-color);
-  padding-block: 0.5rem;
+  padding: 0.5rem;
   margin-bottom: 10px;
 }
 
 .admin-dashboard__lecturer-search-results-item:last-child {
   border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
 }
 
 .admin-dashboard__lecturer-search-results-item h3 {

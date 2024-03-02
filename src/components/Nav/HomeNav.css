@@ -8,6 +8,7 @@
   transition: all 0.3s ease-in-out;
   height: auto;
   height: var(--nav-height);
+  border-bottom: 1px solid var(--nav-border-color);
 }
 
 .home__nav a {
@@ -115,7 +116,7 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  width: 48px;
+  min-width: 48px;
   height: 28px;
   background-color: var(--nav-bg-color);
   border: 1px solid var(--text-color);
@@ -165,7 +166,7 @@
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 760px) {
   .home__nav__menu {
     display: flex;
   }
