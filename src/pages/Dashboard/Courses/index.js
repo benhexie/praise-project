@@ -6,6 +6,7 @@ import { useState } from "react";
 import { CiViewTable } from "react-icons/ci";
 
 const Courses = () => {
+  const user = useSelector((state) => state.general.user);
   const courses = useSelector((state) => state.admin.courses);
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
@@ -17,10 +18,12 @@ const Courses = () => {
         <Link className="courses__header__link table" to={"table"}>
           <CiViewTable />
         </Link>
-        <Link className="courses__header__link" to={"new"}>
-          <p>Create new course</p>
-          <AiOutlinePlus />
-        </Link>
+        {user.role === "admin" && (
+          <Link className="courses__header__link" to={"new"}>
+            <p>Create new course</p>
+            <AiOutlinePlus />
+          </Link>
+        )}
       </div>
       <Outlet />
       <div className="courses__wrapper">

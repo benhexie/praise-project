@@ -49,7 +49,7 @@ const DashboardNav = () => {
           )}
           <span>Dashboard</span>
         </NavLink>
-        {user.role === "admin" && (
+        {(user.role === "admin" || user.role === "viewer") && (
           <NavLink to={"/dashboard/courses"} className={"dashboard__nav__link"}>
             {/\/courses(\/.+)*$/i.test(location.pathname) ? (
               <IoBook className="dashboard__nav__link__icon" />

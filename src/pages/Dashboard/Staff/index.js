@@ -5,7 +5,10 @@ import { GoArrowLeft, GoTrash } from "react-icons/go";
 import { useState } from "react";
 import ConfirmationBox from "../../../components/Dialog/ConfirmationBox";
 import { toast } from "react-toastify";
-import { updateStaff } from "../../../redux/actions/admin";
+import {
+  updateAssignedCourse,
+  updateStaff,
+} from "../../../redux/actions/admin";
 import { RiInformationLine } from "react-icons/ri";
 
 const Staff = () => {
@@ -17,13 +20,17 @@ const Staff = () => {
     state.admin.courses.filter((c) => c.assignedTo === id),
   );
   const [showDialog, setShowDialog] = useState(false);
+  const [dialogCaller, setDialogCaller] = useState("disable"); // disable or grant
   const [disableLoading, setDisableLoading] = useState(false);
   const [grantLoading, setGrantLoading] = useState(false);
+  const [unassignLoading, setUnassignLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.general.user);
 
-  const disableAccount = async () => {
-    if (!showDialog) {
+  const disableAccount = async (disable) => {
+    if (disable && !showDialog) {
+      setDialogCaller("disable");
       setShowDialog(true);
       return;
     }
@@ -35,7 +42,7 @@ const Staff = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: JSON.stringify({ disable: true }),
+        body: JSON.stringify({ disable }),
       });
       const data = await res.json();
       setDisableLoading(false);
@@ -53,24 +60,62 @@ const Staff = () => {
     }
   };
 
-  const enableAccount = async () => {
-    setDisableLoading(true);
+  const grantViewer = async (grant) => {
+    if (grant && !showDialog) {
+      setDialogCaller("grant");
+      setShowDialog(true);
+      return;
+    }
+    setGrantLoading(true);
     try {
-      const res = await fetch(`${process.env.REACT_APP_SERVER}/user/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER}/grant/viewer/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({ grant }),
         },
-        body: JSON.stringify({ disable: false }),
-      });
+      );
       const data = await res.json();
-      setDisableLoading(false);
+      setGrantLoading(false);
       if (data.error) return toast.error(data.message);
       dispatch(updateStaff(data.data));
       toast.success(data.message);
+      setShowDialog(false);
     } catch (err) {
-      setDisableLoading(false);
+      setGrantLoading(false);
+      if (/failed to fetch|network error/i.test(err.message)) {
+        return toast.error("Please check your internet connection.");
+      }
+      toast.error("Something went wrong");
+      console.error(err.message);
+    }
+  };
+
+  const unassignCourse = async (courseId) => {
+    if (unassignLoading) return;
+    setUnassignLoading(true);
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_SERVER}/course/unassign/${courseId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      const data = await res.json();
+      setUnassignLoading(false);
+      if (data.error) return toast.error(data.message);
+      dispatch(updateAssignedCourse(id, data.data));
+      toast.success(data.message);
+    } catch (err) {
+      setUnassignLoading(false);
       if (/failed to fetch|network error/i.test(err.message)) {
         return toast.error("Please check your internet connection.");
       }
@@ -89,10 +134,20 @@ const Staff = () => {
         <div className="card admin__user__container">
           {showDialog && (
             <ConfirmationBox
-              message="Are you sure you want to disable this account?"
-              onConfirm={disableAccount}
+              message={
+                dialogCaller === "disable"
+                  ? "Are you sure you want to disable this account?"
+                  : "Staff would be able to view but not modify courses and other staff details."
+              }
+              onConfirm={() =>
+                dialogCaller === "disable"
+                  ? disableAccount(true)
+                  : grantViewer(true)
+              }
               onCancel={() => setShowDialog(false)}
-              confirmText="Yes, disable"
+              confirmText={
+                dialogCaller === "disable" ? "Yes, disable" : "Yes, grant"
+              }
               cancelText="No, cancel"
             />
           )}
@@ -109,7 +164,7 @@ const Staff = () => {
             <div className="admin__user__actions__item__container">
               <button
                 className="admin__user__actions__disable"
-                onClick={staff.disabled ? enableAccount : disableAccount}
+                onClick={() => disableAccount(staff.disabled ? false : true)}
                 disabled={disableLoading}
               >
                 {staff.disabled ? "Enable account" : "Disable account"}
@@ -122,7 +177,13 @@ const Staff = () => {
               </span>
             </div>
             <div className="admin__user__actions__item__container">
-              <button className="admin__user__actions__grant">
+              <button
+                className="admin__user__actions__grant"
+                disabled={grantLoading}
+                onClick={() =>
+                  grantViewer(staff.role === "staff" ? true : false)
+                }
+              >
                 {staff.role === "staff" ? "Grant viewer" : "Revoke viewer"}
               </button>
               <RiInformationLine className={`admin__user__actions__info`} />
@@ -145,7 +206,9 @@ const Staff = () => {
                       <h3>{course.code}</h3>
                       <p>{course.title}</p>
                     </div>
-                    <GoTrash />
+                    {user.role === "admin" && (
+                      <GoTrash onClick={() => unassignCourse(course._id)} />
+                    )}
                   </div>
                 ))
               )}

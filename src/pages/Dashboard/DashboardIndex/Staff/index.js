@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import LecturerSearch from "../components/LecturerSearch";
 
 const StaffDashboard = () => {
   const indicatorRef = useRef(null);
@@ -94,26 +95,26 @@ const StaffDashboard = () => {
         <div className="user-dashboard__info__container">
           {courses.length > 0 ? (
             <div className="user-dashboard__courses__container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Code</th>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Credits</th>
-                </tr>
-              </thead>
-              <tbody>
-                {courses.map((course) => (
-                  <tr key={course._id}>
-                    <td>{course.code}</td>
-                    <td>{course.title}</td>
-                    <td>{course.description}</td>
-                    <td>{course.credits}</td>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Code</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Credits</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {courses.map((course) => (
+                    <tr key={course._id}>
+                      <td>{course.code}</td>
+                      <td>{course.title}</td>
+                      <td>{course.description}</td>
+                      <td>{course.credits}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           ) : (
             <p className="no__assigned__text">
@@ -125,6 +126,7 @@ const StaffDashboard = () => {
             <Link to={"/dashboard/profile"}>Manage Profile</Link>
           </div>
         </div>
+        {user.role === "viewer" && <LecturerSearch />}
       </div>
     </div>
   );

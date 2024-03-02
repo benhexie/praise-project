@@ -308,7 +308,7 @@ const Profile = () => {
             )}
           </div>
         </section>
-        {user.role === "admin" && (
+        {(user.role === "admin" || user.role === "viewer") && (
           <section className="dashboard__section token__section">
             <h2>Token Information</h2>
             <div className="dashboard__section__content">
@@ -325,12 +325,14 @@ const Profile = () => {
                     />
                   </div>
                 </label>
-                <button
-                  className="dashboard__section__button"
-                  onClick={generateToken}
-                >
-                  Generate New Token
-                </button>
+                {user.role === "admin" && (
+                  <button
+                    className="dashboard__section__button"
+                    onClick={generateToken}
+                  >
+                    Generate New Token
+                  </button>
+                )}
               </div>
             </div>
           </section>

@@ -24,6 +24,8 @@ import CoursesTable from "./pages/Dashboard/CoursesTable";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { setTheme } from "./redux/actions";
+import AdminProxy from "./pages/Dashboard/Proxies/AdminProxy";
+import AdminAndViewerProxy from "./pages/Dashboard/Proxies/AdminAndViewerProxy";
 
 const DEVELOPMENT = process.env.REACT_APP_DEV === "true";
 
@@ -77,12 +79,19 @@ function App() {
                     </Route>
                     <Route path="/dashboard" element={<Dashboard />}>
                       <Route index element={<DashboardIndex />} />
-                      <Route path="staff/:id" element={<Staff />} />
-                      <Route path="courses" element={<Courses />}>
-                        <Route path="new" element={<NewCourse />} />
-                        <Route path=":id" element={<NewCourse />} />
+                      <Route element={<AdminAndViewerProxy />}>
+                        <Route path="staff/:id" element={<Staff />} />
+                        <Route path="courses" element={<Courses />}>
+                          <Route element={<AdminProxy />}>
+                            <Route path="new" element={<NewCourse />} />
+                          </Route>
+                          <Route path=":id" element={<NewCourse />} />
+                        </Route>
+                        <Route
+                          path="courses/table"
+                          element={<CoursesTable />}
+                        />
                       </Route>
-                      <Route path="courses/table" element={<CoursesTable />} />
                       <Route path="portfolio" element={<Portfolio />}>
                         <Route path="add">
                           <Route

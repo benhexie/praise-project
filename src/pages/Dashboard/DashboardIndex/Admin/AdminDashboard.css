@@ -53,6 +53,7 @@
 
 .admin-dashboard__lecturer {
   flex: 1;
+  width: 100%;
 }
 
 .admin-dashboard__lecturer-search .courses__search__container {

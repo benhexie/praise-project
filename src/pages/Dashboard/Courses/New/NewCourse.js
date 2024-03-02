@@ -1,7 +1,7 @@
 import "./NewCourse.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addCourse,
@@ -25,6 +25,7 @@ const NewCourse = () => {
   const [previewData, setPreviewData] = useState({});
   const dispatch = useDispatch();
 
+  const user = useSelector((state) => state.general.user);
   const courses = useSelector((state) => state.admin.courses);
   const staffs = useSelector((state) => state.admin.staffs);
   const [showDialog, setShowDialog] = useState(false);
@@ -263,11 +264,19 @@ const NewCourse = () => {
           >
             {error}
           </p>
-          <button type="submit">{id ? "Edit" : "Create"}</button>
-          {id && (
-            <button type="button" className="delete" onClick={deleteCourseFtn}>
-              Delete
-            </button>
+          {user.role === "admin" && (
+            <Fragment>
+              <button type="submit">{id ? "Edit" : "Create"}</button>
+              {id && (
+                <button
+                  type="button"
+                  className="delete"
+                  onClick={deleteCourseFtn}
+                >
+                  Delete
+                </button>
+              )}
+            </Fragment>
           )}
         </form>
       </div>

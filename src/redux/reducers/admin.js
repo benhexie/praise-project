@@ -47,6 +47,25 @@ export const adminReducer = (state = initialState, action = {}) => {
         }),
       };
 
+    case "UPDATE_ASSIGNED_COURSE":
+      return {
+        ...state,
+        staffs: state.staffs.map((staff) => {
+          if (staff._id === action.payload.id) {
+            return {
+              ...staff,
+              courses: staff.courses.map((course) => {
+                if (course._id === action.payload.course._id) {
+                  return action.payload.course;
+                }
+                return course;
+              }),
+            };
+          }
+          return staff;
+        }),
+      };
+
     default:
       return state;
   }

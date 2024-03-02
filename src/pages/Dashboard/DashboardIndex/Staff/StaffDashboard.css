@@ -13,9 +13,8 @@
   height: 40px;
   position: relative;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: var(--box-shadow);
-  background-color: white;
+  background-color: var(--main-bg-color);
 }
 
 .profile__complete__indicator > div {
@@ -39,7 +38,7 @@
 }
 
 .profile__complete__indicator__list__container {
-  background-color: white;
+  background-color: var(--main-bg-color);
   width: 100%;
   padding: 20px;
   border-radius: 8px;
@@ -61,7 +60,7 @@
 
 .profile__complete__indicator__list__container a {
   text-decoration: none;
-  color: black;
+  color: var(--text-color);
   font-size: 1rem;
 }
 
@@ -73,7 +72,7 @@
 .user-dashboard__info__container {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: var(--main-bg-color);
   padding: 20px;
   border-radius: 8px;
   box-shadow: var(--box-shadow);
@@ -118,6 +117,7 @@
 .user-dashboard__info__container table {
   width: 100%;
   border-collapse: collapse;
+  color: var(--text-color);
 }
 
 .user-dashboard__info__container table thead {
@@ -132,6 +132,10 @@
 
 .user-dashboard__info__container table tbody tr {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.user-dashboard__info__container table tbody tr:nth-child(even) {
+  background-color: var(--bg-color);
 }
 
 .user-dashboard__info__container table tbody tr td {

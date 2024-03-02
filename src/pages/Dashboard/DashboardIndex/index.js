@@ -10,7 +10,8 @@ const DashboardIndex = () => {
     <>
       {(() => {
         if (user.role === "admin") return <AdminDashboard />;
-        if (user.role === "staff") return <StaffDashboard />;
+        if (user.role === "staff" || user.role === "viewer")
+          return <StaffDashboard />;
         return null;
       })()}
     </>

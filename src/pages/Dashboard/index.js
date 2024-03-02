@@ -44,12 +44,18 @@ const Dashboard = () => {
         dispatch(setUser(data.data.user));
         dispatch(setSchool(data.data.school));
         dispatch(setNotifications(data.data.notifications));
-        if (data.data.user.role === "admin") {
+        if (
+          data.data.user.role === "admin" ||
+          data.data.user.role === "viewer"
+        ) {
           dispatch(setCourses(data.data.courses));
           dispatch(setStaffs(data.data.staffs));
         }
-        if (data.data.user.role === "staff") {
-          dispatch(setAssignedCourses(data.data.courses));
+        if (
+          data.data.user.role === "staff" ||
+          data.data.user.role === "viewer"
+        ) {
+          dispatch(setAssignedCourses(data.data.assignedCourses));
           dispatch(setProfessional(data.data.professional));
         }
       })
