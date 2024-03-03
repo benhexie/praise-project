@@ -82,10 +82,36 @@
   align-items: center;
   margin-bottom: 10px;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .support__message__header > *:last-child {
   margin-left: auto;
+}
+
+@media (max-width: 500px) {
+  .support__message__header > *:first-child {
+    width: 100%;
+    text-align: center;
+  }
+
+  .support__message__header > *:last-child {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .support__message__header > *:last-child {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 300px) {
+  .support__message__header > *:last-child {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+  }
 }
 
 .support__message__read {
