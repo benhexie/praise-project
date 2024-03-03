@@ -17,6 +17,14 @@
   --bg-color-light: #e0e0e0;
   --text-color: #000;
   --nav-border-color: #e0e0e0;
+  --feedback-color: #28a745;
+  --feedback-text-color: #fff;
+  --complaint-color: #dc3545;
+  --complaint-text-color: #fff;
+  --suggestion-color: #ffc107;
+  --suggestion-text-color: #fff;
+  --question-color: #17a2b8;
+  --question-text-color: #fff;
 
   /* SIZES */
   --nav-height: 5rem;

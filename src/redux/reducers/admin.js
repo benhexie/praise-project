@@ -1,6 +1,7 @@
 const initialState = {
   courses: [],
   staffs: [],
+  messages: [],
 };
 
 export const adminReducer = (state = initialState, action = {}) => {
@@ -55,6 +56,23 @@ export const adminReducer = (state = initialState, action = {}) => {
             return action.payload;
           }
           return course;
+        }),
+      };
+
+    case "SET_MESSAGES":
+      return {
+        ...state,
+        messages: action.payload,
+      };
+
+    case "UPDATE_MESSAGE":
+      return {
+        ...state,
+        messages: state.messages.map((message) => {
+          if (message._id === action.payload._id) {
+            return action.payload;
+          }
+          return message;
         }),
       };
 

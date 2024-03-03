@@ -29,13 +29,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
+  flex-wrap: wrap;
+  text-align: center;
 }
 
 .professional .profile__section .dashboard__section__content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 0.5rem;
 }
 

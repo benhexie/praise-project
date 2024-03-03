@@ -1,0 +1,99 @@
+.complaint {
+  border: 1px solid var(--nav-border-color);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.complaint__container {
+  margin-top: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.complaint__form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  gap: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.complaint__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.complaint label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-color);
+}
+
+.complaint textarea,
+.complaint input[type="email"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--bg-color-light);
+  border-radius: 5px;
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+  outline: none;
+  resize: none;
+}
+
+.complaint textarea {
+  height: 260px;
+}
+
+.complaint button[type="submit"] {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.complaint button[type="submit"]:hover {
+  background-color: var(--secondary-color);
+}
+
+.complaint select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--bg-color-light);
+  border-radius: 5px;
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+  outline: none;
+}
+
+.complaint select option {
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+}
+
+.complaint__error {
+  color: var(--error-color);
+  margin-top: 5px;
+}
+
+[data-theme="dark"] .complaint {
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--nav-border-color);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .complaint textarea,
+[data-theme="dark"] .complaint input[type="email"] {
+  background-color: inherit;
+  border: 1px solid var(--bg-color);
+  color: var(--text-color);
+}

@@ -60,3 +60,17 @@ export const updateAssignedCourse = (course) => {
     payload: course,
   };
 };
+
+export const setMessages = (messages) => {
+  return {
+    type: "SET_MESSAGES",
+    payload: messages,
+  };
+}
+
+export const updateMessage = (message) => {
+  return {
+    type: "UPDATE_MESSAGE",
+    payload: message,
+  };
+};

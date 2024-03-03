@@ -112,7 +112,11 @@ const NewCourse = () => {
       dispatch(updateCourse(data.data));
       navigate("/dashboard/courses", { replace: true });
     } catch (error) {
+      if (/failed to fetch|network error/i.test(error.message)) {
+        setError("Please check your internet connection.");
+      }
       setError(error.message);
+      console.error(error.message);
     }
   };
 
