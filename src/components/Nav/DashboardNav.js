@@ -7,6 +7,8 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { AiOutlineMenu } from "react-icons/ai";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoBookOutline, IoBook } from "react-icons/io5";
+import { RiCustomerServiceLine, RiCustomerServiceFill } from "react-icons/ri";
+import { AiOutlineMessage, AiFillMessage } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import lecturaLogo from "../../assets/svgs/lectura-logo.svg";
@@ -70,6 +72,26 @@ const DashboardNav = () => {
               <PiScrollDuotone className="dashboard__nav__link__icon" />
             )}
             <span>Portfolio</span>
+          </NavLink>
+        )}
+        {(user.role === "staff" || user.role === "viewer") && (
+          <NavLink to={"/dashboard/help"} className={"dashboard__nav__link"}>
+            {/\/help$/i.test(location.pathname) ? (
+              <RiCustomerServiceFill className="dashboard__nav__link__icon" />
+            ) : (
+              <RiCustomerServiceLine className="dashboard__nav__link__icon" />
+            )}
+            <span>Support</span>
+          </NavLink>
+        )}
+        {user.role === "admin" && (
+          <NavLink to={"/dashboard/support"} className={"dashboard__nav__link"}>
+            {/\/support$/i.test(location.pathname) ? (
+              <AiFillMessage className="dashboard__nav__link__icon" />
+            ) : (
+              <AiOutlineMessage className="dashboard__nav__link__icon" />
+            )}
+            <span>Support</span>
           </NavLink>
         )}
         <NavLink to={"/dashboard/profile"} className={"dashboard__nav__link"}>

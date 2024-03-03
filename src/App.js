@@ -26,6 +26,9 @@ import { useEffect } from "react";
 import { setTheme } from "./redux/actions";
 import AdminProxy from "./pages/Dashboard/Proxies/AdminProxy";
 import AdminAndViewerProxy from "./pages/Dashboard/Proxies/AdminAndViewerProxy";
+import Help from "./pages/Dashboard/Help";
+import Support from "./pages/Dashboard/Support";
+import StaffAndViewerProxy from "./pages/Dashboard/Proxies/StaffAndViewerProxy";
 
 const DEVELOPMENT = process.env.REACT_APP_DEV === "true";
 
@@ -92,18 +95,29 @@ function App() {
                           element={<CoursesTable />}
                         />
                       </Route>
-                      <Route path="portfolio" element={<Portfolio />}>
-                        <Route path="add">
-                          <Route
-                            path="experience"
-                            element={<ExperienceOverlay />}
-                          />
-                          <Route
-                            path="education"
-                            element={<EducationOverlay />}
-                          />
-                          <Route path="catalog" element={<CatalogOverlay />} />
+                      <Route element={<StaffAndViewerProxy />}>
+                        <Route path="portfolio" element={<Portfolio />}>
+                          <Route path="add">
+                            <Route
+                              path="experience"
+                              element={<ExperienceOverlay />}
+                            />
+                            <Route
+                              path="education"
+                              element={<EducationOverlay />}
+                            />
+                            <Route
+                              path="catalog"
+                              element={<CatalogOverlay />}
+                            />
+                          </Route>
                         </Route>
+                      </Route>
+                      <Route element={<StaffAndViewerProxy />}>
+                        <Route path="help" element={<Help />} />
+                      </Route>
+                      <Route element={<AdminAndViewerProxy />}>
+                        <Route path="support" element={<Support />} />
                       </Route>
                       <Route path="profile" element={<Profile />} />
                       <Route path="*" element={<ErrorPage />} />

@@ -58,6 +58,7 @@
 
 .admin-dashboard__lecturer-search .courses__search__container {
   padding: 0;
+  background-color: var(--main-bg-color);
 }
 
 .admin-dashboard__lecturer-search-results-container {

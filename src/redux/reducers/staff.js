@@ -10,6 +10,7 @@ const initialState = {
 export const userReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case "SET_PROFESSIONAL":
+      if (!action.payload) return state;
       return { ...state, professional: action.payload };
 
     case "SET_TOKEN":
