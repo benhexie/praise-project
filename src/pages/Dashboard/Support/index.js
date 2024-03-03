@@ -91,8 +91,13 @@ const Support = () => {
             </div>
             <div className="scrollable">
               <div>
-                {messages.length === 0 ? (
-                  <p className="support__empty">No messages yet</p>
+                {messages.filter((message) => {
+                  if (filter === "unread") return !message.read;
+                  if (filter === "read") return message.read;
+                  if (filter) return message.category === filter;
+                  return true;
+                }).length === 0 ? (
+                  <p className="support__empty">No message to found</p>
                 ) : (
                   messages
                     .filter((message) => {
