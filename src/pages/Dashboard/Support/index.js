@@ -1,7 +1,11 @@
 import "./Support.css";
 import { Fragment, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setMessages, updateMessage } from "../../../redux/actions/admin";
+import {
+  hasFetchedMessages,
+  setMessages,
+  updateMessage,
+} from "../../../redux/actions/admin";
 import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
 import { AiFillMail } from "react-icons/ai";
@@ -9,13 +13,13 @@ import { Link } from "react-router-dom";
 
 const Support = () => {
   const messages = useSelector((state) => state.admin.messages);
+  const hfm = useSelector((state) => state.admin.hasFetchedMessages);
   const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState("unread");
 
   useEffect(() => {
-    if (messages.length !== 0) return setLoading(false);
-
+    if (hfm) return setLoading(false);
     setLoading(true);
     fetch(`${process.env.REACT_APP_SERVER}/messages`, {
       headers: {
@@ -25,6 +29,7 @@ const Support = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) return toast.error(data.message);
+        dispatch(hasFetchedMessages());
         dispatch(setMessages(data.data));
         setLoading(false);
       })

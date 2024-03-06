@@ -3,13 +3,15 @@ import { useSelector } from "react-redux";
 import User from "../../../assets/svgs/user.svg";
 import { IoAddOutline } from "react-icons/io5";
 import ErrorPage from "../../Error/ErrorPage";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
+import { Fragment } from "react";
 
 const Portfolio = () => {
   const user = useSelector((state) => state.general.user);
   const navigate = useNavigate();
   const school = useSelector((state) => state.general.school);
   const professional = useSelector((state) => state.user.professional);
+  const { category, id } = useParams();
 
   return (
     <>
@@ -17,7 +19,7 @@ const Portfolio = () => {
         <ErrorPage to="/dashboard" btnText="Go to dashboard" />
       ) : (
         <div className="professional">
-          <Outlet />
+          {!category && !id && <Outlet />}
           <div className="dashboard__header profile__header">
             <h1>Portfolio</h1>
           </div>
@@ -31,7 +33,10 @@ const Portfolio = () => {
                   {user.firstname} {user.lastname}
                 </h2>
                 <p>{user.email}</p>
-                <p className="school__txt">
+                <p
+                  style={{ textTransform: "capitalize" }}
+                  className="school__txt"
+                >
                   {school.name}, {school.address}
                 </p>
               </div>
@@ -59,15 +64,29 @@ const Portfolio = () => {
                   <div className="dashboard__section__content">
                     {professional.experience
                       .sort(
-                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
                       )
                       .map((experience) => (
                         <div
-                          className="dashboard__section__content__item"
+                          className={`dashboard__section__content__item ${
+                            category === "experience" && id === experience._id
+                              ? "active"
+                              : ""
+                          }`}
                           key={experience._id}
+                          onClick={() =>
+                            navigate(`experience/${experience._id}`)
+                          }
                         >
-                          <h3>{experience.company}</h3>
-                          <p>{experience.title}</p>
+                          {category === "experience" &&
+                          id === experience._id ? (
+                            <Outlet />
+                          ) : (
+                            <Fragment>
+                              <h3>{experience.company}</h3>
+                              <p>{experience.title}</p>
+                            </Fragment>
+                          )}
                         </div>
                       ))}
                   </div>
@@ -97,15 +116,26 @@ const Portfolio = () => {
                   <div className="dashboard__section__content">
                     {professional.education
                       .sort(
-                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
                       )
                       .map((education) => (
                         <div
-                          className="dashboard__section__content__item"
+                          className={`dashboard__section__content__item ${
+                            category === "education" && id === education._id
+                              ? "active"
+                              : ""
+                          }`}
                           key={education._id}
+                          onClick={() => navigate(`education/${education._id}`)}
                         >
-                          <h3>{education.school}</h3>
-                          <p>{education.degree}</p>
+                          {category === "education" && id === education._id ? (
+                            <Outlet />
+                          ) : (
+                            <Fragment>
+                              <h3>{education.school}</h3>
+                              <p>{education.degree}</p>
+                            </Fragment>
+                          )}
                         </div>
                       ))}
                   </div>
@@ -135,24 +165,39 @@ const Portfolio = () => {
                   <div className="dashboard__section__content">
                     {professional.catalog
                       .sort(
-                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
                       )
                       .map((catalog) => (
                         <div
-                          className="dashboard__section__content__item"
+                          className={`dashboard__section__content__item ${
+                            category === "catalog" && id === catalog._id
+                              ? "active"
+                              : ""
+                          }`}
                           key={catalog._id}
+                          onClick={() => navigate(`catalog/${catalog._id}`)}
                         >
-                          <h3>{catalog.name}</h3>
-                          <p>{catalog.description}</p>
-                          {catalog.links &&
-                            catalog.links.length > 0 &&
-                            catalog.links.map((link, index) => (
-                              <span key={index}>
-                                <a href={link} target="_blank" rel="noreferrer">
-                                  {link}
-                                </a>
-                              </span>
-                            ))}
+                          {category === "catalog" && id === catalog._id ? (
+                            <Outlet />
+                          ) : (
+                            <Fragment>
+                              <h3>{catalog.name}</h3>
+                              <p>{catalog.description}</p>
+                              {catalog.links &&
+                                catalog.links.length > 0 &&
+                                catalog.links.map((link, index) => (
+                                  <span key={index}>
+                                    <a
+                                      href={link}
+                                      target="_blank"
+                                      rel="noreferrer"
+                                    >
+                                      {link}
+                                    </a>
+                                  </span>
+                                ))}
+                            </Fragment>
+                          )}
                         </div>
                       ))}
                   </div>

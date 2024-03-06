@@ -2,6 +2,7 @@ const initialState = {
   courses: [],
   staffs: [],
   messages: [],
+  hasFetchedMessages: false,
 };
 
 export const adminReducer = (state = initialState, action = {}) => {
@@ -76,6 +77,12 @@ export const adminReducer = (state = initialState, action = {}) => {
         }),
       };
 
+    case "HAS_FETCHED_MESSAGES":
+      return {
+        ...state,
+        hasFetchedMessages: true,
+      };
+
     default:
       return state;
   }
@@ -85,16 +92,31 @@ const orderStaffByScore = (staffs) => {
   const education = 3;
   const experience = 2;
   const catalog = 1;
+  const phd = 10, msc = 8, bsc = 5;
 
   return staffs.sort((a, b) => {
-    const aScore =
-      a.educationCount * education +
-      a.experienceCount * experience +
-      a.catalogCount * catalog;
-    const bScore =
-      b.educationCount * education +
-      b.experienceCount * experience +
-      b.catalogCount * catalog;
+    let aScore = 0, bScore = 0;
+    
+    a.education.forEach((edu) => {
+      if (/phd/i.test(edu.degree?.replace(".", ""))) aScore += phd;
+      if (/msc/i.test(edu.degree?.replace(".", ""))) aScore += msc;
+      if (/bsc/i.test(edu.degree?.replace(".", ""))) aScore += bsc;
+    });
+
+    b.education.forEach((edu) => {
+      if (/phd/i.test(edu.degree?.replace(".", ""))) bScore += phd;
+      if (/msc/i.test(edu.degree?.replace(".", ""))) bScore += msc;
+      if (/bsc/i.test(edu.degree?.replace(".", ""))) bScore += bsc;
+    });
+
+    aScore +=
+      a.education.length * education +
+      a.experience.length * experience +
+      a.catalog.length * catalog;
+    bScore +=
+      b.education.length * education +
+      b.experience.length * experience +
+      b.catalog.length * catalog;
 
     return bScore - aScore;
   });

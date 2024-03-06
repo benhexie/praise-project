@@ -29,6 +29,7 @@ import AdminAndViewerProxy from "./pages/Dashboard/Proxies/AdminAndViewerProxy";
 import Help from "./pages/Dashboard/Help";
 import Support from "./pages/Dashboard/Support";
 import StaffAndViewerProxy from "./pages/Dashboard/Proxies/StaffAndViewerProxy";
+import PortfolioPreview from "./pages/Dashboard/Portfolio/Preview";
 
 const DEVELOPMENT = process.env.REACT_APP_DEV === "true";
 
@@ -111,6 +112,10 @@ function App() {
                               element={<CatalogOverlay />}
                             />
                           </Route>
+                          <Route
+                            path={":category/:id"}
+                            element={<PortfolioPreview />}
+                          />
                         </Route>
                       </Route>
                       <Route element={<StaffAndViewerProxy />}>

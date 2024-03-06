@@ -39,6 +39,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  position: relative;
 }
 
 .professional .profile__section h2 {
@@ -54,6 +55,15 @@
 
 .professional .profile__section .school__txt {
   color: #ccc;
+}
+
+.dashboard__section__content__item {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.dashboard__section__content__item:not(.active):hover {
+  transform: scale(1.02);
 }
 
 .professional__section__item--empty {

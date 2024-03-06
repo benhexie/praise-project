@@ -74,3 +74,9 @@ export const updateMessage = (message) => {
     payload: message,
   };
 };
+
+export const hasFetchedMessages = () => {
+  return {
+    type: "HAS_FETCHED_MESSAGES",
+  };
+}
