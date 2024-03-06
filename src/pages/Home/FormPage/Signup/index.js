@@ -270,7 +270,9 @@ const Signup = () => {
             value={confirm}
             setValue={setConfirm}
           />
-          <Button disabled={loading}>Signup</Button>
+          <Button disabled={loading}>
+            {loading ? "Loading..." : "Signup"}
+          </Button>
           <p className="form__footer">
             Already have an account? <Link to="/login">Login</Link>
           </p>

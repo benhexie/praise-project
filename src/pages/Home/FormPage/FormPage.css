@@ -43,10 +43,16 @@
   border: none;
 }
 
-.formpage button:hover {
+.formpage button:not(:disabled):hover {
   background-color: var(--primary-color);
   color: #fff;
   transform: scale(1.05);
+}
+
+.formpage button:disabled {
+  background-color: #ccc;
+  color: #fff;
+  cursor: not-allowed;
 }
 
 .formpage .form__select {

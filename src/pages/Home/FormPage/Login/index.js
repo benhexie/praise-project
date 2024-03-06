@@ -103,8 +103,10 @@ const Login = () => {
             value={password}
             setValue={setPassword}
           />
-          <Link className="login__forgot__password" to="/forgot-password">Forgot password?</Link>
-          <Button disabled={loading}>Login</Button>
+          <Link className="login__forgot__password" to="/forgot-password">
+            Forgot password?
+          </Link>
+          <Button disabled={loading}>{loading ? "Loading..." : "Login"}</Button>
           <p className="form__footer">
             Don't have an account? <Link to="/signup">Signup</Link>
           </p>
