@@ -78,14 +78,14 @@ const Staff = () => {
           },
           body: JSON.stringify({ grant }),
         },
-        );
-        const data = await res.json();
-        setGrantLoading(false);
-        if (data.error) return toast.error(data.message);
-        dispatch(updateStaff(data.data));
-        toast.success(data.message);
-        setShowDialog(false);
-      } catch (err) {
+      );
+      const data = await res.json();
+      setGrantLoading(false);
+      if (data.error) return toast.error(data.message);
+      dispatch(updateStaff(data.data));
+      toast.success(data.message);
+      setShowDialog(false);
+    } catch (err) {
       setGrantLoading(false);
       if (/failed to fetch|network error/i.test(err.message)) {
         return toast.error("Please check your internet connection.");
@@ -94,7 +94,7 @@ const Staff = () => {
       console.error(err.message);
     }
   };
-  
+
   const unassignCourse = async (courseId) => {
     if (unassignLoading) return;
     setUnassignLoading(true);
@@ -152,7 +152,7 @@ const Staff = () => {
             />
           )}
           <div className="admin__user__image">
-            <img src={staff.image} alt={staff.firstname} />
+            {staff.image && <img src={staff.image} alt={staff.firstname} />}
           </div>
           <h1>
             {staff.firstname} {staff.lastname}
