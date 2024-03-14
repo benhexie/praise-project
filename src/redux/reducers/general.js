@@ -5,6 +5,7 @@ const initialState = {
   notifications: [],
 };
 
+// This reducer is only available to all accounts
 export const generalReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case "SET_THEME":

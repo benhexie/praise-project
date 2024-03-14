@@ -5,6 +5,7 @@ const initialState = {
   hasFetchedMessages: false,
 };
 
+// This reducer is only available to the admin and partly to the view-only admins
 export const adminReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case "SET_COURSES":

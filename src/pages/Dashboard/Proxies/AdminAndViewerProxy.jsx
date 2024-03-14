@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import ErrorPage from "../../Error/ErrorPage";
 
+// Only allow admins to view route content
 const AdminAndViewerProxy = () => {
   const user = useSelector((state) => state.general.user);
 

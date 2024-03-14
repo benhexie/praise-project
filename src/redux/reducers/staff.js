@@ -7,6 +7,7 @@ const initialState = {
   courses: [],
 };
 
+// This reducer is only available to the staffs and view-only admins
 export const userReducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case "SET_PROFESSIONAL":
