@@ -1,5 +1,5 @@
 import "./Staff.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { GoArrowLeft, GoTrash } from "react-icons/go";
 import { useState } from "react";
@@ -151,15 +151,18 @@ const Staff = () => {
               cancelText="No, cancel"
             />
           )}
-          <div className="admin__user__image">
-            {staff.image && <img src={staff.image} alt={staff.firstname} />}
-          </div>
+          {staff.image && (
+            <div className="admin__user__image">
+              <img src={staff.image} alt={staff.firstname} />
+            </div>
+          )}
           <h1>
             {staff.firstname} {staff.lastname}
           </h1>
           <p>{staff.email}</p>
-          <p>{staff.phone}</p>
-          <p>{staff.department}</p>
+          {staff.phone && <p>{staff.phone}</p>}
+          {staff.department && <p>{staff.department}</p>}
+          <Link to={"portfolio"} className="admin__user__portfolio__link">See Portfolio</Link>
           <div className="admin__user__actions">
             <div className="admin__user__actions__item__container">
               <button

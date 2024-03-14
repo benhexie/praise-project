@@ -92,11 +92,14 @@ const orderStaffByScore = (staffs) => {
   const education = 3;
   const experience = 2;
   const catalog = 1;
-  const phd = 10, msc = 8, bsc = 5;
+  const phd = 10,
+    msc = 8,
+    bsc = 5;
 
   return staffs.sort((a, b) => {
-    let aScore = 0, bScore = 0;
-    
+    let aScore = 0,
+      bScore = 0;
+
     a.education.forEach((edu) => {
       if (/phd/i.test(edu.degree?.replace(".", ""))) aScore += phd;
       if (/msc/i.test(edu.degree?.replace(".", ""))) aScore += msc;

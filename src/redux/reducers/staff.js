@@ -52,6 +52,20 @@ export const userReducer = (state = initialState, action = {}) => {
     case "SET_ASSIGNED_COURSES":
       return { ...state, courses: action.payload };
 
+    case "DELETE_PORTFOLIO_ITEM":
+      const category = action.payload.category;
+      const id = action.payload.id;
+      const updatedCategory = state.professional[category].filter(
+        (item) => item._id !== id,
+      );
+      return {
+        ...state,
+        professional: {
+          ...state.professional,
+          [category]: updatedCategory,
+        },
+      };
+
     default:
       return state;
   }

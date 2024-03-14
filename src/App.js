@@ -95,6 +95,15 @@ function App() {
                           path="courses/table"
                           element={<CoursesTable />}
                         />
+                        <Route
+                          path="staff/:staffId/portfolio"
+                          element={<Portfolio />}
+                        >
+                          <Route
+                            path={":category/:id"}
+                            element={<PortfolioPreview />}
+                          />
+                        </Route>
                       </Route>
                       <Route element={<StaffAndViewerProxy />}>
                         <Route path="portfolio" element={<Portfolio />}>

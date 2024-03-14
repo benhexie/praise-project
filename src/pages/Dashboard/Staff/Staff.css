@@ -68,6 +68,22 @@
   object-fit: cover;
 }
 
+.admin__user__portfolio__link {
+  text-decoration: none;
+  background-color: #000;
+  padding: 8px;
+  border-radius: 5px;
+  color: var(--text-color);
+  max-width: 200px;
+  width: 100%;
+  margin: auto;
+  transition: 0.3s;
+}
+
+.admin__user__portfolio__link:hover {
+  scale: 1.05;
+}
+
 .admin__user__actions {
   display: flex;
   justify-content: space-around;

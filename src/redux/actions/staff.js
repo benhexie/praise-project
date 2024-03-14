@@ -25,3 +25,10 @@ export const setAssignedCourses = (courses) => {
     payload: courses,
   };
 };
+
+export const deletePortfolioItem = (category, id) => {
+  return {
+    type: "DELETE_PORTFOLIO_ITEM",
+    payload: { category, id },
+  };
+}

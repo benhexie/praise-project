@@ -55,3 +55,18 @@
 .portfolio__preview__close:hover {
   filter: brightness(1.1);
 }
+
+.portfolio__preview__delete {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  box-sizing: content-box;
+  padding: 4px;
+  color: red;
+  filter: brightness(0.8);
+  cursor: pointer;
+}
+
+.portfolio__preview__delete:hover {
+  filter: brightness(1);
+}
