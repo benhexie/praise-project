@@ -101,13 +101,13 @@ const orderStaffByScore = (staffs) => {
     let aScore = 0,
       bScore = 0;
 
-    a.education.forEach((edu) => {
+    a?.education?.forEach((edu) => {
       if (/phd/i.test(edu.degree?.replace(".", ""))) aScore += phd;
       if (/msc/i.test(edu.degree?.replace(".", ""))) aScore += msc;
       if (/bsc/i.test(edu.degree?.replace(".", ""))) aScore += bsc;
     });
 
-    b.education.forEach((edu) => {
+    b?.education?.forEach((edu) => {
       if (/phd/i.test(edu.degree?.replace(".", ""))) bScore += phd;
       if (/msc/i.test(edu.degree?.replace(".", ""))) bScore += msc;
       if (/bsc/i.test(edu.degree?.replace(".", ""))) bScore += bsc;
