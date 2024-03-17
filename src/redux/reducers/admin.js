@@ -114,13 +114,13 @@ const orderStaffByScore = (staffs) => {
     });
 
     aScore +=
-      a.education.length * education +
-      a.experience.length * experience +
-      a.catalog.length * catalog;
+      (a?.education?.length || 0) * education +
+      (a?.experience?.length || 0) * experience +
+      (a?.catalog?.length || 0) * catalog;
     bScore +=
-      b.education.length * education +
-      b.experience.length * experience +
-      b.catalog.length * catalog;
+      (b?.education?.length || 0) * education +
+      (b?.experience?.length || 0) * experience +
+      (b?.catalog?.length || 0) * catalog;
 
     return bScore - aScore;
   });
