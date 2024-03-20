@@ -162,41 +162,45 @@ const Staff = () => {
           <p>{staff.email}</p>
           {staff.phone && <p>{staff.phone}</p>}
           {staff.department && <p>{staff.department}</p>}
-          <Link to={"portfolio"} className="admin__user__portfolio__link">See Portfolio</Link>
-          <div className="admin__user__actions">
-            <div className="admin__user__actions__item__container">
-              <button
-                className="admin__user__actions__disable"
-                onClick={() => disableAccount(staff.disabled ? false : true)}
-                disabled={disableLoading}
-              >
-                {staff.disabled ? "Enable account" : "Disable account"}
-              </button>
-              <RiInformationLine className={`admin__user__actions__info`} />
-              <span>
-                {staff.disabled
-                  ? "This will re-enable the user's account."
-                  : "This will prevent the user from using the platform."}
-              </span>
+          <Link to={"portfolio"} className="admin__user__portfolio__link">
+            See Portfolio
+          </Link>
+          {user.role === "admin" && (
+            <div className="admin__user__actions">
+              <div className="admin__user__actions__item__container">
+                <button
+                  className="admin__user__actions__disable"
+                  onClick={() => disableAccount(staff.disabled ? false : true)}
+                  disabled={disableLoading}
+                >
+                  {staff.disabled ? "Enable account" : "Disable account"}
+                </button>
+                <RiInformationLine className={`admin__user__actions__info`} />
+                <span>
+                  {staff.disabled
+                    ? "This will re-enable the user's account."
+                    : "This will prevent the user from using the platform."}
+                </span>
+              </div>
+              <div className="admin__user__actions__item__container">
+                <button
+                  className="admin__user__actions__grant"
+                  disabled={grantLoading}
+                  onClick={() =>
+                    grantViewer(staff.role === "staff" ? true : false)
+                  }
+                >
+                  {staff.role === "staff" ? "Grant viewer" : "Revoke viewer"}
+                </button>
+                <RiInformationLine className={`admin__user__actions__info`} />
+                <span>
+                  {staff.role === "staff"
+                    ? "This will grant the user access to view but not modify courses and other staff details."
+                    : "This will revoke the user's access to view courses and other staff details."}
+                </span>
+              </div>
             </div>
-            <div className="admin__user__actions__item__container">
-              <button
-                className="admin__user__actions__grant"
-                disabled={grantLoading}
-                onClick={() =>
-                  grantViewer(staff.role === "staff" ? true : false)
-                }
-              >
-                {staff.role === "staff" ? "Grant viewer" : "Revoke viewer"}
-              </button>
-              <RiInformationLine className={`admin__user__actions__info`} />
-              <span>
-                {staff.role === "staff"
-                  ? "This will grant the user access to view but not modify courses and other staff details."
-                  : "This will revoke the user's access to view courses and other staff details."}
-              </span>
-            </div>
-          </div>
+          )}
           <div className="admin__user__courses">
             <h2>Courses</h2>
             <div className="scrollable">

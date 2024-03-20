@@ -188,6 +188,7 @@ const NewCourse = () => {
               autoFocus
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              disabled={user.role !== "admin"}
             />
           </label>
           <label>
@@ -198,6 +199,7 @@ const NewCourse = () => {
               placeholder="MATH 203"
               value={code}
               onChange={(e) => setCode(e.target.value)}
+              disabled={user.role !== "admin"}
             />
           </label>
           <label>
@@ -209,6 +211,7 @@ const NewCourse = () => {
               placeholder="3"
               value={credits}
               onChange={(e) => setCredits(e.target.value)}
+              disabled={user.role !== "admin"}
             />
           </label>
           <label>
@@ -217,6 +220,7 @@ const NewCourse = () => {
               placeholder="A brief description of the course"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              disabled={user.role !== "admin"}
             />
           </label>
           {!profileId || Object.keys(previewData).length === 0 ? null : (
@@ -227,9 +231,9 @@ const NewCourse = () => {
                   {previewData.firstname} {previewData.lastname}
                 </span>
               </p>
-              {/* <p>
-                Department:<span>{previewData.department}</span>
-              </p> */}
+              <p>
+                Email:<span>{previewData.email}</span>
+              </p>
               <Link to={`/dashboard/staff/${profileId}`}>
                 View Full Profile
               </Link>
@@ -241,6 +245,7 @@ const NewCourse = () => {
               <select
                 value={assignTo}
                 onChange={(e) => setAssignTo(e.target.value)}
+                disabled={user.role !== "admin"}
               >
                 <option value={""}>Not assigned</option>
                 {staffs.map((staff) => (

@@ -144,3 +144,13 @@
 .course__profile__preview a:hover {
   color: var(--secondary-color);
 }
+
+.course__new :is(input:disabled, select:disabled) {
+  background-color: var(--main-bg-color);
+  color: var(--text-color);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
+}
