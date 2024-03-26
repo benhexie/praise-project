@@ -134,7 +134,7 @@ const Staff = () => {
       {staff ? (
         <div className="card admin__user__container">
           <div className="admin__user__score">
-            {staff.score}/{maxScore}
+            {staff.score}
           </div>
           {showDialog && (
             <ConfirmationBox
