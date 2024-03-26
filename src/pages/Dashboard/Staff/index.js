@@ -19,6 +19,7 @@ const Staff = () => {
   const courses = useSelector((state) => state.admin.courses).filter(
     (c) => c.assignedTo === id,
   );
+  const maxScore = useSelector((state) => state.admin.maxScore);
   const [showDialog, setShowDialog] = useState(false);
   const [dialogCaller, setDialogCaller] = useState("disable"); // disable or grant
   const [disableLoading, setDisableLoading] = useState(false);
@@ -132,6 +133,9 @@ const Staff = () => {
       </button>
       {staff ? (
         <div className="card admin__user__container">
+          <div className="admin__user__score">
+            {staff.score}/{maxScore}
+          </div>
           {showDialog && (
             <ConfirmationBox
               message={

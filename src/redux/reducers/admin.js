@@ -1,4 +1,5 @@
 const initialState = {
+  maxScore: 0,
   courses: [],
   staffs: [],
   messages: [],
@@ -37,7 +38,9 @@ export const adminReducer = (state = initialState, action = {}) => {
       };
 
     case "SET_STAFFS":
-      return { ...state, staffs: orderStaffByScore(action.payload) };
+      const staffs = orderStaffByScore(action.payload);
+      const maxScore = staffs[0]?.score || 0;
+      return { ...state, staffs, maxScore };
 
     case "UPDATE_STAFF":
       return {
@@ -95,33 +98,31 @@ const orderStaffByScore = (staffs) => {
   const catalog = 1;
   const phd = 10,
     msc = 8,
-    bsc = 5;
+    bsc = 6;
+
+  // add score to staff data
+  staffs = staffs.map((staff) => {
+    let score = 0;
+
+    staff?.education?.forEach((edu) => {
+      if (/phd/i.test(edu.degree?.replace(".", ""))) score += phd;
+      if (/msc/i.test(edu.degree?.replace(".", ""))) score += msc;
+      if (/bsc/i.test(edu.degree?.replace(".", ""))) score += bsc;
+    });
+
+    score +=
+      (staff?.education?.length || 0) * education +
+      (staff?.experience?.length || 0) * experience +
+      (staff?.catalog?.length || 0) * catalog;
+
+    const maxCredits = staff?.maxCredits || 15;
+
+    return { ...staff, score, maxCredits };
+  });
 
   return staffs.sort((a, b) => {
-    let aScore = 0,
-      bScore = 0;
-
-    a?.education?.forEach((edu) => {
-      if (/phd/i.test(edu.degree?.replace(".", ""))) aScore += phd;
-      if (/msc/i.test(edu.degree?.replace(".", ""))) aScore += msc;
-      if (/bsc/i.test(edu.degree?.replace(".", ""))) aScore += bsc;
-    });
-
-    b?.education?.forEach((edu) => {
-      if (/phd/i.test(edu.degree?.replace(".", ""))) bScore += phd;
-      if (/msc/i.test(edu.degree?.replace(".", ""))) bScore += msc;
-      if (/bsc/i.test(edu.degree?.replace(".", ""))) bScore += bsc;
-    });
-
-    aScore +=
-      (a?.education?.length || 0) * education +
-      (a?.experience?.length || 0) * experience +
-      (a?.catalog?.length || 0) * catalog;
-    bScore +=
-      (b?.education?.length || 0) * education +
-      (b?.experience?.length || 0) * experience +
-      (b?.catalog?.length || 0) * catalog;
-
-    return bScore - aScore;
+    if (a.score > b.score) return -1;
+    if (a.score < b.score) return 1;
+    return 0;
   });
 };

@@ -20,6 +20,7 @@ const NewCourse = () => {
   const [credits, setCredits] = useState("");
   const [description, setDescription] = useState("");
   const [assignTo, setAssignTo] = useState("");
+  const [maxCredits, setMaxCredits] = useState(15);
   const [error, setError] = useState("");
   const [profileId, setProfileId] = useState("");
   const [previewData, setPreviewData] = useState({});
@@ -28,7 +29,10 @@ const NewCourse = () => {
   const user = useSelector((state) => state.general.user);
   const courses = useSelector((state) => state.admin.courses);
   const staffs = useSelector((state) => state.admin.staffs);
-  const [showDialog, setShowDialog] = useState(false);
+  const [showDialog, setShowDialog] = useState({
+    delete: false,
+    overload: false,
+  });
 
   useEffect(() => {
     if (!id) return;
@@ -54,44 +58,36 @@ const NewCourse = () => {
     );
   }, [profileId]);
 
-  const createHandler = async (e) => {
+  const saveHandler = async (e) => {
     e.preventDefault();
-    const [error, message] = validateInput();
-    if (error) return setError(message);
 
-    try {
-      const res = await fetch(`${process.env.REACT_APP_SERVER}/course`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({
-          title,
-          code,
-          credits,
-          description,
-          assignedTo: assignTo,
-        }),
-      });
-      const data = await res.json();
-      if (data.error) return setError(data.message);
-      dispatch(addCourse(data.data));
-      navigate("/dashboard/courses", { replace: true });
-    } catch (error) {
-      setError(error.message);
+    if (
+      assignTo &&
+      (() => {
+        const staff = staffs.find((staff) => staff._id === assignTo);
+        return (
+          courses
+            .filter((course) => course.assignedTo === staff._id)
+            .reduce((acc, course) => acc + course.credits, 0) +
+            credits >
+          staff.maxCredits
+        );
+      })() &&
+      !showDialog.overload
+    ) {
+      setShowDialog((prev) => ({
+        ...prev,
+        overload: true,
+      }));
+      return;
     }
-  };
 
-  const editHandler = async (e) => {
-    e.preventDefault();
     const [error, message] = validateInput();
     if (error) return setError(message);
 
     try {
       const res = await fetch(`${process.env.REACT_APP_SERVER}/course`, {
-        method: "PUT",
+        method: id ? "PUT" : "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -108,7 +104,7 @@ const NewCourse = () => {
 
       const data = await res.json();
       if (data.error) return setError(data.message);
-      toast.success("Course updated successfully");
+      toast.success(data.message);
       dispatch(updateCourse(data.data));
       navigate("/dashboard/courses", { replace: true });
     } catch (error) {
@@ -121,8 +117,11 @@ const NewCourse = () => {
   };
 
   const deleteCourseFtn = async (id) => {
-    if (!showDialog) {
-      setShowDialog(true);
+    if (!showDialog.delete) {
+      setShowDialog((prev) => ({
+        ...prev,
+        delete: true,
+      }));
       return;
     }
 
@@ -138,7 +137,10 @@ const NewCourse = () => {
       if (data.error) return toast.error(data.message);
       dispatch(deleteCourse(id));
       toast.success(data.message);
-      setShowDialog(false);
+      setShowDialog((prev) => ({
+        ...prev,
+        delete: false,
+      }));
     } catch (err) {
       if (/failed to fetch|network error/i.test(err.message)) {
         return toast.error("Please check your internet connection.");
@@ -163,11 +165,28 @@ const NewCourse = () => {
       onClick={() => navigate("/dashboard/courses", { replace: true })}
       ref={bgRef}
     >
-      {id && showDialog && (
+      {id && showDialog.delete && (
         <ConfirmationBox
           message="Are you sure you want to delete this course?"
           onConfirm={() => deleteCourseFtn(id)}
-          onCancel={() => setShowDialog(false)}
+          onCancel={() =>
+            setShowDialog((prev) => ({
+              ...prev,
+              delete: false,
+            }))
+          }
+        />
+      )}
+      {id && showDialog.overload && (
+        <ConfirmationBox
+          message="This staff has reached the maximum credit limit. Assigning this course will overload the staff. Do you want to proceed?"
+          onConfirm={saveHandler}
+          onCancel={() =>
+            setShowDialog((prev) => ({
+              ...prev,
+              overload: false,
+            }))
+          }
         />
       )}
       <div
@@ -178,7 +197,7 @@ const NewCourse = () => {
           className="course__new__close__icon"
           onClick={() => bgRef.current.click()}
         />
-        <form onSubmit={id ? editHandler : createHandler}>
+        <form onSubmit={saveHandler}>
           <label>
             <p>
               Course Title <span>*</span>
@@ -250,7 +269,17 @@ const NewCourse = () => {
                 <option value={""}>Not assigned</option>
                 {staffs.map((staff) => (
                   <option key={staff._id} value={staff._id}>
-                    {staff.firstname} {staff.lastname} ({3} remaining)
+                    {staff.firstname} {staff.lastname} - {staff.score}{" "}
+                    {(() => {
+                      const left =
+                        staff.maxCredits -
+                        courses
+                          .filter((course) => course.assignedTo === staff._id)
+                          .reduce((acc, course) => acc + course.credits, 0);
+                      if (left < 0)
+                        return `(${Math.abs(left)} credits overload)`;
+                      return `(${left} credits left)`;
+                    })()}
                   </option>
                 ))}
               </select>
@@ -275,7 +304,7 @@ const NewCourse = () => {
           </p>
           {user.role === "admin" && (
             <Fragment>
-              <button type="submit">{id ? "Edit" : "Create"}</button>
+              <button type="submit">Save</button>
               {id && (
                 <button
                   type="button"

@@ -100,14 +100,17 @@ const EducationOverlay = () => {
           </div>
           <div className="dashboard__overlay__form__group">
             <label htmlFor="degree">Degree</label>
-            <input
-              type="text"
+            <select
               name="degree"
               id="degree"
-              placeholder="Degree"
               value={degree}
               onChange={(e) => setDegree(e.target.value)}
-            />
+            >
+              <option value="">Select Degree</option>
+              <option value="bsc">BSc</option>
+              <option value="msc">MSc</option>
+              <option value="phd">PhD</option>
+            </select>
           </div>
           <div className="dashboard__overlay__form__group">
             <label htmlFor="fieldofstudy">Field of Study</label>
